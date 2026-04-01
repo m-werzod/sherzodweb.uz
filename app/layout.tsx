@@ -5,8 +5,8 @@ import Footer from '@/components/layout/Footer'
 import AIWidget from '@/components/ui/AIWidget'
 
 export const metadata: Metadata = {
-  title: 'Sherzodbek Usmonjonov — Frontend Architect',
-  description: 'Frontend Architect Crafting High-Performance Digital Experiences.',
+  title: 'Sherzodbek Usmonjonov — Frontend Web Developer',
+  description: 'Frontend Web Developer crafting high-performance digital experiences with React, Next.js & motion design.',
   keywords: ['Frontend Developer', 'React', 'Next.js', 'Uzbekistan'],
 }
 

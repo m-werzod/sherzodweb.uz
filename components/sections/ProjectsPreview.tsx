@@ -50,7 +50,7 @@ export default function ProjectsPreview() {
             Featured <span className="text-[#38bdf8]">Projects</span>
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
-            A selection of projects that showcase my expertise in frontend architecture and product thinking.
+            A selection of projects that showcase my skills in frontend development, motion design, and product thinking.
           </p>
         </motion.div>
 

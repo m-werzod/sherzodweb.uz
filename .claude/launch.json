@@ -5,7 +5,7 @@
       "name": "sherzoddev",
       "runtimeExecutable": "C:\\Program Files\\nodejs\\npm.cmd",
       "runtimeArgs": ["run", "dev"],
-      "port": 3002,
+      "port": 4000,
       "autoPort": false
     }
   ]

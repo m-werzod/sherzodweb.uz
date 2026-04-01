@@ -7,7 +7,7 @@ type Tab = 'Tech Stack' | 'Projects' | 'Contact Info' | 'About Me'
 const knowledge: Record<Tab, { q: string; a: string }> = {
   'Tech Stack': {
     q: 'What technologies does Sherzod use?',
-    a: "Sherzod specializes in React, Next.js 14, TypeScript, and Tailwind CSS for frontend. He also works with Framer Motion for animations, Three.js/R3F for 3D experiences, Git for version control, and Node.js for backend. He's proficient in Figma for design collaboration.",
+    a: "Sherzod specializes in React, Next.js 15, TypeScript, and Tailwind CSS. He creates motion designs with Framer Motion, and builds 3D web experiences using Three.js / React Three Fiber with AI assistance. His toolbox also includes Git, Figma, Node.js, Firebase and Vercel for deployment.",
   },
   Projects: {
     q: 'What projects has Sherzod built?',
@@ -15,11 +15,11 @@ const knowledge: Record<Tab, { q: string; a: string }> = {
   },
   'Contact Info': {
     q: 'How can I contact Sherzod?',
-    a: 'You can reach Sherzod via:\n📧 Email: sherzodusmonjonov734@gmail.com\n📱 Phone: +998 94 205 5512\n✈️ Telegram: @WerzodUsmanov\n🐙 GitHub: github.com/m-werzod\nHe\'s currently available for freelance and full-time opportunities!',
+    a: 'You can reach Sherzod via:\n- Email: sherzodusmonjonov734@gmail.com\n- Phone: +998 94 205 5512\n- Telegram: @WerzodUsmanov\n- GitHub: github.com/m-werzod\nHe is currently available for freelance and full-time opportunities!',
   },
   'About Me': {
     q: 'Tell me about Sherzod.',
-    a: "Sherzodbek Usmonjonov is a passionate Frontend Architect with 2+ years of experience crafting high-performance web applications. Based in Uzbekistan, he focuses on clean architecture, pixel-perfect UI, and exceptional user experiences. He's available for both freelance projects and full-time positions.",
+    a: "Sherzodbek Usmonjonov is a Frontend Web Developer from Uzbekistan with 1+ year of experience building high-performance web apps. He specializes in React, Next.js, and also creates motion designs & 3D web experiences using AI-powered tools. He speaks English fluently, understands Russian, and is available for freelance or full-time positions.",
   },
 }
 
@@ -198,16 +198,9 @@ export default function AIWidget() {
               />
               <button
                 onClick={handleSend}
-                className="w-8 h-8 rounded-xl bg-[#38bdf8] text-[#020617] flex items-center justify-center hover:bg-sky-300 transition-colors shrink-0"
+                className="w-8 h-8 rounded-xl bg-[#38bdf8] flex items-center justify-center hover:bg-sky-300 transition-colors shrink-0"
               >
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2.5}
-                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                  />
-                </svg>
+                <img src="https://cdn-icons-png.flaticon.com/512/3682/3682321.png" alt="Send" className="w-4 h-4 object-contain" />
               </button>
             </div>
           </motion.div>

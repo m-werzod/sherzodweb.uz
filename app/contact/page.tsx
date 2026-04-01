@@ -8,19 +8,19 @@ const contacts = [
     label: 'Email',
     value: 'sherzodusmonjonov734@gmail.com',
     href: 'mailto:sherzodusmonjonov734@gmail.com',
-    icon: '✉',
+    icon: 'https://cdn-icons-png.flaticon.com/512/732/732200.png',
   },
   {
     label: 'Phone',
     value: '+998 94 205 5512',
     href: 'tel:+998942055512',
-    icon: '📱',
+    icon: 'https://cdn-icons-png.flaticon.com/512/455/455705.png',
   },
   {
     label: 'Telegram',
     value: '@WerzodUsmanov',
     href: 'https://t.me/WerzodUsmanov',
-    icon: '✈',
+    icon: 'https://cdn-icons-png.flaticon.com/512/2111/2111646.png',
   },
 ]
 
@@ -86,7 +86,7 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
                 className="flex items-start gap-4 p-5 rounded-2xl border border-white/10 bg-[#0a1628] hover:border-[#38bdf8]/30 transition-all group"
               >
-                <span className="text-2xl">{c.icon}</span>
+                <img src={c.icon} alt={c.label} className="w-6 h-6 object-contain shrink-0 mt-0.5" />
                 <div>
                   <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mb-1">{c.label}</p>
                   <p className="text-sm text-slate-300 group-hover:text-[#38bdf8] transition-colors font-medium break-all">
@@ -219,14 +219,7 @@ export default function ContactPage() {
                   className="w-full py-4 bg-[#38bdf8] text-[#020617] font-bold rounded-xl hover:bg-sky-300 transition-all hover:shadow-lg hover:shadow-sky-400/25 flex items-center justify-center gap-2"
                 >
                   Send Message
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2.5}
-                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                    />
-                  </svg>
+                  <img src="https://cdn-icons-png.flaticon.com/512/3682/3682321.png" alt="Send" className="w-4 h-4 object-contain" />
                 </motion.button>
               </form>
             )}

@@ -32,7 +32,7 @@ export default function Footer() {
             <span className="text-white">Sherzod</span>
             <span className="text-[#38bdf8]">dev</span>
           </p>
-          <p className="text-sm text-slate-500 mt-1">Frontend Architect — Crafting Digital Experiences</p>
+          <p className="text-sm text-slate-500 mt-1">Frontend Web Developer — Crafting Digital Experiences</p>
         </div>
 
         <div className="flex items-center gap-4">

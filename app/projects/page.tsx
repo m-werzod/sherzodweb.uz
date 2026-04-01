@@ -75,8 +75,7 @@ export default function ProjectsPage() {
             Featured <span className="text-[#38bdf8]">Projects</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">
-            A curated selection of projects showcasing my expertise in frontend architecture, UI/UX, and full-stack
-            development.
+            A curated selection of projects showcasing my expertise in frontend development, motion design, and full-stack solutions.
           </p>
         </motion.div>
 
