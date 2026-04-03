@@ -13,7 +13,7 @@
     "caniuse-lite": "^1.0.30001599",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.19",
-    "next": "^15.2.4",
+    "next": "15.2.8",
     "react": "^19",
     "react-dom": "^19",
     "three": "^0.166.1"
