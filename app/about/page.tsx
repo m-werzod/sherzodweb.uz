@@ -56,7 +56,7 @@ export default function AboutPage() {
             Passionate about <span className="text-[#38bdf8]">the web</span>
           </h1>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-4 text-slate-400 leading-relaxed">
               <p>
                 I&apos;m{" "}
@@ -95,28 +95,48 @@ export default function AboutPage() {
             </div>
 
             {/* Photo */}
-            <div className="relative h-80 rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-b from-slate-800 to-[#020617]">
-              <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/60 via-transparent to-transparent z-10" />
-              {!imgError ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  ref={imgRef}
-                  src="/images/hero.png"
-                  alt="Sherzodbek Usmonjonov"
-                  onLoad={() => setImgLoaded(true)}
-                  onError={() => setImgError(true)}
-                  className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ${
-                    imgLoaded ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-6xl font-black text-[#38bdf8]/30">
-                    SU
-                  </span>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="relative flex justify-center lg:justify-end"
+            >
+              {/* Glow blob */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-64 h-64 rounded-full bg-[#38bdf8]/10 blur-3xl" />
+              </div>
+
+              {/* Portrait frame */}
+              <div className="relative w-full max-w-[340px] h-[480px] md:h-[540px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-sky-950/40 bg-gradient-to-b from-slate-800/40 to-[#020617]">
+                {/* Gradient overlay — blends the dark photo bg seamlessly */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/50 via-transparent to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/20 via-transparent to-[#020617]/20 z-10 pointer-events-none" />
+
+                {!imgError ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    ref={imgRef}
+                    src="/images/about.png"
+                    alt="Sherzodbek Usmonjonov"
+                    onLoad={() => setImgLoaded(true)}
+                    onError={() => setImgError(true)}
+                    className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
+                      imgLoaded ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-6xl font-black text-[#38bdf8]/30">SU</span>
+                  </div>
+                )}
+
+                {/* Name badge at the bottom */}
+                <div className="absolute bottom-0 left-0 right-0 z-20 p-5 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent">
+                  <p className="text-base font-bold text-white tracking-tight">Sherzodbek Usmonjonov</p>
+                  <p className="text-xs text-[#38bdf8] font-medium mt-0.5">Frontend Web Developer</p>
                 </div>
-              )}
-            </div>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
 

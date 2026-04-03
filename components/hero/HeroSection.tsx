@@ -59,11 +59,11 @@ export default function HeroSection() {
                 {!imgError ? (
                   <img
                     ref={imgRef}
-                    src="/images/hero.png"
+                    src="/images/hero2.png"
                     alt="Sherzodbek Usmonjonov"
                     onLoad={() => setImgLoaded(true)}
                     onError={() => setImgError(true)}
-                    className={`w-full h-full object-cover object-top transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    className={`w-full h-full object-cover object-center transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
@@ -123,7 +123,7 @@ export default function HeroSection() {
               <span className="text-base">🇬🇧</span> English — Fluent
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
-              <span className="text-base">🇷🇺</span> Russian — Understands
+              <span className="text-base">🇷🇺</span> Russian — basic
             </span>
           </motion.div>
 
@@ -189,59 +189,79 @@ export default function HeroSection() {
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut', delay: 0.4 }}
-          className="relative hidden lg:flex items-center justify-center"
+          className="relative hidden lg:flex items-center justify-center py-10"
         >
-          {/* Glow blob behind image */}
+          {/* Ambient glow blob */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-80 h-80 rounded-full bg-[#38bdf8]/10 blur-3xl" />
+            <div className="w-96 h-96 rounded-full bg-[#38bdf8]/8 blur-3xl" />
           </div>
 
-          {/* Image container */}
-          <div className="relative w-[360px] h-[500px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-sky-950/50 bg-gradient-to-b from-slate-800 to-[#020617]">
-            {/* Subtle dark overlays to blend edges */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/50 via-transparent to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/20 via-transparent to-transparent z-10" />
+          {/* ── Image frame ── */}
+          <div className="relative w-[380px] h-[540px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-sky-950/60 bg-[#0a0f1e]">
+            {/* Bottom-to-top dark fade so the image merges into the page */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/70 via-transparent to-transparent z-10 pointer-events-none" />
 
             {!imgError ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 ref={imgRef2}
-                src="/images/hero.png"
+                src="/images/hero2.png"
                 alt="Sherzodbek Usmonjonov"
                 onLoad={() => setImgLoaded(true)}
                 onError={() => setImgError(true)}
-                className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ${
+                className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
                   imgLoaded ? 'opacity-100' : 'opacity-0'
                 }`}
               />
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center">
-                  <span className="text-4xl font-black text-[#38bdf8]">SU</span>
-                </div>
-                <p className="text-slate-500 text-sm">Add hero.jpg to /public/images/</p>
+                <span className="text-5xl font-black text-[#38bdf8]/30">SU</span>
               </div>
             )}
           </div>
 
-          {/* Floating stat — left */}
+          {/* ── Stat card — LEFT (overlaps left edge, upper-third) ── */}
           <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute -left-6 top-1/4 bg-[#0f172a] border border-white/10 rounded-2xl p-4 shadow-xl backdrop-blur-sm"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0, y: [0, -7, 0] }}
+            transition={{
+              opacity: { duration: 0.5, delay: 0.8 },
+              x:       { duration: 0.5, delay: 0.8 },
+              y:       { duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1 },
+            }}
+            className="absolute left-0 top-[28%] -translate-x-[60%] bg-[#0d1b2e] border border-[#38bdf8]/20 rounded-2xl px-5 py-4 shadow-xl shadow-sky-950/40 backdrop-blur-sm min-w-[130px]"
           >
-            <p className="text-2xl font-black text-[#38bdf8]">1+</p>
-            <p className="text-xs text-slate-400 mt-0.5">Year Experience</p>
+            <p className="text-3xl font-black text-[#38bdf8] leading-none">1+</p>
+            <p className="text-xs text-slate-400 mt-1.5 font-medium">Year Experience</p>
           </motion.div>
 
-          {/* Floating stat — right */}
+          {/* ── Stat card — RIGHT (overlaps right edge, lower-half) ── */}
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-            className="absolute -right-6 bottom-1/3 bg-[#0f172a] border border-white/10 rounded-2xl p-4 shadow-xl backdrop-blur-sm"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0, y: [0, 7, 0] }}
+            transition={{
+              opacity: { duration: 0.5, delay: 1 },
+              x:       { duration: 0.5, delay: 1 },
+              y:       { duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1.2 },
+            }}
+            className="absolute right-0 top-[55%] translate-x-[60%] bg-[#0d1b2e] border border-[#38bdf8]/20 rounded-2xl px-5 py-4 shadow-xl shadow-sky-950/40 backdrop-blur-sm min-w-[130px]"
           >
-            <p className="text-2xl font-black text-[#38bdf8]">10+</p>
-            <p className="text-xs text-slate-400 mt-0.5">Projects Built</p>
+            <p className="text-3xl font-black text-[#38bdf8] leading-none">10+</p>
+            <p className="text-xs text-slate-400 mt-1.5 font-medium">Projects Built</p>
+          </motion.div>
+
+          {/* ── Stat card — BOTTOM-LEFT (tech count) ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: [0, -5, 0] }}
+            transition={{
+              opacity: { duration: 0.5, delay: 1.2 },
+              y:       { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.4 },
+            }}
+            className="absolute left-[10%] bottom-[4%] bg-[#0d1b2e] border border-[#38bdf8]/20 rounded-2xl px-5 py-4 shadow-xl shadow-sky-950/40 backdrop-blur-sm min-w-[130px]"
+          >
+            <p className="text-3xl font-black text-[#38bdf8] leading-none">15+</p>
+            <p className="text-xs text-slate-400 mt-1.5 font-medium">Technologies</p>
           </motion.div>
         </motion.div>
       </div>
