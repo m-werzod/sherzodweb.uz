@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const ICON = {
   gmail:    'https://cdn-icons-png.flaticon.com/512/281/281769.png',
-  phone:    'https://img.icons8.com/3d-fluency/94/phone.png',
+  phone:    'https://img.icons8.com/3d-fluency/96/phone.png',
   telegram: 'https://cdn-icons-png.flaticon.com/512/2111/2111646.png',
   github:   'https://img.icons8.com/3d-fluency/94/github.png',
   instagram:'https://cdn-icons-png.flaticon.com/512/15713/15713420.png',

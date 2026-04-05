@@ -7,31 +7,38 @@ const projects: Project[] = [
   {
     title: 'E-Commerce Platform',
     description:
-      'Full-stack e-commerce app with product catalog, admin panel, search & filter, cart, user authentication, and responsive design across all devices.',
+      'Full-featured online store with product catalog, admin dashboard, search & filter, shopping cart, user authentication, and fully responsive UI across all devices.',
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Vite'],
     github: 'https://github.com/m-werzod',
     demo: 'https://e-commerce-with-registration.vercel.app/',
     gradient: 'from-sky-500 to-blue-600',
+    image: '/images/projects/ecommerce.png',
     status: 'live',
     year: '2024',
   },
   {
-    title: 'Task Manager Pro',
+    title: 'Restaurant Website',
     description:
-      'Trello-inspired drag-and-drop kanban board with task assignments, priorities, deadlines, and real-time sync across devices.',
-    tags: ['React', 'TypeScript', 'DnD Kit', 'Firebase'],
+      'Modern restaurant landing page with interactive menu, reservation system, animated sections, photo gallery, and mobile-first responsive design.',
+    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'JavaScript'],
     github: 'https://github.com/m-werzod',
-    demo: '#',
-    gradient: 'from-emerald-500 to-teal-600',
+    demo: 'https://restaurant-ten-self.vercel.app/',
+    gradient: 'from-orange-500 to-red-600',
+    image: '/images/projects/restaurant.png',
+    status: 'live',
+    year: '2024',
   },
   {
-    title: 'UI Component Library',
+    title: 'Edu CRM / ERP System',
     description:
-      '30+ reusable React components with full TypeScript types, dark-mode support, Storybook docs, and zero external UI dependencies.',
-    tags: ['React', 'TypeScript', 'Storybook', 'Rollup'],
+      'Educational management platform with student tracking, course management, attendance, grade reports, and a clean admin dashboard for institutions.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
     github: 'https://github.com/m-werzod',
-    demo: '#',
-    gradient: 'from-violet-500 to-indigo-600',
+    demo: 'https://edu-crm-erp.vercel.app/',
+    gradient: 'from-emerald-500 to-teal-600',
+    image: '/images/projects/educrm.png',
+    status: 'live',
+    year: '2024',
   },
 ]
 
@@ -51,7 +58,7 @@ export default function ProjectsPreview() {
             Featured <span className="text-[#38bdf8]">Projects</span>
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
-            A selection of projects showcasing frontend development, motion design, and product thinking.
+            A selection of real-world projects — e-commerce, CRM systems, restaurants, and more.
           </p>
         </motion.div>
 
@@ -72,11 +79,8 @@ export default function ProjectsPreview() {
             href="/projects"
             className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white font-semibold rounded-xl hover:border-[#38bdf8]/50 hover:bg-[#38bdf8]/5 hover:text-[#38bdf8] transition-all duration-200 group"
           >
-            View All Projects
-            <svg
-              className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
-              fill="none" stroke="currentColor" viewBox="0 0 24 24"
-            >
+            View All 10 Projects
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
