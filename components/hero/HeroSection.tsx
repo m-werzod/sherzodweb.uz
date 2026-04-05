@@ -130,16 +130,19 @@ export default function HeroSection() {
           {/* CTAs */}
           <motion.div variants={item} className="flex flex-wrap gap-3 justify-center lg:justify-start">
             <Link
-              href="/projects"
-              className="px-6 py-3 bg-[#38bdf8] text-[#020617] font-bold rounded-xl hover:bg-sky-300 transition-all duration-200 hover:shadow-lg hover:shadow-sky-400/25 active:scale-95"
+              href="/contact"
+              className="group relative px-7 py-3.5 bg-gradient-to-r from-[#38bdf8] to-sky-400 text-[#020617] font-extrabold rounded-xl transition-all duration-200 hover:shadow-xl hover:shadow-sky-400/40 active:scale-95 hover:from-sky-300 hover:to-[#38bdf8] flex items-center gap-2"
             >
-              View Projects
+              <span>Contact Me</span>
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
             </Link>
             <Link
-              href="/contact"
-              className="px-6 py-3 border border-white/15 text-white font-semibold rounded-xl hover:border-[#38bdf8]/50 hover:bg-white/5 transition-all duration-200 active:scale-95"
+              href="/projects"
+              className="px-7 py-3.5 border border-white/20 text-white font-semibold rounded-xl hover:border-[#38bdf8]/60 hover:bg-[#38bdf8]/8 hover:text-[#38bdf8] transition-all duration-200 active:scale-95"
             >
-              Contact Me
+              View Projects
             </Link>
           </motion.div>
 

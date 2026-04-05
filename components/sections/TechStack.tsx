@@ -50,14 +50,14 @@ export default function TechStack() {
 
       {/* Row 1 — left to right */}
       <div className="relative mb-4 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-        <div className="flex gap-3 animate-marquee">
+        <div className="flex gap-3" style={{ animation: 'marquee 14s linear infinite' }}>
           {doubled.map((tech, i) => <TechPill key={i} tech={tech} />)}
         </div>
       </div>
 
       {/* Row 2 — right to left */}
       <div className="relative [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-        <div className="flex gap-3" style={{ animation: 'marquee 28s linear infinite reverse' }}>
+        <div className="flex gap-3" style={{ animation: 'marquee 20s linear infinite reverse' }}>
           {doubled.map((tech, i) => <TechPill key={i} tech={tech} />)}
         </div>
       </div>

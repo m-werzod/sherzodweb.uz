@@ -8,7 +8,7 @@ const projects: Project[] = [
     title: 'E-Commerce Platform',
     description:
       'Full-featured online store with product catalog, admin dashboard, search & filter, shopping cart, user authentication, and fully responsive UI across all devices.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Vite'],
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Redux Toolkit', 'Axios', 'React Query', 'React Hot Toast'],
     github: 'https://github.com/m-werzod',
     demo: 'https://e-commerce-with-registration.vercel.app/',
     gradient: 'from-sky-500 to-blue-600',
@@ -20,7 +20,7 @@ const projects: Project[] = [
     title: 'Restaurant Website',
     description:
       'Modern restaurant landing page with interactive menu, reservation system, animated sections, photo gallery, and mobile-first responsive design.',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'JavaScript'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Lucide React', 'React Cookie'],
     github: 'https://github.com/m-werzod',
     demo: 'https://restaurant-ten-self.vercel.app/',
     gradient: 'from-orange-500 to-red-600',
@@ -32,7 +32,7 @@ const projects: Project[] = [
     title: 'Edu CRM / ERP System',
     description:
       'Educational management platform with student tracking, course management, attendance, grade reports, and a clean admin dashboard for institutions.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Ant Design', 'Axios', 'React Query', 'React Hot Toast', 'React Cookie'],
     github: 'https://github.com/m-werzod',
     demo: 'https://edu-crm-erp.vercel.app/',
     gradient: 'from-emerald-500 to-teal-600',

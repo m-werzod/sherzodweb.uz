@@ -59,10 +59,6 @@ export default function ProjectCard({ project, index }: { project: Project; inde
             <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-white/40" />
             <div className="absolute w-14 h-14 sm:w-20 sm:h-20 rounded-full border-2 border-white/30" />
           </div>
-          {/* Year */}
-          {project.year && (
-            <span className="absolute bottom-3 left-3 text-xs font-semibold text-white/40">{project.year}</span>
-          )}
         </div>
       )}
 
@@ -71,11 +67,6 @@ export default function ProjectCard({ project, index }: { project: Project; inde
 
       {/* ── Content ── */}
       <div className="flex flex-col flex-1 p-4 sm:p-5">
-        {/* Year badge (image cards) */}
-        {hasImage && project.year && (
-          <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-1">{project.year}</span>
-        )}
-
         <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#38bdf8] transition-colors duration-200 mb-1.5 leading-snug">
           {project.title}
         </h3>

@@ -8,7 +8,7 @@ const featured: Project[] = [
     title: 'E-Commerce Platform',
     description:
       'Full-featured online store with product catalog, admin dashboard, search & filter, shopping cart, user authentication, and fully responsive UI across all devices.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Vite'],
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Redux Toolkit', 'Axios', 'React Query', 'React Hot Toast'],
     github: 'https://github.com/m-werzod',
     demo: 'https://e-commerce-with-registration.vercel.app/',
     gradient: 'from-sky-500 to-blue-600',
@@ -20,7 +20,7 @@ const featured: Project[] = [
     title: 'Restaurant Website',
     description:
       'Modern restaurant landing page with interactive menu, reservation system, animated sections, photo gallery, and mobile-first responsive design.',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'JavaScript'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Lucide React', 'React Cookie'],
     github: 'https://github.com/m-werzod',
     demo: 'https://restaurant-ten-self.vercel.app/',
     gradient: 'from-orange-500 to-red-600',
@@ -32,7 +32,7 @@ const featured: Project[] = [
     title: 'Edu CRM / ERP System',
     description:
       'Educational management platform with student tracking, course management, attendance, grade reports, and a clean admin dashboard for institutions.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Ant Design', 'Axios', 'React Query', 'React Hot Toast', 'React Cookie'],
     github: 'https://github.com/m-werzod',
     demo: 'https://edu-crm-erp.vercel.app/',
     gradient: 'from-emerald-500 to-teal-600',
@@ -58,7 +58,7 @@ const more: Project[] = [
     title: 'Nexora Labs — Company Site',
     description:
       'Corporate website for a tech company featuring service showcase, team section, animated hero, and a modern dark design system.',
-    tags: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
+    tags: ['React', 'Next.js', 'Tailwind CSS'],
     github: 'https://github.com/m-werzod/Nexora-labs-company',
     demo: '#',
     gradient: 'from-violet-500 to-purple-600',
@@ -78,7 +78,7 @@ const more: Project[] = [
     title: 'Fitness Time Gym',
     description:
       'Gym landing page with pricing plans, class schedule, trainer profiles, animated stats counter, and a bold high-energy design.',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'JavaScript'],
+    tags: ['React', 'Tailwind CSS', 'JavaScript'],
     github: 'https://github.com/m-werzod',
     demo: 'https://fitness-time-gym.vercel.app/',
     gradient: 'from-yellow-500 to-orange-500',
@@ -111,7 +111,7 @@ const more: Project[] = [
     title: 'Sherzoddev Portfolio',
     description:
       'This portfolio — built with Next.js 15, animated with Framer Motion, 3D visuals via React Three Fiber, and a full-stack contact system with Telegram & Gmail.',
-    tags: ['Next.js', 'TypeScript', 'Three.js', 'Framer Motion', 'Tailwind CSS'],
+    tags: ['Next.js', 'TypeScript', 'Three.js', 'Tailwind CSS', 'React Three Fiber'],
     github: 'https://github.com/m-werzod',
     demo: 'https://sherzoddev.com',
     gradient: 'from-[#38bdf8] to-indigo-500',

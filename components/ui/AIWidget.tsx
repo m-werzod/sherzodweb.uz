@@ -2,16 +2,16 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-type Tab = 'Tech Stack' | 'Projects' | 'Contact Info' | 'About Me'
+type Tab = 'Tech Stack' | 'Projects' | 'Contact Info' | 'About Me' | 'Education & AI'
 
 const knowledge: Record<Tab, { q: string; a: string }> = {
   'Tech Stack': {
     q: 'What technologies does Sherzod use?',
-    a: 'Sherzod specializes in React, Next.js 15, TypeScript, and Tailwind CSS. He creates motion designs with Framer Motion, and builds 3D web experiences using Three.js / React Three Fiber with AI assistance. His toolbox also includes Git, Figma, Node.js, Firebase and Vercel for deployment.',
+    a: 'Sherzod specializes in React, Next.js 15, TypeScript, and Tailwind CSS. He creates motion designs with Framer Motion, and builds 3D web experiences using Three.js / React Three Fiber with AI assistance. His toolbox also includes Git, Figma, Node.js, and Vercel for deployment.',
   },
   Projects: {
     q: 'What projects has Sherzod built?',
-    a: 'Sherzod has built 10+ projects including: an E-Commerce Platform (Next.js + Stripe), a real-time Chat Application (Socket.io), a Task Manager with drag-and-drop kanban, a Weather Dashboard with data visualization, a UI Component Library, and more. Check the Projects page for details!',
+    a: 'Sherzod has built 10 real-world projects:\n\n1. E-Commerce Platform — React, TypeScript, Vite, Redux Toolkit, React Query\n2. Restaurant Website — Next.js, shadcn/ui, Tailwind CSS\n3. Edu CRM/ERP System — React, TypeScript, Ant Design, Axios\n4. Toshkent Baliqchi — Fish restaurant landing page\n5. Nexora Labs — Corporate tech company site\n6. iPhone Store UZ — Apple product storefront\n7. Fitness Time Gym — Gym landing with pricing & schedule\n8. Parfume Market — Luxury perfume shop\n9. Barakah Restaurant — Full restaurant website\n10. Sherzoddev Portfolio — This site (Next.js 15, Three.js, R3F)\n\nSee them all on the Projects page!',
   },
   'Contact Info': {
     q: 'How can I contact Sherzod?',
@@ -20,6 +20,10 @@ const knowledge: Record<Tab, { q: string; a: string }> = {
   'About Me': {
     q: 'Tell me about Sherzod.',
     a: 'Sherzodbek Usmonjonov is a Frontend Web Developer from Uzbekistan with 1+ year of experience building high-performance web apps. He specializes in React, Next.js, and also creates motion designs & 3D web experiences using AI-powered tools. He speaks English fluently, understands Russian, and is available for freelance or full-time positions.',
+  },
+  'Education & AI': {
+    q: 'What is Sherzod\'s education and AI background?',
+    a: 'Sherzod graduated from Najot Ta\'lim — one of Uzbekistan\'s leading tech schools — specializing in Frontend Web Development.\n\nBeyond coding, he has studied Prompt Engineering and is skilled at working with a wide range of AI tools to speed up development, create motion designs, and build 3D web experiences.\n\nHe is also planning to launch a social media presence to share his projects, development journey, and insights — so stay tuned! 🚀',
   },
 }
 
