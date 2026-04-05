@@ -17,7 +17,7 @@ const socials = [
     alt: 'Instagram',
   },
   {
-    href: '#',
+    href: 'https://www.linkedin.com/in/sherzod-usmonjonov-8b22713b0/',
     src: 'https://cdn-icons-png.flaticon.com/512/3992/3992606.png',
     alt: 'LinkedIn',
   },

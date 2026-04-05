@@ -1,22 +1,33 @@
 'use client'
 import { motion } from 'framer-motion'
 
+const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
+
 const techs = [
-  { name: 'HTML5', color: '#e34f26', bg: 'rgba(227,79,38,0.1)' },
-  { name: 'CSS3', color: '#1572b6', bg: 'rgba(21,114,182,0.1)' },
-  { name: 'JavaScript', color: '#f7df1e', bg: 'rgba(247,223,30,0.1)' },
-  { name: 'TypeScript', color: '#3178c6', bg: 'rgba(49,120,198,0.1)' },
-  { name: 'React', color: '#61dafb', bg: 'rgba(97,218,251,0.1)' },
-  { name: 'Next.js', color: '#ffffff', bg: 'rgba(255,255,255,0.05)' },
-  { name: 'Tailwind CSS', color: '#38bdf8', bg: 'rgba(56,189,248,0.1)' },
-  { name: 'Framer Motion', color: '#bb22dd', bg: 'rgba(187,34,221,0.1)' },
-  { name: 'Git', color: '#f05032', bg: 'rgba(240,80,50,0.1)' },
-  { name: 'Node.js', color: '#339933', bg: 'rgba(51,153,51,0.1)' },
-  { name: 'Three.js', color: '#ffffff', bg: 'rgba(255,255,255,0.05)' },
-  { name: 'Figma', color: '#f24e1e', bg: 'rgba(242,78,30,0.1)' },
+  { name: 'HTML5',        icon: `${DEVICON}/html5/html5-original.svg` },
+  { name: 'CSS3',         icon: `${DEVICON}/css3/css3-original.svg` },
+  { name: 'JavaScript',   icon: `${DEVICON}/javascript/javascript-original.svg` },
+  { name: 'TypeScript',   icon: `${DEVICON}/typescript/typescript-original.svg` },
+  { name: 'React',        icon: `${DEVICON}/react/react-original.svg` },
+  { name: 'Next.js',      icon: `${DEVICON}/nextjs/nextjs-original.svg` },
+  { name: 'Tailwind CSS', icon: `${DEVICON}/tailwindcss/tailwindcss-original.svg` },
+  { name: 'Node.js',      icon: `${DEVICON}/nodejs/nodejs-original.svg` },
+  { name: 'Git',          icon: `${DEVICON}/git/git-original.svg` },
+  { name: 'Figma',        icon: `${DEVICON}/figma/figma-original.svg` },
+  { name: 'Firebase',     icon: `${DEVICON}/firebase/firebase-original.svg` },
+  { name: 'Three.js',     icon: `${DEVICON}/threejs/threejs-original.svg` },
 ]
 
 const doubled = [...techs, ...techs]
+
+function TechPill({ tech }: { tech: typeof techs[0] }) {
+  return (
+    <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-white/10 bg-white/[0.03] text-sm font-semibold shrink-0 hover:scale-105 hover:border-white/20 transition-all duration-200 cursor-default select-none">
+      <img src={tech.icon} alt={tech.name} className="w-5 h-5 object-contain" loading="lazy" />
+      <span className="text-slate-300 whitespace-nowrap">{tech.name}</span>
+    </div>
+  )
+}
 
 export default function TechStack() {
   return (
@@ -37,38 +48,17 @@ export default function TechStack() {
         </motion.div>
       </div>
 
-      {/* Marquee row 1 */}
-      <div className="relative flex overflow-hidden mb-4 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        <div className="flex gap-4 animate-marquee whitespace-nowrap">
-          {doubled.map((tech, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2 px-5 py-3 rounded-full border border-white/10 text-sm font-semibold shrink-0 hover:scale-105 transition-transform cursor-default"
-              style={{ color: tech.color, background: tech.bg, borderColor: `${tech.color}20` }}
-            >
-              <span className="w-2 h-2 rounded-full" style={{ background: tech.color }} />
-              {tech.name}
-            </div>
-          ))}
+      {/* Row 1 — left to right */}
+      <div className="relative mb-4 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+        <div className="flex gap-3 animate-marquee">
+          {doubled.map((tech, i) => <TechPill key={i} tech={tech} />)}
         </div>
       </div>
 
-      {/* Marquee row 2 (reverse) */}
-      <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        <div
-          className="flex gap-4 whitespace-nowrap"
-          style={{ animation: 'marquee 25s linear infinite reverse' }}
-        >
-          {doubled.map((tech, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2 px-5 py-3 rounded-full border text-sm font-semibold shrink-0 hover:scale-105 transition-transform cursor-default"
-              style={{ color: tech.color, background: tech.bg, borderColor: `${tech.color}20` }}
-            >
-              <span className="w-2 h-2 rounded-full" style={{ background: tech.color }} />
-              {tech.name}
-            </div>
-          ))}
+      {/* Row 2 — right to left */}
+      <div className="relative [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+        <div className="flex gap-3" style={{ animation: 'marquee 28s linear infinite reverse' }}>
+          {doubled.map((tech, i) => <TechPill key={i} tech={tech} />)}
         </div>
       </div>
     </section>

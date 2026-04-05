@@ -7,7 +7,7 @@ type Tab = 'Tech Stack' | 'Projects' | 'Contact Info' | 'About Me'
 const knowledge: Record<Tab, { q: string; a: string }> = {
   'Tech Stack': {
     q: 'What technologies does Sherzod use?',
-    a: "Sherzod specializes in React, Next.js 15, TypeScript, and Tailwind CSS. He creates motion designs with Framer Motion, and builds 3D web experiences using Three.js / React Three Fiber with AI assistance. His toolbox also includes Git, Figma, Node.js, Firebase and Vercel for deployment.",
+    a: 'Sherzod specializes in React, Next.js 15, TypeScript, and Tailwind CSS. He creates motion designs with Framer Motion, and builds 3D web experiences using Three.js / React Three Fiber with AI assistance. His toolbox also includes Git, Figma, Node.js, Firebase and Vercel for deployment.',
   },
   Projects: {
     q: 'What projects has Sherzod built?',
@@ -19,7 +19,7 @@ const knowledge: Record<Tab, { q: string; a: string }> = {
   },
   'About Me': {
     q: 'Tell me about Sherzod.',
-    a: "Sherzodbek Usmonjonov is a Frontend Web Developer from Uzbekistan with 1+ year of experience building high-performance web apps. He specializes in React, Next.js, and also creates motion designs & 3D web experiences using AI-powered tools. He speaks English fluently, understands Russian, and is available for freelance or full-time positions.",
+    a: 'Sherzodbek Usmonjonov is a Frontend Web Developer from Uzbekistan with 1+ year of experience building high-performance web apps. He specializes in React, Next.js, and also creates motion designs & 3D web experiences using AI-powered tools. He speaks English fluently, understands Russian, and is available for freelance or full-time positions.',
   },
 }
 
@@ -75,7 +75,7 @@ export default function AIWidget() {
 
   return (
     <>
-      {/* Toggle Button */}
+      {/* Toggle Button — fixed bottom-right */}
       <motion.button
         onClick={() => setOpen(!open)}
         whileHover={{ scale: 1.1 }}
@@ -200,7 +200,11 @@ export default function AIWidget() {
                 onClick={handleSend}
                 className="w-8 h-8 rounded-xl bg-[#38bdf8] flex items-center justify-center hover:bg-sky-300 transition-colors shrink-0"
               >
-                <img src="https://cdn-icons-png.flaticon.com/512/3682/3682321.png" alt="Send" className="w-4 h-4 object-contain" />
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/3682/3682321.png"
+                  alt="Send"
+                  className="w-4 h-4 object-contain brightness-0"
+                />
               </button>
             </div>
           </motion.div>

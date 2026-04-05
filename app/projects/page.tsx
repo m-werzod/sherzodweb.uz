@@ -1,23 +1,25 @@
 'use client'
 import { motion } from 'framer-motion'
-import ProjectCard from '@/components/ui/ProjectCard'
+import ProjectCard, { Project } from '@/components/ui/ProjectCard'
 import Link from 'next/link'
 
-const projects = [
+const projects: Project[] = [
   {
     title: 'E-Commerce Platform',
     description:
-      'A full-stack e-commerce solution with product catalog, cart, Stripe payments, user authentication, and an admin dashboard. Built for performance and scalability.',
-    tags: ['Next.js 14', 'TypeScript', 'Tailwind', 'Stripe', 'Prisma'],
+      'Full-stack e-commerce app with product catalog, admin panel, search & filter, cart, user authentication, and responsive design across desktop & mobile.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Vite'],
     github: 'https://github.com/m-werzod',
-    demo: '#',
+    demo: 'https://e-commerce-with-registration.vercel.app/',
     gradient: 'from-sky-500 to-blue-600',
+    status: 'live',
+    year: '2024',
   },
   {
     title: 'Portfolio v1',
     description:
-      'First iteration personal portfolio showcasing creative animations, custom cursor effects, and GSAP scroll-triggered transitions with a unique design identity.',
-    tags: ['React', 'GSAP', 'CSS3', 'Vite'],
+      'First iteration personal portfolio with creative animations, smooth scroll transitions, and a unique dark-mode design identity built from scratch.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     github: 'https://github.com/m-werzod',
     demo: '#',
     gradient: 'from-purple-500 to-pink-600',
@@ -25,8 +27,8 @@ const projects = [
   {
     title: 'Task Manager Pro',
     description:
-      'A Trello-inspired drag-and-drop kanban board with real-time collaboration, task assignments, deadlines, and Firebase sync across devices.',
-    tags: ['React', 'DnD Kit', 'Firebase', 'Tailwind'],
+      'Trello-inspired drag-and-drop kanban board with task assignments, priorities, deadlines, and real-time sync across devices.',
+    tags: ['React', 'TypeScript', 'DnD Kit', 'Firebase'],
     github: 'https://github.com/m-werzod',
     demo: '#',
     gradient: 'from-emerald-500 to-teal-600',
@@ -34,8 +36,8 @@ const projects = [
   {
     title: 'Weather Dashboard',
     description:
-      'Real-time weather application with animated data visualizations, 7-day forecasts, location detection, and interactive charts powered by OpenWeather API.',
-    tags: ['Next.js', 'Chart.js', 'OpenWeather API', 'TypeScript'],
+      'Real-time weather app with 7-day forecasts, animated data visualizations, auto location detection, and interactive charts.',
+    tags: ['Next.js', 'TypeScript', 'Chart.js', 'OpenWeather API'],
     github: 'https://github.com/m-werzod',
     demo: '#',
     gradient: 'from-orange-500 to-amber-600',
@@ -43,7 +45,7 @@ const projects = [
   {
     title: 'Chat Application',
     description:
-      'Real-time chat app with WebSocket support, multiple rooms, file sharing, read receipts, and a polished UI with message animations.',
+      'Real-time chat with WebSocket support, multiple rooms, file sharing, read receipts, typing indicators, and smooth message animations.',
     tags: ['React', 'Socket.io', 'Node.js', 'Express'],
     github: 'https://github.com/m-werzod',
     demo: '#',
@@ -52,8 +54,8 @@ const projects = [
   {
     title: 'UI Component Library',
     description:
-      'A comprehensive React component library with 30+ components, full TypeScript support, Storybook documentation, and zero external dependencies.',
-    tags: ['React', 'TypeScript', 'Rollup', 'Storybook', 'Jest'],
+      '30+ reusable React components with full TypeScript types, dark-mode support, Storybook docs, and zero external UI dependencies.',
+    tags: ['React', 'TypeScript', 'Storybook', 'Rollup'],
     github: 'https://github.com/m-werzod',
     demo: '#',
     gradient: 'from-violet-500 to-indigo-600',

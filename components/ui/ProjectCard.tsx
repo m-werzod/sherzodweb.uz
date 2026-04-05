@@ -2,13 +2,16 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-interface Project {
+export interface Project {
   title: string
   description: string
   tags: string[]
   github: string
   demo: string
   gradient: string
+  image?: string
+  status?: 'live' | 'wip' | 'archived'
+  year?: string
 }
 
 export default function ProjectCard({ project, index }: { project: Project; index: number }) {

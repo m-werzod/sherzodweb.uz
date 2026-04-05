@@ -162,7 +162,7 @@ export default function HeroSection() {
                 alt: 'Instagram',
               },
               {
-                href: '#',
+                href: 'https://www.linkedin.com/in/sherzod-usmonjonov-8b22713b0/',
                 src: 'https://cdn-icons-png.flaticon.com/512/3992/3992606.png',
                 alt: 'LinkedIn',
               },
@@ -181,6 +181,19 @@ export default function HeroSection() {
                 />
               </Link>
             ))}
+          </motion.div>
+
+          {/* ── Mobile scroll indicator (under social icons) ── */}
+          <motion.div
+            variants={item}
+            className="flex lg:hidden flex-col items-center gap-2 pt-2 pb-4"
+          >
+            <span className="text-[10px] text-slate-600 tracking-[0.3em] uppercase font-medium">Scroll</span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-px h-7 bg-gradient-to-b from-[#38bdf8] to-transparent"
+            />
           </motion.div>
         </motion.div>
 
@@ -266,12 +279,12 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — desktop only, absolute bottom-center */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
       >
         <span className="text-xs text-slate-600 tracking-widest uppercase">Scroll</span>
         <motion.div
