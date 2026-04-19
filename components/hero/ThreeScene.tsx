@@ -8,6 +8,9 @@ export default function ThreeScene() {
     let animId: number
     let disposed = false
 
+    // Skip WebGL entirely on mobile — saves ~400 KB of JS execution
+    if (window.innerWidth < 1024) return
+
     const canvas = canvasRef.current
     if (!canvas) return
 

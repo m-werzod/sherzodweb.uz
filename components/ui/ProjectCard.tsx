@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export interface Project {
   title: string
@@ -38,10 +39,13 @@ export default function ProjectCard({ project, index }: { project: Project; inde
               <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Live</span>
             </div>
           )}
-          <img
-            src={project.image}
+          <Image
+            src={project.image!}
             alt={project.title}
-            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            loading="lazy"
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
           />
         </div>
       ) : (
@@ -95,7 +99,8 @@ export default function ProjectCard({ project, index }: { project: Project; inde
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors px-3 py-2 rounded-lg border border-white/10 hover:border-white/25 hover:bg-white/5 flex-1 justify-center sm:flex-none sm:justify-start"
           >
-            <img src="https://img.icons8.com/3d-fluency/94/github.png" alt="GitHub" className="w-3.5 h-3.5 shrink-0" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="https://img.icons8.com/3d-fluency/94/github.png" alt="GitHub" width={14} height={14} loading="lazy" decoding="async" className="w-3.5 h-3.5 shrink-0" />
             Code
           </Link>
 

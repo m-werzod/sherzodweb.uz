@@ -116,7 +116,7 @@ export default function AboutPage() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     ref={imgRef}
-                    src="/images/about.png"
+                    src="/images/about.webp"
                     alt="Sherzodbek Usmonjonov"
                     onLoad={() => setImgLoaded(true)}
                     onError={() => setImgError(true)}
