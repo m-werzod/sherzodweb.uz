@@ -2,6 +2,8 @@
 const nextConfig = {
   transpilePackages: ['three'],
 
+  serverExternalPackages: ['nodemailer'],
+
   // Disable the dev toolbar that causes "Failed to fetch" errors in Next.js 15
   devIndicators: false,
 

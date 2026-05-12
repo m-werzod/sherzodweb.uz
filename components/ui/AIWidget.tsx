@@ -11,7 +11,7 @@ const knowledge: Record<Tab, { q: string; a: string }> = {
   },
   Projects: {
     q: 'What projects has Sherzod built?',
-    a: 'Sherzod has built 10 real-world projects:\n\n1. E-Commerce Platform — React, TypeScript, Vite, Redux Toolkit, React Query\n2. Restaurant Website — Next.js, shadcn/ui, Tailwind CSS\n3. Edu CRM/ERP System — React, TypeScript, Ant Design, Axios\n4. Toshkent Baliqchi — Fish restaurant landing page\n5. Nexora Labs — Corporate tech company site\n6. iPhone Store UZ — Apple product storefront\n7. Fitness Time Gym — Gym landing with pricing & schedule\n8. Parfume Market — Luxury perfume shop\n9. Barakah Restaurant — Full restaurant website\n10. Sherzoddev Portfolio — This site (Next.js 15, Three.js, R3F)\n\nSee them all on the Projects page!',
+    a: 'Sherzod has built 11 real-world projects:\n\n1. E-Commerce Platform — React, TypeScript, Vite, Redux Toolkit, React Query\n2. Restaurant Website — Next.js, shadcn/ui, Tailwind CSS\n3. Edu CRM/ERP System — React, TypeScript, Ant Design, Axios\n4. Business Finance Manager — Full-stack finance app with dashboard analytics, budget tracking & PostgreSQL\n5. Toshkent Baliqchi — Fish restaurant landing page\n6. Nexora Labs — Corporate tech company site\n7. iPhone Store UZ — Apple product storefront\n8. Fitness Time Gym — Gym landing with pricing & schedule\n9. Parfume Market — Luxury perfume shop\n10. Barakah Restaurant — Full restaurant website\n11. Sherzoddev Portfolio — This site (Next.js 15, Three.js, R3F)\n\nSee them all on the Projects page!',
   },
   'Contact Info': {
     q: 'How can I contact Sherzod?',

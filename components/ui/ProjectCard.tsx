@@ -16,7 +16,9 @@ export interface Project {
 }
 
 export default function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const hasImage = !!project.image
+  const hasImage   = !!project.image
+  const hasDemo    = project.demo && project.demo !== '#'
+  const hasGithub  = project.github && project.github !== '#'
 
   return (
     <motion.div
@@ -27,14 +29,23 @@ export default function ProjectCard({ project, index }: { project: Project; inde
       whileHover={{ y: -6 }}
       className="group relative flex flex-col rounded-2xl border border-white/10 bg-[#0a1628] overflow-hidden hover:border-[#38bdf8]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-sky-950/60"
     >
+      {/* ── Full-card clickable overlay → demo link ── */}
+      {hasDemo && (
+        <Link
+          href={project.demo}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute inset-0 z-10"
+          aria-label={`Open ${project.title}`}
+        />
+      )}
+
       {/* ── Image / Placeholder ── */}
       {hasImage ? (
         <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
-          {/* Gradient overlay on image */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/20 to-transparent z-10 pointer-events-none" />
-          {/* Status badge */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/20 to-transparent z-[1] pointer-events-none" />
           {project.status === 'live' && (
-            <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-sm">
+            <div className="absolute top-3 right-3 z-[2] flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Live</span>
             </div>
@@ -49,16 +60,14 @@ export default function ProjectCard({ project, index }: { project: Project; inde
           />
         </div>
       ) : (
-        /* Colourful gradient placeholder for cards without a screenshot */
         <div className={`relative w-full bg-gradient-to-br ${project.gradient} overflow-hidden`} style={{ aspectRatio: '16/9' }}>
           <div className="absolute inset-0 bg-[#020617]/60" />
           {project.status === 'live' && (
-            <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40">
+            <div className="absolute top-3 right-3 z-[2] flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Live</span>
             </div>
           )}
-          {/* Abstract pattern */}
           <div className="absolute inset-0 flex items-center justify-center opacity-20">
             <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-white/40" />
             <div className="absolute w-14 h-14 sm:w-20 sm:h-20 rounded-full border-2 border-white/30" />
@@ -66,7 +75,6 @@ export default function ProjectCard({ project, index }: { project: Project; inde
         </div>
       )}
 
-      {/* ── Colour bar (only for no-image cards) ── */}
       {!hasImage && <div className={`h-0.5 w-full bg-gradient-to-r ${project.gradient}`} />}
 
       {/* ── Content ── */}
@@ -91,44 +99,34 @@ export default function ProjectCard({ project, index }: { project: Project; inde
           ))}
         </div>
 
-        {/* Links */}
-        <div className="flex items-center gap-2 mt-auto">
-          <Link
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors px-3 py-2 rounded-lg border border-white/10 hover:border-white/25 hover:bg-white/5 flex-1 justify-center sm:flex-none sm:justify-start"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="https://img.icons8.com/3d-fluency/94/github.png" alt="GitHub" width={14} height={14} loading="lazy" decoding="async" className="w-3.5 h-3.5 shrink-0" />
-            Code
-          </Link>
+        {/* Action buttons — sit above the overlay via z-20 */}
+        <div className="relative z-20 flex items-center gap-2 mt-auto">
+          {hasGithub && (
+            <Link
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors px-3 py-2 rounded-lg border border-white/10 hover:border-white/25 hover:bg-white/5"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://img.icons8.com/3d-fluency/94/github.png" alt="GitHub" width={14} height={14} loading="lazy" decoding="async" className="w-3.5 h-3.5 shrink-0" />
+              Code
+            </Link>
+          )}
 
-          {project.demo !== '#' && (
+          {hasDemo && (
             <Link
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-semibold text-[#38bdf8] hover:text-sky-200 transition-colors px-3 py-2 rounded-lg border border-[#38bdf8]/30 hover:border-[#38bdf8]/60 bg-[#38bdf8]/5 hover:bg-[#38bdf8]/10 flex-1 justify-center sm:flex-none sm:justify-start"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-1.5 text-xs font-semibold text-[#38bdf8] hover:text-sky-200 transition-colors px-3 py-2 rounded-lg border border-[#38bdf8]/30 hover:border-[#38bdf8]/60 bg-[#38bdf8]/5 hover:bg-[#38bdf8]/10"
             >
               <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
               Live Demo
-            </Link>
-          )}
-
-          {/* External arrow for image cards */}
-          {hasImage && project.demo !== '#' && (
-            <Link
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-auto w-8 h-8 flex items-center justify-center rounded-lg border border-white/10 hover:border-[#38bdf8]/40 hover:bg-[#38bdf8]/5 transition-all text-slate-500 hover:text-[#38bdf8]"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14" />
-              </svg>
             </Link>
           )}
         </div>

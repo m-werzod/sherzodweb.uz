@@ -14,7 +14,6 @@ const featured: Project[] = [
     gradient: 'from-sky-500 to-blue-600',
     image: '/images/projects/ecommerce.webp',
     status: 'live',
-    year: '2024',
   },
   {
     title: 'Restaurant Website',
@@ -26,7 +25,6 @@ const featured: Project[] = [
     gradient: 'from-orange-500 to-red-600',
     image: '/images/projects/restaurant.webp',
     status: 'live',
-    year: '2024',
   },
   {
     title: 'Edu CRM / ERP System',
@@ -38,7 +36,17 @@ const featured: Project[] = [
     gradient: 'from-emerald-500 to-teal-600',
     image: '/images/projects/educrm.webp',
     status: 'live',
-    year: '2024',
+  },
+  {
+    title: 'Business Finance Manager',
+    description:
+      'Full-stack business finance management app with income & expense tracking, budget planning, transaction history, category breakdowns, and interactive dashboard analytics.',
+    tags: ['React', 'TypeScript', 'Next.js', 'Node.js', 'Tailwind CSS', 'Recharts', 'PostgreSQL', 'JWT'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://finance-manager-theta-six.vercel.app/',
+    gradient: 'from-green-500 to-emerald-600',
+    image: '/images/projects/finance.jpg',
+    status: 'live',
   },
 ]
 
@@ -51,8 +59,8 @@ const more: Project[] = [
     github: 'https://github.com/m-werzod',
     demo: 'https://toshkent-baliqchi.vercel.app/',
     gradient: 'from-cyan-500 to-blue-500',
+    image: '/images/projects/baliqchi.jpg',
     status: 'live',
-    year: '2024',
   },
   {
     title: 'Nexora Labs — Company Site',
@@ -60,9 +68,9 @@ const more: Project[] = [
       'Corporate website for a tech company featuring service showcase, team section, animated hero, and a modern dark design system.',
     tags: ['React', 'Next.js', 'Tailwind CSS'],
     github: 'https://github.com/m-werzod/Nexora-labs-company',
-    demo: '#',
+    demo: 'https://github.com/m-werzod/Nexora-labs-company',
     gradient: 'from-violet-500 to-purple-600',
-    year: '2024',
+    image: '/images/projects/nexora.jpg',
   },
   {
     title: 'iPhone Store UZ',
@@ -70,9 +78,9 @@ const more: Project[] = [
       'Apple product e-commerce storefront with product listing, category filter, cart, and a pixel-perfect Apple-inspired UI for the Uzbekistan market.',
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
     github: 'https://github.com/m-werzod/IPHONE-STORE.UZ',
-    demo: '#',
+    demo: 'https://github.com/m-werzod/IPHONE-STORE.UZ',
     gradient: 'from-slate-400 to-slate-600',
-    year: '2024',
+    image: '/images/projects/iphone-store.jpg',
   },
   {
     title: 'Fitness Time Gym',
@@ -82,8 +90,8 @@ const more: Project[] = [
     github: 'https://github.com/m-werzod',
     demo: 'https://fitness-time-gym.vercel.app/',
     gradient: 'from-yellow-500 to-orange-500',
+    image: '/images/projects/fitness.jpg',
     status: 'live',
-    year: '2024',
   },
   {
     title: 'Parfume Market',
@@ -93,8 +101,8 @@ const more: Project[] = [
     github: 'https://github.com/m-werzod',
     demo: 'https://parfume-market-nu.vercel.app/',
     gradient: 'from-pink-500 to-rose-600',
+    image: '/images/projects/parfume.jpg',
     status: 'live',
-    year: '2024',
   },
   {
     title: 'Barakah Restaurant',
@@ -104,8 +112,8 @@ const more: Project[] = [
     github: 'https://github.com/m-werzod',
     demo: 'https://barakahresturant.vercel.app/',
     gradient: 'from-amber-500 to-yellow-600',
+    image: '/images/projects/barakah.jpg',
     status: 'live',
-    year: '2025',
   },
   {
     title: 'Sherzoddev Portfolio',
@@ -115,8 +123,8 @@ const more: Project[] = [
     github: 'https://github.com/m-werzod',
     demo: 'https://sherzoddev.com',
     gradient: 'from-[#38bdf8] to-indigo-500',
+    image: '/images/projects/portfolio.jpg',
     status: 'live',
-    year: '2025',
   },
 ]
 
@@ -137,11 +145,11 @@ export default function ProjectsPage() {
             All <span className="text-[#38bdf8]">Projects</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">
-            10 real-world projects — from e-commerce and CRM systems to restaurant brands and 3D portfolios.
+            11 real-world projects — from full-stack finance apps and CRM systems to e-commerce platforms and 3D portfolios.
           </p>
         </motion.div>
 
-        {/* ── Featured Top 3 ── */}
+        {/* ── Featured ── */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -154,13 +162,13 @@ export default function ProjectsPage() {
           <div className="flex-1 h-px bg-white/5" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {featured.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
         </div>
 
-        {/* ── More Projects ── */}
+        {/* ── More Work ── */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}

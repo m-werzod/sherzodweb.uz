@@ -38,7 +38,17 @@ const projects: Project[] = [
     gradient: 'from-emerald-500 to-teal-600',
     image: '/images/projects/educrm.webp',
     status: 'live',
-    year: '2024',
+  },
+  {
+    title: 'Business Finance Manager',
+    description:
+      'Full-stack business finance management app with income & expense tracking, budget planning, transaction history, category breakdowns, and interactive dashboard analytics.',
+    tags: ['React', 'TypeScript', 'Next.js', 'Node.js', 'Tailwind CSS', 'Recharts', 'PostgreSQL', 'JWT'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://finance-manager-theta-six.vercel.app/',
+    gradient: 'from-green-500 to-emerald-600',
+    image: '/images/projects/finance.jpg',
+    status: 'live',
   },
 ]
 
@@ -62,7 +72,7 @@ export default function ProjectsPreview() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {projects.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
@@ -79,7 +89,7 @@ export default function ProjectsPreview() {
             href="/projects"
             className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white font-semibold rounded-xl hover:border-[#38bdf8]/50 hover:bg-[#38bdf8]/5 hover:text-[#38bdf8] transition-all duration-200 group"
           >
-            View All 10 Projects
+            View All 11 Projects
             <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

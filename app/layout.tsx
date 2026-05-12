@@ -1,9 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
-import ClientWidgets from '@/components/layout/ClientWidgets'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -46,10 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
       </head>
       <body className={`${inter.className} bg-[#020617] text-white antialiased`}>
-        <ClientWidgets />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   )
