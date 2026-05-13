@@ -19,7 +19,14 @@ body {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
 }
-.animate-marquee { animation: marquee 20s linear infinite; }
+.animate-marquee  { animation: marquee 20s linear infinite; }
+.marquee-row1     { animation: marquee 18s linear infinite; }
+.marquee-row2     { animation: marquee 24s linear infinite reverse; }
+
+@media (max-width: 768px) {
+  .marquee-row1 { animation-duration: 9s; }
+  .marquee-row2 { animation-duration: 12s; }
+}
 
 /* Glow effect */
 .glow { box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }

@@ -7,91 +7,86 @@ type Tab = 'Tech Stack' | 'Projects' | 'Contact Info' | 'About Me' | 'Education 
 const knowledge: Record<Tab, { q: string; a: string }> = {
   'Tech Stack': {
     q: 'What technologies does Sherzod use?',
-    a: 'Sherzod specializes in React, Next.js 15, TypeScript, and Tailwind CSS. He creates motion designs with Framer Motion, and builds 3D web experiences using Three.js / React Three Fiber with AI assistance. His toolbox also includes Git, Figma, Node.js, and Vercel for deployment.',
+    a: 'Sherzod specializes in React, Next.js 15, TypeScript, and Tailwind CSS. He creates motion designs with Framer Motion, builds 3D web experiences using Three.js / React Three Fiber, and integrates AI tools into his workflow. His toolbox also includes Node.js, Git, Figma, and Vercel for deployment.',
   },
   Projects: {
     q: 'What projects has Sherzod built?',
-    a: 'Sherzod has built 11 real-world projects:\n\n1. E-Commerce Platform — React, TypeScript, Vite, Redux Toolkit, React Query\n2. Restaurant Website — Next.js, shadcn/ui, Tailwind CSS\n3. Edu CRM/ERP System — React, TypeScript, Ant Design, Axios\n4. Business Finance Manager — Full-stack finance app with dashboard & PostgreSQL\n5. Toshkent Baliqchi — Fish restaurant landing page\n6. Nexora Labs — Corporate tech company site\n7. iPhone Store UZ — Apple product storefront\n8. Fitness Time Gym — Gym landing with pricing & schedule\n9. Parfume Market — Luxury perfume shop\n10. Barakah Restaurant — Full restaurant website\n11. Sherzoddev Portfolio — This site (Next.js 15, Three.js, R3F)\n\nSee them all on the Projects page!',
+    a: 'Sherzod has built 11 real-world projects:\n\n1. E-Commerce Platform — React, TypeScript, Vite, Redux Toolkit\n2. Restaurant Website — Next.js, shadcn/ui, Tailwind CSS\n3. Edu CRM/ERP System — React, TypeScript, Ant Design\n4. Business Finance Manager — Full-stack, Node.js, PostgreSQL\n5. Toshkent Baliqchi — Fish restaurant landing page\n6. Nexora Labs — Corporate tech company site\n7. iPhone Store UZ — Apple product storefront\n8. Fitness Time Gym — Gym landing with pricing\n9. Parfume Market — Luxury perfume shop\n10. Barakah Restaurant — Full restaurant website\n11. Sherzoddev Portfolio — Next.js 15, Three.js, R3F\n\nSee them all on the Projects page!',
   },
   'Contact Info': {
     q: 'How can I contact Sherzod?',
-    a: 'You can reach Sherzod via:\n📧 Email: sherzodusmonjonov734@gmail.com\n📱 Phone: +998 94 205 5512\n✈️ Telegram: @WerzodUsmanov\n💻 GitHub: github.com/m-werzod\n\nHe is currently available for freelance and full-time opportunities!',
+    a: 'You can reach Sherzod via:\n\nEmail: sherzodusmonjonov734@gmail.com\nPhone: +998 94 205 5512\nTelegram: @WerzodUsmanov\nGitHub: github.com/m-werzod\n\nHe is currently available for freelance and full-time opportunities!',
   },
   'About Me': {
     q: 'Tell me about Sherzod.',
-    a: 'Sherzodbek Usmonjonov is a Frontend Web Developer from Uzbekistan with 1+ year of experience building high-performance web apps. He specializes in React, Next.js, and also creates motion designs & 3D web experiences using AI-powered tools. He speaks English fluently, understands Russian, and is available for freelance or full-time positions.',
+    a: 'Sherzodbek Usmonjonov is a Frontend Web Developer from Uzbekistan with 1+ year of experience building high-performance web apps. He specializes in React, Next.js, and creates motion designs and 3D web experiences using AI-powered tools. He speaks English fluently, understands Russian, and is available for freelance or full-time positions.',
   },
   'Education & AI': {
     q: "What is Sherzod's education and AI background?",
-    a: "Sherzod graduated from Najot Ta'lim — one of Uzbekistan's leading tech schools — specializing in Frontend Web Development.\n\nBeyond coding, he has studied Prompt Engineering and is skilled at working with a wide range of AI tools to speed up development, create motion designs, and build 3D web experiences.\n\nHe is also planning to launch a social media presence to share his projects and development journey — so stay tuned! 🚀",
+    a: "Sherzod graduated from Najot Ta'lim — one of Uzbekistan's leading tech schools — specializing in Frontend Web Development.\n\nBeyond coding, he has studied Prompt Engineering and is skilled at working with a wide range of AI tools to speed up development, create motion designs, and build 3D web experiences.\n\nHe is also planning to launch a social media presence to share his projects and development journey — stay tuned!",
   },
 }
 
-// ── Keyword-based smart reply ─────────────────────────────────────────────────
 function smartReply(input: string): string {
   const q = input.toLowerCase()
 
-  if (/contact|email|phone|telegram|reach|message|dm|whatsapp|call/.test(q))
+  if (/contact|email|phone|telegram|reach|message|dm|call/.test(q))
     return knowledge['Contact Info'].a
 
-  if (/project|built|work|portfolio|app|site|website|ecommerce|restaurant|finance|crm|erp|gym|parfume|baliqchi|nexora|iphone/.test(q))
+  if (/project|built|work|app|site|website|ecommerce|restaurant|finance|crm|gym|parfume/.test(q))
     return knowledge['Projects'].a
 
-  if (/tech|stack|technology|language|framework|react|next|typescript|tailwind|three\.?js|figma|node|git|tools/.test(q))
+  if (/tech|stack|technology|language|framework|react|next|typescript|tailwind|three|figma|node/.test(q))
     return knowledge['Tech Stack'].a
 
   if (/educat|school|study|najot|degree|certif|prompt|ai|artificial/.test(q))
     return knowledge['Education & AI'].a
 
-  if (/who|about|sherzod|himself|bio|background|experience|uzbek|developer|years/.test(q))
+  if (/who|about|sherzod|bio|background|experience|uzbek|developer/.test(q))
     return knowledge['About Me'].a
 
-  if (/hire|available|freelance|job|opportunity|work together|collaborate|price|cost|rate/.test(q))
-    return "Sherzod is currently available for freelance projects and full-time opportunities! 🟢\n\nBest way to reach him:\n✈️ Telegram: @WerzodUsmanov\n📧 Email: sherzodusmonjonov734@gmail.com\n\nHe typically responds within a few hours."
+  if (/hire|available|freelance|job|opportunity|collaborate|price|cost|rate/.test(q))
+    return "Sherzod is currently available for freelance projects and full-time opportunities.\n\nBest way to reach him:\n- Telegram: @WerzodUsmanov\n- Email: sherzodusmonjonov734@gmail.com\n\nHe typically responds within a few hours."
 
-  if (/hello|hi |hey|sup|what's up|yo |greet/.test(q))
-    return "Hey there! 👋 I'm Sherzod's AI assistant. I can tell you about his projects, tech stack, experience, or how to get in touch. What would you like to know?"
+  if (/hello|hi |hey|sup|greet/.test(q))
+    return "Hey there! I'm Sherzod's AI assistant. I can tell you about his projects, tech stack, experience, or how to get in touch. What would you like to know?"
 
-  if (/salary|pay|rate|cost|price|budget/.test(q))
-    return "For project pricing or salary expectations, it's best to discuss directly with Sherzod.\n\n✈️ Telegram: @WerzodUsmanov\n📧 Email: sherzodusmonjonov734@gmail.com\n\nHe'll get back to you quickly!"
+  if (/salary|pay|rate|cost|budget/.test(q))
+    return "For project pricing or salary expectations, it's best to discuss directly with Sherzod.\n\n- Telegram: @WerzodUsmanov\n- Email: sherzodusmonjonov734@gmail.com\n\nHe'll get back to you quickly!"
 
-  return "Great question! I have info about Sherzod's projects, tech stack, experience, and contact details. Try the quick tabs above or ask something like:\n• \"What projects has he built?\"\n• \"How can I contact him?\"\n• \"What tech does he use?\""
+  return "I have info about Sherzod's projects, tech stack, experience, and contact details. Try the quick tabs above or ask something like:\n- \"What projects has he built?\"\n- \"How can I contact him?\"\n- \"What tech does he use?\""
 }
 
 interface Message { role: 'user' | 'assistant'; content: string }
 
-// ── Bubble messages (rotates) ─────────────────────────────────────────────────
 const bubbleMessages = [
-  "👋 Hi! Ask me about Sherzod",
-  "💼 See his 11 projects!",
-  "🚀 Available for hire!",
-  "🛠️ Ask about his tech stack",
+  'Ask me about Sherzod',
+  'See his 11 projects',
+  'Available for hire',
+  'Ask about his tech stack',
 ]
 
 export default function AIWidget() {
-  const [open, setOpen]             = useState(false)
-  const [bubble, setBubble]         = useState(true)
-  const [bubbleIdx, setBubbleIdx]   = useState(0)
-  const [messages, setMessages]     = useState<Message[]>([
-    { role: 'assistant', content: "Hi! 👋 I'm Sherzod's AI assistant. Ask me anything about his skills, projects, or how to get in touch!" },
+  const [open, setOpen]           = useState(false)
+  const [bubble, setBubble]       = useState(true)
+  const [bubbleIdx, setBubbleIdx] = useState(0)
+  const [messages, setMessages]   = useState<Message[]>([
+    { role: 'assistant', content: "Hi! I'm Sherzod's AI assistant. Ask me anything about his skills, projects, or how to get in touch!" },
   ])
   const [input, setInput]   = useState('')
   const [typing, setTyping] = useState(false)
   const messagesEndRef      = useRef<HTMLDivElement>(null)
 
-  // Auto-scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, typing])
 
-  // Rotate bubble message every 4 s
   useEffect(() => {
     if (!bubble || open) return
     const id = setInterval(() => setBubbleIdx((i) => (i + 1) % bubbleMessages.length), 4000)
     return () => clearInterval(id)
   }, [bubble, open])
 
-  // Hide bubble after 18 s
   useEffect(() => {
     const id = setTimeout(() => setBubble(false), 18000)
     return () => clearTimeout(id)
@@ -123,55 +118,56 @@ export default function AIWidget() {
 
   return (
     <>
-      {/* ── Speech bubble ──────────────────────────────────────────────────── */}
+      {/* ── Speech bubble ──────────────────────────────────────────────── */}
       <AnimatePresence>
         {bubble && !open && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.7, y: 12, x: 8 }}
-            animate={{ opacity: 1, scale: 1,   y: 0,  x: 0 }}
-            exit={{   opacity: 0, scale: 0.7, y: 12, x: 8 }}
+            initial={{ opacity: 0, scale: 0.7, y: 12 }}
+            animate={{ opacity: 1, scale: 1,   y: 0  }}
+            exit={{   opacity: 0, scale: 0.7, y: 12 }}
             transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-            className="fixed bottom-[88px] right-6 z-50 max-w-[210px] cursor-pointer select-none"
+            className="fixed bottom-[88px] right-6 z-50 max-w-[200px] cursor-pointer"
             onClick={openChat}
           >
-            {/* Cloud body */}
-            <div className="relative bg-white text-[#0a0f1e] text-xs font-semibold px-4 py-2.5 rounded-2xl shadow-xl shadow-black/30 leading-snug">
+            <div className="relative bg-white text-[#0a0f1e] text-xs font-semibold px-4 py-2.5 rounded-2xl shadow-xl shadow-black/30 leading-snug flex items-center gap-2">
+              {/* Small colored icon per message */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://img.icons8.com/fluency/48/chatbot.png"
+                alt=""
+                width={16}
+                height={16}
+                className="w-4 h-4 object-contain shrink-0"
+              />
               <AnimatePresence mode="wait">
                 <motion.span
                   key={bubbleIdx}
-                  initial={{ opacity: 0, y: 4 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 4  }}
+                  animate={{ opacity: 1, y: 0  }}
                   exit={{   opacity: 0, y: -4 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.25 }}
                   className="block"
                 >
                   {bubbleMessages[bubbleIdx]}
                 </motion.span>
               </AnimatePresence>
 
-              {/* Dismiss × */}
+              {/* Dismiss */}
               <button
                 onClick={(e) => { e.stopPropagation(); setBubble(false) }}
                 className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-slate-400 hover:bg-slate-500 text-white flex items-center justify-center text-[9px] leading-none transition-colors"
               >
-                ✕
+                &#x2715;
               </button>
 
-              {/* Tail pointing down-right toward the button */}
+              {/* Tail */}
               <span className="absolute -bottom-2 right-5 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-white" />
             </div>
-
-            {/* Subtle pulse ring around bubble */}
-            <motion.div
-              className="absolute inset-0 rounded-2xl ring-2 ring-white/30"
-              animate={{ scale: [1, 1.06, 1], opacity: [0.6, 0, 0.6] }}
-              transition={{ duration: 2.5, repeat: Infinity }}
-            />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── Toggle button ───────────────────────────────────────────────────── */}
+      {/* ── Toggle button ───────────────────────────────────────────────── */}
       <motion.button
         onClick={() => (open ? setOpen(false) : openChat())}
         whileHover={{ scale: 1.08 }}
@@ -186,11 +182,10 @@ export default function AIWidget() {
             </svg>
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src="https://img.icons8.com/3d-fluency/94/chatbot.png" alt="AI" className="w-9 h-9 object-contain" />
+            <img src="https://img.icons8.com/fluency/96/chatbot.png" alt="AI" className="w-9 h-9 object-contain" />
           )}
         </motion.div>
 
-        {/* Notification dot when bubble is showing */}
         {bubble && !open && (
           <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-blue-700">
             <motion.span
@@ -201,7 +196,6 @@ export default function AIWidget() {
           </span>
         )}
 
-        {/* Pulse ring when closed */}
         {!open && (
           <motion.span
             className="absolute inset-0 rounded-2xl border-2 border-sky-400"
@@ -211,7 +205,7 @@ export default function AIWidget() {
         )}
       </motion.button>
 
-      {/* ── Chat panel ──────────────────────────────────────────────────────── */}
+      {/* ── Chat panel ──────────────────────────────────────────────────── */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -223,7 +217,8 @@ export default function AIWidget() {
           >
             {/* Header */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-gradient-to-r from-sky-950/50 to-transparent">
-              <img src="https://img.icons8.com/3d-fluency/94/chatbot.png" alt="AI" className="w-8 h-8" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://img.icons8.com/fluency/96/chatbot.png" alt="AI" className="w-8 h-8" />
               <div className="flex-1">
                 <p className="text-sm font-bold text-white">AI Assistant</p>
                 <div className="flex items-center gap-1.5">
@@ -232,16 +227,15 @@ export default function AIWidget() {
                 </div>
               </div>
               <button
-                onClick={() => setMessages([{ role: 'assistant', content: "Hi! 👋 I'm Sherzod's AI assistant. Ask me anything about his skills, projects, or how to get in touch!" }])}
+                onClick={() => setMessages([{ role: 'assistant', content: "Hi! I'm Sherzod's AI assistant. Ask me anything about his skills, projects, or how to get in touch!" }])}
                 className="text-[10px] text-slate-600 hover:text-slate-400 transition-colors px-2 py-1 rounded-lg hover:bg-white/5"
-                title="Clear chat"
               >
                 Clear
               </button>
             </div>
 
-            {/* Quick-topic tabs */}
-            <div className="flex gap-1.5 p-3 overflow-x-auto border-b border-white/5 bg-black/10 scrollbar-none">
+            {/* Tabs */}
+            <div className="flex gap-1.5 p-3 overflow-x-auto border-b border-white/5 bg-black/10">
               {(Object.keys(knowledge) as Tab[]).map((tab) => (
                 <button
                   key={tab}
@@ -263,15 +257,14 @@ export default function AIWidget() {
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   {msg.role === 'assistant' && (
-                    <img src="https://img.icons8.com/3d-fluency/94/chatbot.png" alt="" className="w-5 h-5 self-end mb-0.5 mr-1.5 shrink-0" />
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src="https://img.icons8.com/fluency/96/chatbot.png" alt="" className="w-5 h-5 self-end mb-0.5 mr-1.5 shrink-0" />
                   )}
-                  <div
-                    className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed whitespace-pre-line ${
-                      msg.role === 'user'
-                        ? 'bg-[#38bdf8] text-[#020617] font-medium rounded-tr-sm'
-                        : 'bg-white/5 text-slate-300 border border-white/5 rounded-tl-sm'
-                    }`}
-                  >
+                  <div className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed whitespace-pre-line ${
+                    msg.role === 'user'
+                      ? 'bg-[#38bdf8] text-[#020617] font-medium rounded-tr-sm'
+                      : 'bg-white/5 text-slate-300 border border-white/5 rounded-tl-sm'
+                  }`}>
                     {msg.content}
                   </div>
                 </motion.div>
@@ -279,7 +272,8 @@ export default function AIWidget() {
 
               {typing && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start items-end gap-1.5">
-                  <img src="https://img.icons8.com/3d-fluency/94/chatbot.png" alt="" className="w-5 h-5 shrink-0" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="https://img.icons8.com/fluency/96/chatbot.png" alt="" className="w-5 h-5 shrink-0" />
                   <div className="bg-white/5 border border-white/5 rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1">
                     {[0, 0.15, 0.3].map((d, i) => (
                       <motion.span key={i} className="w-1.5 h-1.5 rounded-full bg-slate-400"
@@ -298,7 +292,7 @@ export default function AIWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Ask anything about Sherzod…"
+                placeholder="Ask anything about Sherzod..."
                 className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#38bdf8]/40 transition-colors"
               />
               <button

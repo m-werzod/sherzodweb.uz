@@ -10,7 +10,6 @@ const ICON = {
   github:   'https://img.icons8.com/3d-fluency/94/github.png',
   instagram:'https://cdn-icons-png.flaticon.com/512/15713/15713420.png',
   linkedin: 'https://cdn-icons-png.flaticon.com/512/3992/3992606.png',
-  sms:      'https://cdn-icons-png.flaticon.com/512/724/724664.png',
 }
 
 const contacts = [
@@ -28,64 +27,86 @@ const socials = [
 
 type Method = 'telegram' | 'email' | 'sms'
 
-const methods = [
-  { id: 'telegram' as Method, label: 'Telegram', desc: 'Fastest — usually replies within an hour',   icon: ICON.telegram, ring: 'border-sky-500/40 hover:border-sky-400/70 from-sky-600/10 to-sky-900/10'     },
-  { id: 'email'    as Method, label: 'Gmail',    desc: 'Sends directly to inbox — replies in 24 h',  icon: ICON.gmail,    ring: 'border-red-500/40 hover:border-red-400/70 from-red-600/10 to-red-900/10'       },
-  { id: 'sms'      as Method, label: 'SMS',      desc: 'Opens your messaging app pre-filled',         icon: ICON.phone,    ring: 'border-emerald-500/40 hover:border-emerald-400/70 from-emerald-600/10 to-emerald-900/10' },
+const methods: { id: Method; label: string; desc: string; icon: string; ring: string; badge: string }[] = [
+  {
+    id:    'telegram',
+    label: 'Telegram',
+    desc:  'Opens Telegram with message pre-filled — fastest reply',
+    icon:  ICON.telegram,
+    ring:  'border-sky-500/40 hover:border-sky-400/70 from-sky-600/10 to-sky-900/10',
+    badge: 'bg-sky-500/20 border-sky-400/40 text-sky-300',
+  },
+  {
+    id:    'email',
+    label: 'Gmail',
+    desc:  'Opens Gmail compose with message ready to send',
+    icon:  ICON.gmail,
+    ring:  'border-red-500/40 hover:border-red-400/70 from-red-600/10 to-red-900/10',
+    badge: 'bg-red-500/20 border-red-400/40 text-red-300',
+  },
+  {
+    id:    'sms',
+    label: 'SMS',
+    desc:  'Opens your messaging app with message pre-filled',
+    icon:  ICON.phone,
+    ring:  'border-emerald-500/40 hover:border-emerald-400/70 from-emerald-600/10 to-emerald-900/10',
+    badge: 'bg-emerald-500/20 border-emerald-400/40 text-emerald-300',
+  },
 ]
 
-type Status = { ok: boolean; via?: string; msg: string } | null
+type Toast = { ok: boolean; via: string; msg: string } | null
 
 export default function ContactPage() {
   const [form, setForm]           = useState({ name: '', email: '', subject: '', message: '' })
   const [showModal, setShowModal] = useState(false)
   const [loading, setLoading]     = useState(false)
-  const [status, setStatus]       = useState<Status>(null)
+  const [toast, setToast]         = useState<Toast>(null)
 
-  const openModal = (e: React.FormEvent) => { e.preventDefault(); setStatus(null); setShowModal(true) }
+  const openModal = (e: React.FormEvent) => { e.preventDefault(); setToast(null); setShowModal(true) }
 
-  const send = async (method: Method) => {
+  /* Auto-dismiss toast after 6 s */
+  const showToast = (t: Toast) => {
+    setToast(t)
+    setTimeout(() => setToast(null), 6000)
+  }
+
+  const send = (method: Method) => {
     setShowModal(false)
     setLoading(true)
 
+    const m = methods.find((x) => x.id === method)!
+
     try {
-      /* ── SMS: open native app pre-filled ── */
       if (method === 'sms') {
         const body = encodeURIComponent(
           `Hi Sherzodbek!\nFrom: ${form.name} <${form.email}>\nSubject: ${form.subject}\n\n${form.message}`
         )
         window.open(`sms:+998942055512?body=${body}`, '_blank')
-        setStatus({ ok: true, via: 'SMS', msg: 'SMS app opened — your message is pre-filled. Tap Send!' })
-        setLoading(false)
-        return
-      }
+        showToast({ ok: true, via: m.label, msg: 'SMS app opened — your message is pre-filled. Tap Send inside!' })
 
-      /* ── Telegram & Email: server-side auto-send ── */
-      const res  = await fetch('/api/send', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ method, ...form }),
-      })
-      const data = await res.json()
+      } else if (method === 'telegram') {
+        const text = encodeURIComponent(
+          `📩 Portfolio Message\n\nFrom: ${form.name} (${form.email})\nSubject: ${form.subject}\n\n${form.message}`
+        )
+        window.open(`https://t.me/WerzodUsmanov?text=${text}`, '_blank')
+        showToast({ ok: true, via: m.label, msg: 'Telegram opened with your message ready — press Send inside the app!' })
 
-      if (!res.ok || data.error) {
-        /* Telegram fallback → open t.me with text */
-        if (method === 'telegram') {
-          const text = encodeURIComponent(
-            `Hi! I'm ${form.name} (${form.email})\nSubject: ${form.subject}\n\n${form.message}`
-          )
-          window.open(`https://t.me/WerzodUsmanov?text=${text}`, '_blank')
-          setStatus({ ok: true, via: 'Telegram', msg: 'Telegram opened — tap Send to deliver your message!' })
-        } else {
-          setStatus({ ok: false, msg: data.error || 'Something went wrong. Please try again.' })
-        }
       } else {
-        const via = method === 'telegram' ? 'Telegram' : 'Gmail'
-        setStatus({ ok: true, via, msg: `Your message was sent via ${via}! I'll get back to you soon.` })
-        setForm({ name: '', email: '', subject: '', message: '' })
+        /* Gmail compose URL — 100% reliable, no API keys needed */
+        const su   = encodeURIComponent(`[Portfolio] ${form.subject} — from ${form.name}`)
+        const body = encodeURIComponent(
+          `Hi Sherzodbek,\n\nMy name is ${form.name}.\nReply-to: ${form.email}\n\n${form.message}\n\n— ${form.name}`
+        )
+        window.open(
+          `https://mail.google.com/mail/?view=cm&fs=1&to=sherzodusmonjonov734@gmail.com&su=${su}&body=${body}`,
+          '_blank'
+        )
+        showToast({ ok: true, via: 'Gmail', msg: 'Gmail opened with your message ready — click Send inside Gmail!' })
       }
+
+      setForm({ name: '', email: '', subject: '', message: '' })
     } catch {
-      setStatus({ ok: false, msg: 'Network error — please check your connection and try again.' })
+      showToast({ ok: false, via: '', msg: 'Could not open the app. Please try a different method.' })
     }
 
     setLoading(false)
@@ -120,6 +141,7 @@ export default function ContactPage() {
               <Link key={c.label} href={c.href} target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 rounded-2xl border border-white/10 bg-[#0a1628] hover:border-[#38bdf8]/30 transition-all group"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={c.icon} alt={c.label} className="w-9 h-9 object-contain shrink-0" />
                 <div>
                   <p className="text-[11px] text-slate-500 font-semibold uppercase tracking-widest mb-0.5">{c.label}</p>
@@ -135,6 +157,7 @@ export default function ContactPage() {
                   <Link key={s.alt} href={s.href} target="_blank" rel="noopener noreferrer"
                     className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-[#38bdf8]/30 hover:bg-[#38bdf8]/5 transition-all group"
                   >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={s.src} alt={s.alt} className="w-6 h-6 object-contain group-hover:scale-110 transition-transform" />
                   </Link>
                 ))}
@@ -152,29 +175,6 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
             className="lg:col-span-3"
           >
-            {/* Status banner */}
-            <AnimatePresence>
-              {status && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-                  className={`mb-5 px-5 py-4 rounded-2xl border flex items-start gap-3 ${
-                    status.ok
-                      ? 'bg-emerald-950/30 border-emerald-500/30 text-emerald-300'
-                      : 'bg-red-950/30 border-red-500/30 text-red-300'
-                  }`}
-                >
-                  <span className="text-xl shrink-0 mt-0.5">{status.ok ? '✅' : '❌'}</span>
-                  <div className="flex-1">
-                    {status.ok && status.via && (
-                      <p className="font-bold text-sm mb-0.5">Message sent via {status.via}!</p>
-                    )}
-                    <p className="text-sm opacity-90">{status.msg}</p>
-                  </div>
-                  <button onClick={() => setStatus(null)} className="text-xs opacity-50 hover:opacity-100 shrink-0">✕</button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
             <form onSubmit={openModal} className="p-8 rounded-2xl border border-white/10 bg-[#0a1628] space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
@@ -215,7 +215,7 @@ export default function ContactPage() {
                 type="submit" disabled={loading}
                 whileHover={{ scale: loading ? 1 : 1.02 }}
                 whileTap={{ scale: loading ? 1 : 0.98 }}
-                className="w-full py-4 bg-[#38bdf8] text-[#020617] font-bold rounded-xl hover:bg-sky-300 transition-all hover:shadow-lg hover:shadow-sky-400/25 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full py-4 bg-gradient-to-r from-[#38bdf8] to-sky-400 text-[#020617] font-bold rounded-xl hover:from-sky-300 hover:to-[#38bdf8] transition-all hover:shadow-lg hover:shadow-sky-400/25 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
@@ -223,14 +223,13 @@ export default function ContactPage() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
                     </svg>
-                    Sending…
+                    Opening…
                   </>
                 ) : (
                   <>
                     Send Message
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="22" y1="2" x2="11" y2="13"/>
-                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                      <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
                     </svg>
                   </>
                 )}
@@ -240,7 +239,61 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* ── Method Modal ────────────────────────────────────────────── */}
+      {/* ── Toast notification badge (fixed bottom-left) ────────────── */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, x: -40, y: 0 }}
+            animate={{ opacity: 1, x: 0,   y: 0 }}
+            exit={{   opacity: 0, x: -40, y: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 26 }}
+            className="fixed bottom-6 left-6 z-[60] max-w-xs"
+          >
+            <div className={`flex items-start gap-3 px-5 py-4 rounded-2xl border shadow-2xl shadow-black/60 backdrop-blur-xl ${
+              toast.ok
+                ? 'bg-[#040e1f]/95 border-emerald-500/40'
+                : 'bg-[#040e1f]/95 border-red-500/40'
+            }`}>
+              {/* Icon */}
+              <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+                toast.ok ? 'bg-emerald-500/15 border border-emerald-500/30' : 'bg-red-500/15 border border-red-500/30'
+              }`}>
+                {toast.ok ? (
+                  <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7"/>
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                )}
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <p className={`text-xs font-bold mb-0.5 ${toast.ok ? 'text-emerald-400' : 'text-red-400'}`}>
+                  {toast.ok ? `✓ Opened via ${toast.via}` : 'Something went wrong'}
+                </p>
+                <p className="text-xs text-slate-400 leading-relaxed">{toast.msg}</p>
+              </div>
+
+              <button
+                onClick={() => setToast(null)}
+                className="text-slate-600 hover:text-slate-400 transition-colors shrink-0 mt-0.5 text-xs"
+              >✕</button>
+            </div>
+
+            {/* Progress bar auto-dismiss */}
+            <motion.div
+              initial={{ scaleX: 1 }}
+              animate={{ scaleX: 0 }}
+              transition={{ duration: 6, ease: 'linear' }}
+              className={`h-0.5 rounded-b-full origin-left ${toast.ok ? 'bg-emerald-500/60' : 'bg-red-500/60'}`}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Method Selection Modal ───────────────────────────────────── */}
       <AnimatePresence>
         {showModal && (
           <motion.div
@@ -250,8 +303,8 @@ export default function ContactPage() {
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.88, y: 28 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.88, y: 28 }}
+              animate={{ opacity: 1, scale: 1,   y: 0  }}
+              exit={{   opacity: 0, scale: 0.88, y: 28 }}
               transition={{ type: 'spring', damping: 20, stiffness: 280 }}
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-sm bg-[#060f22] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-black/70"
@@ -262,12 +315,11 @@ export default function ContactPage() {
                 <div className="flex flex-col items-center text-center mb-7">
                   <div className="w-14 h-14 rounded-2xl bg-[#38bdf8]/10 border border-[#38bdf8]/20 flex items-center justify-center mb-4">
                     <svg className="w-7 h-7 text-[#38bdf8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="22" y1="2" x2="11" y2="13"/>
-                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                      <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
                     </svg>
                   </div>
                   <h2 className="text-xl font-black text-white mb-1">How to send it?</h2>
-                  <p className="text-xs text-slate-400">Pick your preferred channel — message sends instantly</p>
+                  <p className="text-xs text-slate-400">Pick your channel — opens instantly with message ready</p>
                 </div>
 
                 <div className="space-y-3">
@@ -282,6 +334,7 @@ export default function ContactPage() {
                       onClick={() => send(m.id)}
                       className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl bg-gradient-to-r border transition-all duration-200 text-left ${m.ring}`}
                     >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={m.icon} alt={m.label} className="w-10 h-10 object-contain shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-bold text-white">{m.label}</p>

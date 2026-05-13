@@ -93,14 +93,14 @@ export default function HeroSection() {
               <span className="block text-white">Sherzodbek</span>
               <span className="block text-[#38bdf8] glow-text">Usmonjonov</span>
             </h1>
-            <p className="mt-3 text-lg md:text-xl font-semibold text-slate-400 tracking-wide">Frontend Web Developer</p>
+            <p className="mt-3 text-lg md:text-xl font-semibold text-slate-400 tracking-wide">Frontend Web Developer Expert</p>
           </motion.div>
 
           {/* Value prop */}
           <motion.p variants={item} className="text-slate-400 text-sm md:text-base leading-relaxed max-w-md text-center lg:text-left">
             Building{' '}
             <span className="text-[#38bdf8] font-semibold">high-performance web experiences</span>{' '}
-            with React &amp; Next.js. Crafting motion designs and 3D visuals with the power of modern AI tools.
+            with React &amp; Next.js. Expert of the TypeScript and JavaScript Crafting motion designs and 3D visuals with the power of modern AI tools. 
           </motion.p>
 
           {/* Language badges */}
@@ -164,8 +164,8 @@ export default function HeroSection() {
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0, y: [0, -7, 0] }}
             transition={{ opacity: { duration: 0.5, delay: 0.7 }, x: { duration: 0.5, delay: 0.7 }, y: { duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1 } }}
             className="absolute left-0 top-[28%] -translate-x-[60%] bg-[#0d1b2e] border border-[#38bdf8]/20 rounded-2xl px-5 py-4 shadow-xl shadow-sky-950/40 backdrop-blur-sm min-w-[130px]">
-            <p className="text-3xl font-black text-[#38bdf8] leading-none">1+</p>
-            <p className="text-xs text-slate-400 mt-1.5 font-medium">Year Experience</p>
+            <p className="text-3xl font-black text-[#38bdf8] leading-none">3+</p>
+            <p className="text-xs text-slate-400 mt-1.5 font-medium">Year Experience <br /> in Coumputer Science</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0, y: [0, 7, 0] }}
