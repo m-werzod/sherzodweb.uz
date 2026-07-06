@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import MainImg from '@/app/assets/images/MainImg.jpg'
 import { useEffect, useState } from 'react'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
+import Highlight from '@/components/ui/Highlight'
 
 // Three.js — only imported if the viewport is ≥ 1024 px
 const ThreeScene = dynamic(() => import('./ThreeScene'), {
@@ -29,6 +31,7 @@ const socials = [
 ]
 
 export default function HeroSection() {
+  const { ui } = useLanguage()
   // Only render ThreeScene on actual desktop — prevents WebGL from executing on mobile
   const [isDesktop, setIsDesktop] = useState(false)
   useEffect(() => {
@@ -73,10 +76,10 @@ export default function HeroSection() {
               <h1 className="text-2xl font-black text-white leading-tight">
                 Sherzodbek <span className="text-[#38bdf8]">Usmonjonov</span>
               </h1>
-              <p className="text-sm font-semibold text-slate-400 mt-1 tracking-wide">Full-Stack Engineer · AI Integration Specialist</p>
+              <p className="text-sm font-semibold text-slate-400 mt-1 tracking-wide">{ui.hero.roleTagline}</p>
               <div className="inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-full border border-[#38bdf8]/30 bg-[#38bdf8]/5 text-[#38bdf8] text-xs font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse" />
-                Available for Work
+                {ui.nav.availableForWork}
               </div>
             </div>
           </motion.div>
@@ -84,7 +87,7 @@ export default function HeroSection() {
           {/* Desktop: badge */}
           <motion.div variants={item} className="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#38bdf8]/30 bg-[#38bdf8]/5 text-[#38bdf8] text-xs font-medium w-fit">
             <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse" />
-            Available for Work
+            {ui.nav.availableForWork}
           </motion.div>
 
           {/* Desktop: heading */}
@@ -93,42 +96,40 @@ export default function HeroSection() {
               <span className="block text-white">Sherzodbek</span>
               <span className="block text-[#38bdf8] glow-text">Usmonjonov</span>
             </h1>
-            <p className="mt-3 text-lg md:text-xl font-semibold text-slate-400 tracking-wide">Full-Stack Engineer · AI Integration Specialist</p>
+            <p className="mt-3 text-lg md:text-xl font-semibold text-slate-400 tracking-wide">{ui.hero.roleTagline}</p>
           </motion.div>
 
           {/* Value prop */}
           <motion.p variants={item} className="text-slate-400 text-sm md:text-base leading-relaxed max-w-md text-center lg:text-left">
-            Building{' '}
-            <span className="text-[#38bdf8] font-semibold">production platforms end to end</span>{' '}
-            with React, Next.js &amp; Node.js — architected Era AI (40+ integrated AI tools) and shipped the Labour Migration Agency platform. Certified Frontend Engineer Expert by micro1 (US).
+            <Highlight text={ui.hero.valueProp} />
           </motion.p>
 
           {/* Language badges */}
           <motion.div variants={item} className="flex flex-wrap gap-2 justify-center lg:justify-start">
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://flagcdn.com/w40/uz.png" alt="Uzbek flag" className="w-4 h-3 rounded-[2px] object-cover" /> Uzbek — Native
+              <img src="https://flagcdn.com/w40/uz.png" alt="Uzbek flag" className="w-4 h-3 rounded-[2px] object-cover" /> {ui.hero.langUzbekLabel}
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://flagcdn.com/w40/gb.png" alt="UK flag" className="w-4 h-3 rounded-[2px] object-cover" /> English — Fluent (C1)
+              <img src="https://flagcdn.com/w40/gb.png" alt="UK flag" className="w-4 h-3 rounded-[2px] object-cover" /> {ui.hero.langEnglishLabel}
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://flagcdn.com/w40/ru.png" alt="Russian flag" className="w-4 h-3 rounded-[2px] object-cover" /> Russian — Conversational
+              <img src="https://flagcdn.com/w40/ru.png" alt="Russian flag" className="w-4 h-3 rounded-[2px] object-cover" /> {ui.hero.langRussianLabel}
             </span>
           </motion.div>
 
           {/* CTAs */}
           <motion.div variants={item} className="flex flex-wrap gap-3 justify-center lg:justify-start">
             <Link href="/contact" className="group px-7 py-3.5 bg-gradient-to-r from-[#38bdf8] to-sky-400 text-[#020617] font-extrabold rounded-xl hover:shadow-xl hover:shadow-sky-400/40 active:scale-95 hover:from-sky-300 hover:to-[#38bdf8] flex items-center gap-2 transition-all duration-200">
-              <span>Contact Me</span>
+              <span>{ui.hero.ctaContact}</span>
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
               </svg>
             </Link>
             <Link href="/projects" className="px-7 py-3.5 border border-white/20 text-white font-semibold rounded-xl hover:border-[#38bdf8]/60 hover:bg-white/5 hover:text-[#38bdf8] transition-all duration-200 active:scale-95">
-              View Projects
+              {ui.hero.ctaProjects}
             </Link>
           </motion.div>
 
@@ -146,7 +147,7 @@ export default function HeroSection() {
 
           {/* Mobile scroll indicator */}
           <motion.div variants={item} className="flex lg:hidden flex-col items-center gap-2 pt-2 pb-4">
-            <span className="text-[10px] text-slate-600 tracking-[0.3em] uppercase font-medium">Scroll</span>
+            <span className="text-[10px] text-slate-600 tracking-[0.3em] uppercase font-medium">{ui.hero.scroll}</span>
             <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
               className="w-px h-7 bg-gradient-to-b from-[#38bdf8] to-transparent" />
           </motion.div>
@@ -171,14 +172,21 @@ export default function HeroSection() {
             transition={{ opacity: { duration: 0.5, delay: 0.7 }, x: { duration: 0.5, delay: 0.7 }, y: { duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1 } }}
             className="absolute left-0 top-[28%] -translate-x-[60%] bg-[#0d1b2e] border border-[#38bdf8]/20 rounded-2xl px-5 py-4 shadow-xl shadow-sky-950/40 backdrop-blur-sm min-w-[130px]">
             <p className="text-3xl font-black text-[#38bdf8] leading-none">3+</p>
-            <p className="text-xs text-slate-400 mt-1.5 font-medium">Year Experience <br /> in Computer Science</p>
+            <p className="text-xs text-slate-400 mt-1.5 font-medium">
+              {ui.hero.statYearsLabel.split('\n').map((line, i) => (
+                <span key={i}>
+                  {i > 0 && <br />}
+                  {line}
+                </span>
+              ))}
+            </p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0, y: [0, 7, 0] }}
             transition={{ opacity: { duration: 0.5, delay: 0.9 }, x: { duration: 0.5, delay: 0.9 }, y: { duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1.2 } }}
             className="absolute right-0 top-[55%] translate-x-[60%] bg-[#0d1b2e] border border-[#38bdf8]/20 rounded-2xl px-5 py-4 shadow-xl shadow-sky-950/40 backdrop-blur-sm min-w-[130px]">
             <p className="text-3xl font-black text-[#38bdf8] leading-none">13+</p>
-            <p className="text-xs text-slate-400 mt-1.5 font-medium">Projects Built</p>
+            <p className="text-xs text-slate-400 mt-1.5 font-medium">{ui.hero.statProjectsLabel}</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: [0, -5, 0] }}
@@ -193,7 +201,7 @@ export default function HeroSection() {
       {/* Desktop scroll indicator */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.3 }}
         className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2">
-        <span className="text-xs text-slate-600 tracking-widest uppercase">Scroll</span>
+        <span className="text-xs text-slate-600 tracking-widest uppercase">{ui.hero.scroll}</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}
           className="w-px h-8 bg-gradient-to-b from-[#38bdf8] to-transparent" />
       </motion.div>

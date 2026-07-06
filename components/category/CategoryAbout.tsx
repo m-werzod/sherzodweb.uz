@@ -1,10 +1,14 @@
 'use client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import type { CategoryData } from '@/lib/resumeData'
+import type { CategoryKey } from '@/lib/resumeData'
 import { ACCENT_CLASSES } from '@/lib/resumeData'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { formatTemplate } from '@/lib/i18n/format'
 
-export default function CategoryAbout({ data }: { data: CategoryData }) {
+export default function CategoryAbout({ category }: { category: CategoryKey }) {
+  const { ui, categories } = useLanguage()
+  const data = categories[category]
   const accent = ACCENT_CLASSES[data.accent]
 
   return (
@@ -18,7 +22,7 @@ export default function CategoryAbout({ data }: { data: CategoryData }) {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <p className={`text-xs font-semibold tracking-[0.25em] uppercase mb-3 ${accent.text}`}>{data.label} Profile</p>
+          <p className={`text-xs font-semibold tracking-[0.25em] uppercase mb-3 ${accent.text}`}>{data.label} {ui.categoryAbout.profileSuffix}</p>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">{data.fullTitle}</h1>
           <p className="text-slate-400 text-base md:text-lg mb-6 font-medium">{data.tagline}</p>
           <div className="space-y-4 text-slate-400 leading-relaxed max-w-3xl">
@@ -70,7 +74,7 @@ export default function CategoryAbout({ data }: { data: CategoryData }) {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <h2 className="text-2xl font-black text-white mb-8">Core Competencies</h2>
+          <h2 className="text-2xl font-black text-white mb-8">{ui.categoryAbout.coreCompetencies}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.competencies.map((group) => (
               <div key={group.category} className="p-6 rounded-2xl border border-white/10 bg-[#0a1628]">
@@ -94,7 +98,7 @@ export default function CategoryAbout({ data }: { data: CategoryData }) {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <h2 className="text-2xl font-black text-white mb-8">Professional Experience</h2>
+          <h2 className="text-2xl font-black text-white mb-8">{ui.categoryAbout.professionalExperience}</h2>
           <div className="space-y-5">
             {data.experience.map((exp) => (
               <div key={`${exp.role}-${exp.company}`} className="p-6 rounded-2xl border border-white/10 bg-[#0a1628] hover:border-white/20 transition-colors">
@@ -133,7 +137,7 @@ export default function CategoryAbout({ data }: { data: CategoryData }) {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <h2 className="text-2xl font-black text-white mb-8">Languages</h2>
+          <h2 className="text-2xl font-black text-white mb-8">{ui.categoryAbout.languages}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {data.languages.map((l, i) => (
               <motion.div
@@ -174,7 +178,7 @@ export default function CategoryAbout({ data }: { data: CategoryData }) {
           className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20"
         >
           <div className="p-6 rounded-2xl border border-white/10 bg-[#0a1628]">
-            <h2 className="text-lg font-black text-white mb-5">Education</h2>
+            <h2 className="text-lg font-black text-white mb-5">{ui.categoryAbout.education}</h2>
             <ul className="space-y-3">
               {data.education.map((e) => (
                 <li key={e} className="flex gap-2.5 text-sm text-slate-400 leading-relaxed">
@@ -185,7 +189,7 @@ export default function CategoryAbout({ data }: { data: CategoryData }) {
             </ul>
           </div>
           <div className="p-6 rounded-2xl border border-white/10 bg-[#0a1628]">
-            <h2 className="text-lg font-black text-white mb-5">Certifications</h2>
+            <h2 className="text-lg font-black text-white mb-5">{ui.categoryAbout.certifications}</h2>
             <ul className="space-y-3">
               {data.certifications.map((c) => (
                 <li key={c} className="flex gap-2.5 text-sm text-slate-400 leading-relaxed">
@@ -204,15 +208,15 @@ export default function CategoryAbout({ data }: { data: CategoryData }) {
           viewport={{ once: true }}
           className="text-center p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-sky-950/30 to-[#0a1628]"
         >
-          <h2 className="text-3xl font-black text-white mb-3">Let&apos;s Work Together</h2>
+          <h2 className="text-3xl font-black text-white mb-3">{ui.categoryAbout.letsWorkTogether}</h2>
           <p className="text-slate-400 mb-8 max-w-md mx-auto">
-            Looking for a {data.label.toLowerCase()} for your team or project? I&apos;m available for freelance work and open to full-time opportunities.
+            {formatTemplate(ui.categoryAbout.ctaBodyTemplate, { role: data.label.toLowerCase() })}
           </p>
           <Link
             href={`/${data.slug}/contact`}
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#38bdf8] text-[#020617] font-bold rounded-xl hover:bg-sky-300 transition-all hover:shadow-lg hover:shadow-sky-400/25"
           >
-            Get In Touch
+            {ui.categoryAbout.getInTouch}
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

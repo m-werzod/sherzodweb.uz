@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 export interface Project {
   title: string
@@ -16,6 +17,7 @@ export interface Project {
 }
 
 export default function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const { ui } = useLanguage()
   const hasImage   = !!project.image
   const hasDemo    = project.demo && project.demo !== '#'
   const hasGithub  = project.github && project.github !== '#'
@@ -47,7 +49,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
           {project.status === 'live' && (
             <div className="absolute top-3 right-3 z-[2] flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Live</span>
+              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">{ui.projectCard.live}</span>
             </div>
           )}
           <Image
@@ -65,7 +67,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
           {project.status === 'live' && (
             <div className="absolute top-3 right-3 z-[2] flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Live</span>
+              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">{ui.projectCard.live}</span>
             </div>
           )}
           <div className="absolute inset-0 flex items-center justify-center opacity-20">
@@ -111,7 +113,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="https://img.icons8.com/3d-fluency/94/github.png" alt="GitHub" width={14} height={14} loading="lazy" decoding="async" className="w-3.5 h-3.5 shrink-0" />
-              Code
+              {ui.projectCard.code}
             </Link>
           )}
 
@@ -126,7 +128,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
               <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
-              Live Demo
+              {ui.projectCard.liveDemo}
             </Link>
           )}
         </div>

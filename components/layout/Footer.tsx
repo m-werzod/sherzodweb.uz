@@ -1,4 +1,6 @@
+'use client'
 import Link from 'next/link'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 const socials = [
   {
@@ -24,6 +26,7 @@ const socials = [
 ]
 
 export default function Footer() {
+  const { ui } = useLanguage()
   return (
     <footer className="border-t border-white/5 bg-[#020617] py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -32,7 +35,7 @@ export default function Footer() {
             <span className="text-white">Sherzod</span>
             <span className="text-[#38bdf8]">dev</span>
           </p>
-          <p className="text-sm text-slate-500 mt-1">Full-Stack Engineer & AI Integration Specialist</p>
+          <p className="text-sm text-slate-500 mt-1">{ui.footer.tagline}</p>
         </div>
 
         <div className="flex items-center gap-4">
@@ -56,7 +59,7 @@ export default function Footer() {
         </div>
 
         <p className="text-xs text-slate-600">
-          © {new Date().getFullYear()} Sherzodbek Usmonjonov. All rights reserved.
+          © {new Date().getFullYear()} Sherzodbek Usmonjonov. {ui.footer.rights}
         </p>
       </div>
     </footer>

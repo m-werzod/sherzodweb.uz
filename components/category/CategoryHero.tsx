@@ -1,10 +1,13 @@
 'use client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import type { CategoryData } from '@/lib/resumeData'
+import type { CategoryKey } from '@/lib/resumeData'
 import { ACCENT_CLASSES } from '@/lib/resumeData'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
-export default function CategoryHero({ data }: { data: CategoryData }) {
+export default function CategoryHero({ category }: { category: CategoryKey }) {
+  const { ui, categories } = useLanguage()
+  const data = categories[category]
   const accent = ACCENT_CLASSES[data.accent]
 
   return (
@@ -20,7 +23,7 @@ export default function CategoryHero({ data }: { data: CategoryData }) {
         >
           <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold mb-6 ${accent.border} ${accent.bg} ${accent.text}`}>
             <span className={`w-1.5 h-1.5 rounded-full ${accent.dot} animate-pulse`} />
-            {data.label} Specialization
+            {data.label} {ui.categoryHero.specializationSuffix}
           </span>
           <h1 className="text-4xl md:text-6xl font-black text-white mb-4 leading-tight tracking-tight">
             {data.fullTitle}
@@ -33,19 +36,19 @@ export default function CategoryHero({ data }: { data: CategoryData }) {
               href={`/${data.slug}/about`}
               className="px-7 py-3.5 bg-gradient-to-r from-[#38bdf8] to-sky-400 text-[#020617] font-extrabold rounded-xl hover:shadow-xl hover:shadow-sky-400/40 active:scale-95 transition-all duration-200"
             >
-              Full Background
+              {ui.categoryHero.fullBackground}
             </Link>
             <Link
               href={`/${data.slug}/projects`}
               className="px-7 py-3.5 border border-white/20 text-white font-semibold rounded-xl hover:border-[#38bdf8]/60 hover:bg-white/5 hover:text-[#38bdf8] transition-all duration-200 active:scale-95"
             >
-              View Projects
+              {ui.categoryHero.viewProjects}
             </Link>
             <Link
               href={`/${data.slug}/contact`}
               className="px-7 py-3.5 border border-white/20 text-white font-semibold rounded-xl hover:border-[#38bdf8]/60 hover:bg-white/5 hover:text-[#38bdf8] transition-all duration-200 active:scale-95"
             >
-              Contact
+              {ui.categoryHero.contact}
             </Link>
           </div>
         </motion.div>
@@ -72,7 +75,7 @@ export default function CategoryHero({ data }: { data: CategoryData }) {
           viewport={{ once: true }}
           className="mt-16"
         >
-          <h2 className="text-xl font-black text-white mb-6 text-center">Core Competencies</h2>
+          <h2 className="text-xl font-black text-white mb-6 text-center">{ui.categoryHero.coreCompetencies}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.competencies.slice(0, 3).map((group) => (
               <div key={group.category} className="p-5 rounded-2xl border border-white/10 bg-[#0a1628]">

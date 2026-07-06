@@ -2,7 +2,8 @@
 import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { categoryList, ACCENT_CLASSES, type CategoryData } from '@/lib/resumeData'
+import { ACCENT_CLASSES, type CategoryData } from '@/lib/resumeData'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 const icons: Record<CategoryData['icon'], ReactNode> = {
   code: (
@@ -27,14 +28,15 @@ const icons: Record<CategoryData['icon'], ReactNode> = {
   ),
 }
 
-const pitches: Record<string, string> = {
-  'full-stack': 'End-to-end platforms — React/Next.js frontends on Node.js & PostgreSQL backends.',
-  frontend: 'TypeScript-expert UI engineering, certified Frontend Engineer Expert by micro1.',
-  'ai-specialist': 'LLM integration & prompt engineering — 40+ AI tools orchestrated in production.',
-  'qa-tester': 'API & release testing, accelerated 10–20x by an AI-augmented QA workflow.',
-}
-
 export default function CategorySelector() {
+  const { ui, categoryList } = useLanguage()
+  const pitches: Record<string, string> = {
+    'full-stack': ui.categorySelector.pitchFullStack,
+    frontend: ui.categorySelector.pitchFrontend,
+    'ai-specialist': ui.categorySelector.pitchAiSpecialist,
+    'qa-tester': ui.categorySelector.pitchQaTester,
+  }
+
   return (
     <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
@@ -45,12 +47,12 @@ export default function CategorySelector() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-xs text-[#38bdf8] font-semibold tracking-[0.25em] uppercase mb-3">Four Lenses, One Engineer</p>
+          <p className="text-xs text-[#38bdf8] font-semibold tracking-[0.25em] uppercase mb-3">{ui.categorySelector.eyebrow}</p>
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-            Explore My Work By <span className="text-[#38bdf8]">Specialization</span>
+            {ui.categorySelector.headingPrefix} <span className="text-[#38bdf8]">{ui.categorySelector.headingHighlight}</span>
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
-            Each path surfaces the experience, skills, and projects most relevant to that role.
+            {ui.categorySelector.subtitle}
           </p>
         </motion.div>
 
@@ -78,7 +80,7 @@ export default function CategorySelector() {
                   </h3>
                   <p className="text-xs text-slate-400 leading-relaxed flex-1">{pitches[cat.slug]}</p>
                   <span className={`mt-4 inline-flex items-center gap-1.5 text-xs font-semibold ${accent.text}`}>
-                    View path
+                    {ui.categorySelector.viewPath}
                     <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>

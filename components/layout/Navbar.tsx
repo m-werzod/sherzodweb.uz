@@ -4,7 +4,9 @@ import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { categoryList, ACCENT_CLASSES, type CategoryData } from '@/lib/resumeData'
+import { ACCENT_CLASSES, type CategoryData } from '@/lib/resumeData'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher'
 
 const linkIcons = {
   home: <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
@@ -30,6 +32,7 @@ export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false)
   const [menuOpen, setMenuOpen]   = useState(false)
   const pathname                  = usePathname()
+  const { ui, categoryList }      = useLanguage()
 
   const activeCategory = categoryList.find(
     (c) => pathname === `/${c.slug}` || pathname.startsWith(`/${c.slug}/`)
@@ -37,10 +40,10 @@ export default function Navbar() {
   const base = activeCategory ? `/${activeCategory.slug}` : ''
 
   const links = [
-    { href: base || '/', label: 'Home', icon: linkIcons.home },
-    { href: `${base}/about`, label: 'About', icon: linkIcons.about },
-    { href: `${base}/projects`, label: 'Projects', icon: linkIcons.projects },
-    { href: `${base}/contact`, label: 'Contact', icon: linkIcons.contact },
+    { href: base || '/', label: ui.nav.home, icon: linkIcons.home },
+    { href: `${base}/about`, label: ui.nav.about, icon: linkIcons.about },
+    { href: `${base}/projects`, label: ui.nav.projects, icon: linkIcons.projects },
+    { href: `${base}/contact`, label: ui.nav.contact, icon: linkIcons.contact },
   ]
 
   useEffect(() => {
@@ -96,24 +99,30 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <div className="ml-3">
+              <LanguageSwitcher />
+            </div>
             <Link
               href={`${base}/contact`}
               className="ml-3 px-4 py-2 text-sm font-bold bg-gradient-to-r from-[#38bdf8] to-sky-400 text-[#020617] rounded-xl hover:from-sky-300 hover:to-[#38bdf8] transition-all duration-200 hover:shadow-lg hover:shadow-sky-400/30"
             >
-              Hire Me
+              {ui.nav.hireMe}
             </Link>
           </nav>
 
-          {/* Hamburger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden relative z-[60] flex flex-col gap-1.5 p-2"
-            aria-label="Toggle menu"
-          >
-            <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 8 : 0 }} transition={{ duration: 0.25 }} className="w-6 h-0.5 bg-white block" />
-            <motion.span animate={{ opacity: menuOpen ? 0 : 1, scaleX: menuOpen ? 0 : 1 }} transition={{ duration: 0.2 }} className="w-6 h-0.5 bg-white block" />
-            <motion.span animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -8 : 0 }} transition={{ duration: 0.25 }} className="w-6 h-0.5 bg-white block" />
-          </button>
+          {/* Mobile: language switcher + hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageSwitcher variant="compact" />
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="relative z-[60] flex flex-col gap-1.5 p-2"
+              aria-label="Toggle menu"
+            >
+              <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 8 : 0 }} transition={{ duration: 0.25 }} className="w-6 h-0.5 bg-white block" />
+              <motion.span animate={{ opacity: menuOpen ? 0 : 1, scaleX: menuOpen ? 0 : 1 }} transition={{ duration: 0.2 }} className="w-6 h-0.5 bg-white block" />
+              <motion.span animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -8 : 0 }} transition={{ duration: 0.25 }} className="w-6 h-0.5 bg-white block" />
+            </button>
+          </div>
         </div>
 
         {/* ── Category row — second line of the header ── */}
@@ -128,7 +137,7 @@ export default function Navbar() {
               }`}
             >
               {mainSiteIcon}
-              Portfolio
+              {ui.nav.portfolio}
             </Link>
             <span className="w-px h-4 bg-white/10 shrink-0" />
             {categoryList.map((cat) => {
@@ -188,8 +197,13 @@ export default function Navbar() {
                 </button>
               </div>
 
+              {/* Language switcher */}
+              <div className="px-4 pt-5">
+                <LanguageSwitcher variant="mobile" />
+              </div>
+
               {/* Mobile nav links with SVG icons */}
-              <nav className="flex flex-col px-4 pt-6 gap-1">
+              <nav className="flex flex-col px-4 pt-4 gap-1">
                 {links.map((link, i) => (
                   <motion.div
                     key={link.href}
@@ -219,7 +233,7 @@ export default function Navbar() {
 
               {/* Mobile category switcher */}
               <div className="px-4 pt-6">
-                <p className="px-2 text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-2">Specializations</p>
+                <p className="px-2 text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-2">{ui.nav.specializationsLabel}</p>
                 <div className="flex flex-col gap-1">
                   <Link
                     href="/"
@@ -228,7 +242,7 @@ export default function Navbar() {
                     }`}
                   >
                     {mainSiteIcon}
-                    Portfolio (Main Site)
+                    {ui.nav.portfolioMainSite}
                   </Link>
                   {categoryList.map((cat) => {
                     const isActive = activeCategory?.slug === cat.slug
@@ -254,9 +268,9 @@ export default function Navbar() {
                   href={`${base}/contact`}
                   className="block w-full py-3 text-sm font-bold bg-[#38bdf8] text-[#020617] rounded-xl text-center hover:bg-sky-300 transition-colors"
                 >
-                  Hire Me
+                  {ui.nav.hireMe}
                 </Link>
-                <p className="text-center text-xs text-slate-600 mt-4">Available for Work</p>
+                <p className="text-center text-xs text-slate-600 mt-4">{ui.nav.availableForWork}</p>
               </div>
             </motion.div>
           </>

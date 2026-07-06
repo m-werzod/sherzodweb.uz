@@ -22,11 +22,10 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const { category } = await params
   if (!isCategoryKey(category)) notFound()
-  const data = categories[category]
 
   return (
     <>
-      <CategoryHero data={data} />
+      <CategoryHero category={category} />
       <ProjectsPreview />
     </>
   )

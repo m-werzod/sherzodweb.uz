@@ -2,6 +2,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import type { CategoryKey } from '@/lib/resumeData'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { formatTemplate } from '@/lib/i18n/format'
 
 const ICON = {
   gmail:    'https://cdn-icons-png.flaticon.com/512/281/281769.png',
@@ -12,12 +15,6 @@ const ICON = {
   linkedin: 'https://cdn-icons-png.flaticon.com/512/3992/3992606.png',
 }
 
-const contacts = [
-  { label: 'Gmail',    value: 'sherzodusmonjonov734@gmail.com', href: 'mailto:sherzodusmonjonov734@gmail.com', icon: ICON.gmail    },
-  { label: 'Phone',    value: '+998 94 205 5512',               href: 'tel:+998942055512',                    icon: ICON.phone    },
-  { label: 'Telegram', value: '@WerzodUsmanov',                 href: 'https://t.me/WerzodUsmanov',           icon: ICON.telegram },
-]
-
 const socials = [
   { href: 'https://github.com/m-werzod',                               src: ICON.github,    alt: 'GitHub'    },
   { href: 'https://t.me/WerzodUsmanov',                                src: ICON.telegram,  alt: 'Telegram'  },
@@ -27,42 +24,51 @@ const socials = [
 
 type Method = 'telegram' | 'email' | 'sms'
 
-const methods: { id: Method; label: string; desc: string; icon: string; ring: string; badge: string }[] = [
-  {
-    id:    'telegram',
-    label: 'Telegram',
-    desc:  'Opens Telegram with message pre-filled — fastest reply',
-    icon:  ICON.telegram,
-    ring:  'border-sky-500/40 hover:border-sky-400/70 from-sky-600/10 to-sky-900/10',
-    badge: 'bg-sky-500/20 border-sky-400/40 text-sky-300',
-  },
-  {
-    id:    'email',
-    label: 'Gmail',
-    desc:  'Opens Gmail compose with message ready to send',
-    icon:  ICON.gmail,
-    ring:  'border-red-500/40 hover:border-red-400/70 from-red-600/10 to-red-900/10',
-    badge: 'bg-red-500/20 border-red-400/40 text-red-300',
-  },
-  {
-    id:    'sms',
-    label: 'SMS',
-    desc:  'Opens your messaging app with message pre-filled',
-    icon:  ICON.phone,
-    ring:  'border-emerald-500/40 hover:border-emerald-400/70 from-emerald-600/10 to-emerald-900/10',
-    badge: 'bg-emerald-500/20 border-emerald-400/40 text-emerald-300',
-  },
-]
-
 type Toast = { ok: boolean; via: string; msg: string } | null
 
 export interface ContactPageContentProps {
-  /** e.g. "Full Stack Developer" — customizes the hero heading, subtitle & prefilled subject. */
-  roleLabel?: string
+  /** When set, renders the category-flavored heading/subtitle for that specialization. */
+  category?: CategoryKey
 }
 
-export default function ContactPageContent({ roleLabel }: ContactPageContentProps) {
+export default function ContactPageContent({ category }: ContactPageContentProps) {
+  const { ui, categories } = useLanguage()
+  const roleLabel = category ? categories[category].fullTitle : undefined
   const defaultSubject = roleLabel ? `${roleLabel} Opportunity` : ''
+
+  const contacts = [
+    { label: 'Gmail',                    value: 'sherzodusmonjonov734@gmail.com', href: 'mailto:sherzodusmonjonov734@gmail.com', icon: ICON.gmail    },
+    { label: ui.contactPage.phoneLabel,  value: '+998 94 205 5512',               href: 'tel:+998942055512',                    icon: ICON.phone    },
+    { label: 'Telegram',                 value: '@WerzodUsmanov',                 href: 'https://t.me/WerzodUsmanov',           icon: ICON.telegram },
+  ]
+
+  const methods: { id: Method; label: string; desc: string; icon: string; ring: string; badge: string }[] = [
+    {
+      id:    'telegram',
+      label: ui.contactPage.methodTelegramLabel,
+      desc:  ui.contactPage.methodTelegramDesc,
+      icon:  ICON.telegram,
+      ring:  'border-sky-500/40 hover:border-sky-400/70 from-sky-600/10 to-sky-900/10',
+      badge: 'bg-sky-500/20 border-sky-400/40 text-sky-300',
+    },
+    {
+      id:    'email',
+      label: ui.contactPage.methodEmailLabel,
+      desc:  ui.contactPage.methodEmailDesc,
+      icon:  ICON.gmail,
+      ring:  'border-red-500/40 hover:border-red-400/70 from-red-600/10 to-red-900/10',
+      badge: 'bg-red-500/20 border-red-400/40 text-red-300',
+    },
+    {
+      id:    'sms',
+      label: ui.contactPage.methodSmsLabel,
+      desc:  ui.contactPage.methodSmsDesc,
+      icon:  ICON.phone,
+      ring:  'border-emerald-500/40 hover:border-emerald-400/70 from-emerald-600/10 to-emerald-900/10',
+      badge: 'bg-emerald-500/20 border-emerald-400/40 text-emerald-300',
+    },
+  ]
+
   const [form, setForm]           = useState({ name: '', email: '', subject: defaultSubject, message: '' })
   const [showModal, setShowModal] = useState(false)
   const [loading, setLoading]     = useState(false)
@@ -88,14 +94,14 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
           `Hi Sherzodbek!\nFrom: ${form.name} <${form.email}>\nSubject: ${form.subject}\n\n${form.message}`
         )
         window.open(`sms:+998942055512?body=${body}`, '_blank')
-        showToast({ ok: true, via: m.label, msg: 'SMS app opened — your message is pre-filled. Tap Send inside!' })
+        showToast({ ok: true, via: m.label, msg: ui.contactPage.toastSmsMsg })
 
       } else if (method === 'telegram') {
         const text = encodeURIComponent(
           `📩 Portfolio Message\n\nFrom: ${form.name} (${form.email})\nSubject: ${form.subject}\n\n${form.message}`
         )
         window.open(`https://t.me/WerzodUsmanov?text=${text}`, '_blank')
-        showToast({ ok: true, via: m.label, msg: 'Telegram opened with your message ready — press Send inside the app!' })
+        showToast({ ok: true, via: m.label, msg: ui.contactPage.toastTelegramMsg })
 
       } else {
         /* Gmail compose URL — 100% reliable, no API keys needed */
@@ -107,12 +113,12 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
           `https://mail.google.com/mail/?view=cm&fs=1&to=sherzodusmonjonov734@gmail.com&su=${su}&body=${body}`,
           '_blank'
         )
-        showToast({ ok: true, via: 'Gmail', msg: 'Gmail opened with your message ready — click Send inside Gmail!' })
+        showToast({ ok: true, via: 'Gmail', msg: ui.contactPage.toastEmailMsg })
       }
 
       setForm({ name: '', email: '', subject: defaultSubject, message: '' })
     } catch {
-      showToast({ ok: false, via: '', msg: 'Could not open the app. Please try a different method.' })
+      showToast({ ok: false, via: '', msg: ui.contactPage.toastErrorMsg })
     }
 
     setLoading(false)
@@ -126,19 +132,19 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/5 text-emerald-400 text-xs font-medium mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Currently Available for Work
+            {ui.contactPage.availableBadge}
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
             {roleLabel ? (
-              <>Hire a <span className="text-[#38bdf8]">{roleLabel}</span></>
+              <>{ui.contactPage.headingRolePrefix}<span className="text-[#38bdf8]">{roleLabel}</span></>
             ) : (
-              <>Let&apos;s <span className="text-[#38bdf8]">Connect</span></>
+              <>{ui.contactPage.headingDefaultPrefix} <span className="text-[#38bdf8]">{ui.contactPage.headingDefaultHighlight}</span></>
             )}
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">
             {roleLabel
-              ? `Looking for a ${roleLabel.toLowerCase()} for your team or project? Tell me what you need — my inbox is always open.`
-              : "Whether you have a project in mind, want to collaborate, or just want to say hi — my inbox is always open."}
+              ? formatTemplate(ui.contactPage.subtitleRoleTemplate, { role: roleLabel.toLowerCase() })
+              : ui.contactPage.subtitleDefault}
           </p>
         </motion.div>
 
@@ -163,7 +169,7 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
             ))}
 
             <div className="p-5 rounded-2xl border border-white/10 bg-[#0a1628]">
-              <p className="text-[11px] text-slate-500 font-semibold uppercase tracking-widest mb-4">Follow Me</p>
+              <p className="text-[11px] text-slate-500 font-semibold uppercase tracking-widest mb-4">{ui.contactPage.followMe}</p>
               <div className="flex gap-3">
                 {socials.map((s) => (
                   <Link key={s.alt} href={s.href} target="_blank" rel="noopener noreferrer"
@@ -177,8 +183,8 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
             </div>
 
             <div className="p-5 rounded-2xl border border-white/10 bg-gradient-to-br from-sky-950/30 to-[#0a1628]">
-              <p className="text-sm font-semibold text-white mb-1">Quick Response Guaranteed</p>
-              <p className="text-xs text-slate-400">I typically respond within 24 hours. For urgent matters, reach out via Telegram.</p>
+              <p className="text-sm font-semibold text-white mb-1">{ui.contactPage.quickResponseTitle}</p>
+              <p className="text-xs text-slate-400">{ui.contactPage.quickResponseBody}</p>
             </div>
           </motion.div>
 
@@ -190,35 +196,35 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
             <form onSubmit={openModal} className="p-8 rounded-2xl border border-white/10 bg-[#0a1628] space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Name</label>
+                  <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">{ui.contactPage.nameLabel}</label>
                   <input type="text" required value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="Your name"
+                    placeholder={ui.contactPage.namePlaceholder}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-[#38bdf8]/50 focus:bg-[#38bdf8]/5 transition-all"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Email</label>
+                  <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">{ui.contactPage.emailLabel}</label>
                   <input type="email" required value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="your@email.com"
+                    placeholder={ui.contactPage.emailPlaceholder}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-[#38bdf8]/50 focus:bg-[#38bdf8]/5 transition-all"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Subject</label>
+                <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">{ui.contactPage.subjectLabel}</label>
                 <input type="text" required value={form.subject}
                   onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                  placeholder="What's this about?"
+                  placeholder={ui.contactPage.subjectPlaceholder}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-[#38bdf8]/50 focus:bg-[#38bdf8]/5 transition-all"
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Message</label>
+                <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">{ui.contactPage.messageLabel}</label>
                 <textarea required value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Tell me about your project..."
+                  placeholder={ui.contactPage.messagePlaceholder}
                   rows={5}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-[#38bdf8]/50 focus:bg-[#38bdf8]/5 transition-all resize-none"
                 />
@@ -235,11 +241,11 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
                     </svg>
-                    Opening…
+                    {ui.contactPage.opening}
                   </>
                 ) : (
                   <>
-                    Send Message
+                    {ui.contactPage.sendMessage}
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
                     </svg>
@@ -283,7 +289,7 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
 
               <div className="flex-1 min-w-0">
                 <p className={`text-xs font-bold mb-0.5 ${toast.ok ? 'text-emerald-400' : 'text-red-400'}`}>
-                  {toast.ok ? `✓ Opened via ${toast.via}` : 'Something went wrong'}
+                  {toast.ok ? `✓ ${ui.contactPage.toastOpenedPrefix}${toast.via}` : ui.contactPage.toastErrorTitle}
                 </p>
                 <p className="text-xs text-slate-400 leading-relaxed">{toast.msg}</p>
               </div>
@@ -330,8 +336,8 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
                       <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
                     </svg>
                   </div>
-                  <h2 className="text-xl font-black text-white mb-1">How to send it?</h2>
-                  <p className="text-xs text-slate-400">Pick your channel — opens instantly with message ready</p>
+                  <h2 className="text-xl font-black text-white mb-1">{ui.contactPage.modalTitle}</h2>
+                  <p className="text-xs text-slate-400">{ui.contactPage.modalSubtitle}</p>
                 </div>
 
                 <div className="space-y-3">
@@ -363,7 +369,7 @@ export default function ContactPageContent({ roleLabel }: ContactPageContentProp
                   onClick={() => setShowModal(false)}
                   className="w-full mt-5 py-2.5 text-xs text-slate-600 hover:text-slate-400 transition-colors"
                 >
-                  Cancel
+                  {ui.contactPage.cancel}
                 </button>
               </div>
             </motion.div>

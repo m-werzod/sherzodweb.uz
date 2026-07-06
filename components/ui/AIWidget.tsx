@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
+import type { UIDict } from '@/lib/i18n/types'
 
 // Modern professional AI sparkle icon (Claude/Gemini style)
 const BotIcon = ({ className = 'w-6 h-6' }: { className?: string }) => (
@@ -40,62 +42,59 @@ function playSendSound() {
   } catch {}
 }
 
-type Tab = 'Tech Stack' | 'Specializations' | 'Projects' | 'Contact Info' | 'About Me'
+type TabKey = 'techStack' | 'specializations' | 'projects' | 'contactInfo' | 'aboutMe'
 
-const knowledge: Record<Tab, { q: string; a: string }> = {
-  'Tech Stack': {
-    q: 'What technologies does Sherzod use?',
-    a: 'Sherzod\'s stack spans the full lifecycle:\n\nFrontend: React 19, Next.js 15 (App Router), TypeScript, Tailwind CSS, Redux Toolkit, TanStack Query, Framer Motion, Three.js / React Three Fiber\n\nBackend: Node.js, Express, PostgreSQL, Prisma ORM, REST & GraphQL APIs, Python (Django), .NET / C# (ASP.NET Core)\n\nAI Integration: OpenAI, Claude & Gemini APIs, Prompt Engineering, n8n automation, Claude Code, Cursor AI\n\nQA & Testing: Playwright, Vitest, Jest, Postman, SQL validation, Core Web Vitals / Lighthouse\n\nTooling: Git/GitHub, Figma, Vercel, Docker basics, CI/CD, RBAC & auth (Clerk/NextAuth/JWT)',
-  },
-  Specializations: {
-    q: 'What does Sherzod specialize in?',
-    a: 'Sherzod works across four specializations — each has its own dedicated page on this site:\n\n1. Full Stack — end-to-end platforms: React/Next.js frontends on Node.js, PostgreSQL/Prisma, plus Python and .NET on the backend.\n2. Frontend — TypeScript-expert UI engineering, internationally certified Frontend Engineer Expert by micro1 (US).\n3. AI Specialist — LLM integration & prompt engineering, orchestrating 40+ AI tools/APIs (OpenAI, Claude, Gemini) in production.\n4. QA Tester — API & release testing (Playwright, Vitest, Jest, Postman), with an AI-augmented workflow (Claude Code) that runs QA 10–20x faster.\n\nVisit /full-stack, /frontend, /ai-specialist or /qa-tester to see the tailored experience, projects, and case for each.',
-  },
-  Projects: {
-    q: 'What projects has Sherzod built?',
-    a: 'Sherzod has shipped 13 real-world projects. Flagship platforms:\n\n1. Era AI Platform — full-stack AI aggregation product integrating 40+ AI tools (OpenAI, Claude, Gemini) behind one interface — React 19, Next.js, Node.js, PostgreSQL/Prisma\n2. Labour Migration Agency Platform — production employment platform with candidate intake, vacancy listings, admin panel & RBAC — React, Next.js, Node.js, PostgreSQL\n\nPlus (Featured): E-Commerce Platform, Restaurant Website, Edu CRM/ERP System, Business Finance Manager.\n\nMore Work: Toshkent Baliqchi, Nexora Labs, iPhone Store UZ, Fitness Time Gym, Parfume Market, Barakah Restaurant, and this Sherzoddev Portfolio itself.\n\nSee them all — with live demos — on the Projects page!',
-  },
-  'Contact Info': {
-    q: 'How can I contact Sherzod?',
-    a: 'You can reach Sherzod via:\nEmail: sherzodusmonjonov734@gmail.com\nPhone: +998 94 205 5512\nTelegram: @WerzodUsmanov\nGitHub: github.com/m-werzod\nLinkedIn: /in/sherzod-usmonjonov-8b22713b0\nInstagram: @Sherzod_usmanovv\n\nHe is currently available for freelance and full-time opportunities, and typically responds within 24 hours!',
-  },
-  'About Me': {
-    q: 'Tell me about Sherzod.',
-    a: 'Sherzodbek Usmonjonov is a Full-Stack Engineer & AI Integration Specialist from Uzbekistan with 3+ years of experience, internationally certified as a Frontend Engineer Expert by micro1 (United States).\n\nHe\'s solo-architected Era AI (40+ integrated AI tools) and shipped the Labour Migration Agency platform, alongside enterprise ERP, e-commerce and fintech SaaS products — with results like 98/100 Lighthouse scores and 50% fewer redundant re-renders.\n\nEducation: Bachelor of Business Management, Tashkent State University of Economics (in progress); graduate of Najot Ta\'lim\'s Frontend Engineering and AI Prompt Engineering programs.\n\nLanguages: Uzbek (Native) · English (Fluent, C1/IELTS 7+) · Russian (Conversational)\n\nAvailable for freelance and full-time work!',
-  },
+function getKnowledge(ui: UIDict): Record<TabKey, { q: string; a: string }> {
+  return {
+    techStack: { q: ui.aiWidget.qTechStack, a: ui.aiWidget.aTechStack },
+    specializations: { q: ui.aiWidget.qSpecializations, a: ui.aiWidget.aSpecializations },
+    projects: { q: ui.aiWidget.qProjects, a: ui.aiWidget.aProjects },
+    contactInfo: { q: ui.aiWidget.qContactInfo, a: ui.aiWidget.aContactInfo },
+    aboutMe: { q: ui.aiWidget.qAboutMe, a: ui.aiWidget.aAboutMe },
+  }
 }
 
-function smartReply(input: string): string {
+function smartReply(input: string, ui: UIDict): string {
   const q = input.toLowerCase()
-  if (/contact|email|phone|telegram|reach|message|dm|whatsapp|call|instagram|linkedin/.test(q)) return knowledge['Contact Info'].a
-  if (/project|built|work|portfolio|app|site|website|ecommerce|restaurant|finance|crm|erp|gym|parfume|baliqchi|nexora|iphone|era ai|labour|migration/.test(q)) return knowledge['Projects'].a
-  if (/full[\s-]?stack|frontend|front-end|ai specialist|qa|q\.a\.|quality assurance|tester|specializ/.test(q)) return knowledge['Specializations'].a
-  if (/tech|stack|technology|language|framework|react|next|typescript|tailwind|three\.?js|figma|node|git|tools|\.net|dotnet|python|playwright|jest|vitest|postman/.test(q)) return knowledge['Tech Stack'].a
-  if (/educat|school|study|najot|degree|certif|prompt|ai|artificial|who|about|sherzod|himself|bio|background|experience|uzbek|developer|years/.test(q)) return knowledge['About Me'].a
-  if (/hire|available|freelance|job|opportunity|work together|collaborate|price|cost|rate/.test(q))
-    return "Sherzod is currently available for freelance projects and full-time opportunities!\n\nBest way to reach him:\nTelegram: @WerzodUsmanov\nEmail: sherzodusmonjonov734@gmail.com\n\nHe typically responds within 24 hours."
-  if (/hello|hi |hey|sup|what's up|yo |greet/.test(q))
-    return "Hey there! I'm Sherzod's AI assistant. I can tell you about his projects, specializations, tech stack, experience, or how to get in touch. What would you like to know?"
-  if (/salary|pay|rate|cost|price|budget/.test(q))
-    return "For project pricing or salary expectations, it's best to discuss directly with Sherzod.\n\nTelegram: @WerzodUsmanov\nEmail: sherzodusmonjonov734@gmail.com\n\nHe'll get back to you quickly!"
-  return "Great question! I have info about Sherzod's projects, specializations (Full Stack, Frontend, AI, QA), tech stack, experience, and contact details. Try the quick tabs above or ask something like:\n• \"What projects has he built?\"\n• \"What does he specialize in?\"\n• \"How can I contact him?\""
+  const knowledge = getKnowledge(ui)
+  if (/contact|email|phone|telegram|reach|message|dm|whatsapp|call|instagram|linkedin|контакт|почта|телефон|телеграм|написать|связат|kontakt|telefon|bog'lan|yozing/.test(q))
+    return knowledge.contactInfo.a
+  if (/project|built|work|portfolio|app|site|website|ecommerce|restaurant|finance|crm|erp|gym|parfume|baliqchi|nexora|iphone|era ai|labour|migration|проект|работ|портфолио|создал|создан|loyiha|portfolio|yaratilgan/.test(q))
+    return knowledge.projects.a
+  if (/full[\s-]?stack|frontend|front-end|ai specialist|qa|q\.a\.|quality assurance|tester|specializ|фулстек|фронтенд|фронт-энд|тестировщик|специализац|fullstack|mutaxassis/.test(q))
+    return knowledge.specializations.a
+  if (/tech|stack|technology|language|framework|react|next|typescript|tailwind|three\.?js|figma|node|git|tools|\.net|dotnet|python|playwright|jest|vitest|postman|технологи|стек|фреймворк|texnologiya|dasturlash/.test(q))
+    return knowledge.techStack.a
+  if (/educat|school|study|najot|degree|certif|prompt|ai|artificial|who|about|sherzod|himself|bio|background|experience|uzbek|developer|years|образован|учил|диплом|сертифик|кто|о себе|биограф|опыт|разработчик|ta'lim|diplom|sertifikat|kim|tajriba|dasturchi/.test(q))
+    return knowledge.aboutMe.a
+  if (/hire|available|freelance|job|opportunity|work together|collaborate|price|cost|rate|нанять|доступен|фриланс|сотруднич|yollash|frilanser|hamkorlik/.test(q))
+    return ui.aiWidget.replyHire
+  if (/hello|hi |hey|sup|what's up|yo |greet|привет|здравству|salom|assalomu/.test(q))
+    return ui.aiWidget.replyGreeting
+  if (/salary|pay|rate|cost|price|budget|зарплата|оплата|цена|стоимост|бюджет|maosh|to'lov|narx|byudjet/.test(q))
+    return ui.aiWidget.replySalary
+  return ui.aiWidget.replyDefault
 }
 
 interface Message { role: 'user' | 'assistant'; content: string }
 
-const bubbleMessages = [
-  "Hi! Ask me about Sherzod",
-  "See his 13 projects!",
-  "Available for hire!",
-  "Ask about his specializations",
-]
-
 export default function AIWidget() {
+  const { locale, ui } = useLanguage()
+  const knowledge = getKnowledge(ui)
+  const tabs: { key: TabKey; label: string }[] = [
+    { key: 'techStack', label: ui.aiWidget.tabTechStack },
+    { key: 'specializations', label: ui.aiWidget.tabSpecializations },
+    { key: 'projects', label: ui.aiWidget.tabProjects },
+    { key: 'contactInfo', label: ui.aiWidget.tabContactInfo },
+    { key: 'aboutMe', label: ui.aiWidget.tabAboutMe },
+  ]
+  const bubbleMessages = [ui.aiWidget.bubble1, ui.aiWidget.bubble2, ui.aiWidget.bubble3, ui.aiWidget.bubble4]
+
   const [open, setOpen]           = useState(false)
   const [bubble, setBubble]       = useState(true)
   const [bubbleIdx, setBubbleIdx] = useState(0)
   const [messages, setMessages]   = useState<Message[]>([
-    { role: 'assistant', content: "Hi! I'm Sherzod's AI assistant. Ask me anything about his skills, projects, or how to get in touch!" },
+    { role: 'assistant', content: ui.aiWidget.greeting },
   ])
   const [input, setInput]         = useState('')
   const [thinking, setThinking]   = useState(false)
@@ -103,6 +102,15 @@ export default function AIWidget() {
 
   const messagesEndRef   = useRef<HTMLDivElement>(null)
   const streamTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Reset the conversation whenever the language changes, so it never mixes languages
+  useEffect(() => {
+    if (streamTimeoutRef.current) clearTimeout(streamTimeoutRef.current)
+    setThinking(false)
+    setStreaming(false)
+    setMessages([{ role: 'assistant', content: ui.aiWidget.greeting }])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locale])
 
   // Auto-scroll
   useEffect(() => {
@@ -114,6 +122,7 @@ export default function AIWidget() {
     if (!bubble || open) return
     const id = setInterval(() => setBubbleIdx((i) => (i + 1) % bubbleMessages.length), 4000)
     return () => clearInterval(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bubble, open])
 
   // Hide bubble after 18 s
@@ -166,7 +175,7 @@ export default function AIWidget() {
 
   const openChat = () => { setOpen(true); setBubble(false) }
 
-  const handleTab = (tab: Tab) => {
+  const handleTab = (tab: TabKey) => {
     if (thinking || streaming) return
     const { q, a } = knowledge[tab]
     setMessages((prev) => [...prev, { role: 'user', content: q }])
@@ -179,10 +188,10 @@ export default function AIWidget() {
     playSendSound()
     setMessages((prev) => [...prev, { role: 'user', content: userMsg }])
     setInput('')
-    streamReply(smartReply(userMsg))
+    streamReply(smartReply(userMsg, ui))
   }
 
-  const statusText = thinking || streaming ? 'typing…' : 'Online — Ask about Sherzod'
+  const statusText = thinking || streaming ? ui.aiWidget.statusTyping : ui.aiWidget.statusOnline
 
   return (
     <>
@@ -277,7 +286,7 @@ export default function AIWidget() {
             <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-gradient-to-r from-sky-950/50 to-transparent">
               <BotIcon className="w-8 h-8 text-[#38bdf8]" />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-white">AI Assistant</p>
+                <p className="text-sm font-bold text-white">{ui.aiWidget.assistantTitle}</p>
                 <div className="flex items-center gap-1.5">
                   <span className={`w-1.5 h-1.5 rounded-full ${thinking || streaming ? 'bg-[#38bdf8]' : 'bg-emerald-400'} animate-pulse`} />
                   <AnimatePresence mode="wait">
@@ -306,25 +315,25 @@ export default function AIWidget() {
                 onClick={() => {
                   if (streamTimeoutRef.current) clearTimeout(streamTimeoutRef.current)
                   setThinking(false); setStreaming(false)
-                  setMessages([{ role: 'assistant', content: "Hi! I'm Sherzod's AI assistant. Ask me anything about his skills, projects, or how to get in touch!" }])
+                  setMessages([{ role: 'assistant', content: ui.aiWidget.greeting }])
                 }}
                 className="text-[10px] text-slate-600 hover:text-slate-400 transition-colors px-2 py-1 rounded-lg hover:bg-white/5"
-                title="Clear chat"
+                title={ui.aiWidget.clear}
               >
-                Clear
+                {ui.aiWidget.clear}
               </button>
             </div>
 
             {/* Quick-topic tabs */}
             <div className="flex gap-1.5 p-3 overflow-x-auto border-b border-white/5 bg-black/10 scrollbar-none">
-              {(Object.keys(knowledge) as Tab[]).map((tab) => (
+              {tabs.map((tab) => (
                 <button
-                  key={tab}
-                  onClick={() => handleTab(tab)}
+                  key={tab.key}
+                  onClick={() => handleTab(tab.key)}
                   disabled={thinking || streaming}
                   className="px-3 py-1.5 text-xs font-medium rounded-lg bg-white/5 hover:bg-[#38bdf8]/15 hover:text-[#38bdf8] text-slate-400 border border-white/5 hover:border-[#38bdf8]/30 transition-all whitespace-nowrap shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {tab}
+                  {tab.label}
                 </button>
               ))}
             </div>
@@ -385,7 +394,7 @@ export default function AIWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Ask anything about Sherzod…"
+                placeholder={ui.aiWidget.placeholder}
                 className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-[#38bdf8]/40 transition-colors"
               />
               <button

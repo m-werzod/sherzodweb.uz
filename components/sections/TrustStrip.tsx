@@ -1,14 +1,16 @@
 'use client'
 import { motion } from 'framer-motion'
-
-const items = [
-  { label: 'Certified Frontend Engineer Expert', sub: 'micro1 (United States) · Proctored', icon: '🏅' },
-  { label: 'English — Fluent (C1)', sub: 'IELTS Band 7+', icon: '🇬🇧' },
-  { label: '40+ AI APIs Integrated', sub: 'OpenAI · Claude · Gemini · Mistral', icon: '🤖' },
-  { label: 'AI-Augmented Delivery', sub: 'Up to 10–20x faster shipping', icon: '⚡' },
-]
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 export default function TrustStrip() {
+  const { ui } = useLanguage()
+  const items = [
+    { label: ui.trust.certTitle, sub: ui.trust.certSub, icon: '🏅' },
+    { label: ui.trust.englishTitle, sub: ui.trust.englishSub, icon: '🇬🇧' },
+    { label: ui.trust.aiApisTitle, sub: ui.trust.aiApisSub, icon: '🤖' },
+    { label: ui.trust.aiDeliveryTitle, sub: ui.trust.aiDeliverySub, icon: '⚡' },
+  ]
+
   return (
     <section className="py-10 px-6 border-y border-white/5 bg-white/[0.015]">
       <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">

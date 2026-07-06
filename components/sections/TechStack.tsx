@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 const SIMPLE  = 'https://cdn.simpleicons.org'
@@ -68,6 +69,7 @@ function TechPill({ tech }: { tech: Tech }) {
 const MASK = '[mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]'
 
 export default function TechStack() {
+  const { ui } = useLanguage()
   return (
     <section id="tech-stack" className="py-24 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-sky-950/5 to-transparent pointer-events-none" />
@@ -80,11 +82,11 @@ export default function TechStack() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs text-[#38bdf8] font-semibold tracking-[0.25em] uppercase mb-3">Tech Arsenal</p>
+          <p className="text-xs text-[#38bdf8] font-semibold tracking-[0.25em] uppercase mb-3">{ui.techStack.eyebrow}</p>
           <h2 className="text-3xl md:text-4xl font-black text-white">
-            Technologies I <span className="text-[#38bdf8]">Master</span>
+            {ui.techStack.heading} <span className="text-[#38bdf8]">{ui.techStack.headingHighlight}</span>
           </h2>
-          <p className="text-slate-500 text-sm mt-2">Frontend · Backend · AI &amp; Automation</p>
+          <p className="text-slate-500 text-sm mt-2">{ui.techStack.subtitle}</p>
         </motion.div>
       </div>
 
