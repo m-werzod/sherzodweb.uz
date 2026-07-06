@@ -1,61 +1,13 @@
 'use client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import ProjectCard, { Project } from '@/components/ui/ProjectCard'
-
-const projects: Project[] = [
-  {
-    title: 'E-Commerce Platform',
-    description:
-      'Full-featured online store with product catalog, admin dashboard, search & filter, shopping cart, user authentication, and fully responsive UI across all devices.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Redux Toolkit', 'Axios', 'React Query', 'React Hot Toast'],
-    github: 'https://github.com/m-werzod',
-    demo: 'https://e-commerce-with-registration.vercel.app/',
-    gradient: 'from-sky-500 to-blue-600',
-    image: '/images/projects/ecommerce.webp',
-    status: 'live',
-    year: '2024',
-  },
-  {
-    title: 'Restaurant Website',
-    description:
-      'Modern restaurant landing page with interactive menu, reservation system, animated sections, photo gallery, and mobile-first responsive design.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Lucide React', 'React Cookie'],
-    github: 'https://github.com/m-werzod',
-    demo: 'https://restaurant-ten-self.vercel.app/',
-    gradient: 'from-orange-500 to-red-600',
-    image: '/images/projects/restaurant.webp',
-    status: 'live',
-    year: '2024',
-  },
-  {
-    title: 'Edu CRM / ERP System',
-    description:
-      'Educational management platform with student tracking, course management, attendance, grade reports, and a clean admin dashboard for institutions.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Ant Design', 'Axios', 'React Query', 'React Hot Toast', 'React Cookie'],
-    github: 'https://github.com/m-werzod',
-    demo: 'https://edu-crm-erp.vercel.app/',
-    gradient: 'from-emerald-500 to-teal-600',
-    image: '/images/projects/educrm.webp',
-    status: 'live',
-  },
-  {
-    title: 'Business Finance Manager',
-    description:
-      'Full-stack business finance management app with income & expense tracking, budget planning, transaction history, category breakdowns, and interactive dashboard analytics.',
-    tags: ['React', 'TypeScript', 'Next.js', 'Node.js', 'Tailwind CSS', 'Recharts', 'PostgreSQL', 'JWT'],
-    github: 'https://github.com/m-werzod',
-    demo: 'https://finance-manager-theta-six.vercel.app/',
-    gradient: 'from-green-500 to-emerald-600',
-    image: '/images/projects/finance.jpg',
-    status: 'live',
-  },
-]
+import ProjectCard from '@/components/ui/ProjectCard'
+import { homeHighlights } from '@/lib/projects'
 
 export default function ProjectsPreview() {
   return (
     <section className="py-24 px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -68,12 +20,12 @@ export default function ProjectsPreview() {
             Featured <span className="text-[#38bdf8]">Projects</span>
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
-            A selection of real-world projects — e-commerce, CRM systems, restaurants, and more.
+            Flagship platforms I&apos;ve architected end-to-end — an AI aggregation product, a production employment platform, and a full-featured e-commerce store.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {projects.map((project, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {homeHighlights.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
         </div>

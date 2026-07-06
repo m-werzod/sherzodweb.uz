@@ -43,7 +43,7 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-radial from-sky-950/30 via-[#020617] to-[#020617]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen pt-20 pb-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen pt-32 pb-12">
 
         {/* LEFT */}
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-5 lg:gap-6">
@@ -73,7 +73,7 @@ export default function HeroSection() {
               <h1 className="text-2xl font-black text-white leading-tight">
                 Sherzodbek <span className="text-[#38bdf8]">Usmonjonov</span>
               </h1>
-              <p className="text-sm font-semibold text-slate-400 mt-1 tracking-wide">Frontend Web Developer</p>
+              <p className="text-sm font-semibold text-slate-400 mt-1 tracking-wide">Full-Stack Engineer · AI Integration Specialist</p>
               <div className="inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-full border border-[#38bdf8]/30 bg-[#38bdf8]/5 text-[#38bdf8] text-xs font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse" />
                 Available for Work
@@ -93,23 +93,29 @@ export default function HeroSection() {
               <span className="block text-white">Sherzodbek</span>
               <span className="block text-[#38bdf8] glow-text">Usmonjonov</span>
             </h1>
-            <p className="mt-3 text-lg md:text-xl font-semibold text-slate-400 tracking-wide">Frontend Web Developer Expert</p>
+            <p className="mt-3 text-lg md:text-xl font-semibold text-slate-400 tracking-wide">Full-Stack Engineer · AI Integration Specialist</p>
           </motion.div>
 
           {/* Value prop */}
           <motion.p variants={item} className="text-slate-400 text-sm md:text-base leading-relaxed max-w-md text-center lg:text-left">
             Building{' '}
-            <span className="text-[#38bdf8] font-semibold">high-performance web experiences</span>{' '}
-            with React &amp; Next.js. Expert of the TypeScript and JavaScript Crafting motion designs and 3D visuals with the power of modern AI tools. 
+            <span className="text-[#38bdf8] font-semibold">production platforms end to end</span>{' '}
+            with React, Next.js &amp; Node.js — architected Era AI (40+ integrated AI tools) and shipped the Labour Migration Agency platform. Certified Frontend Engineer Expert by micro1 (US).
           </motion.p>
 
           {/* Language badges */}
           <motion.div variants={item} className="flex flex-wrap gap-2 justify-center lg:justify-start">
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
-              <span className="text-base">🇬🇧</span> English — Fluent
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://flagcdn.com/w40/uz.png" alt="Uzbek flag" className="w-4 h-3 rounded-[2px] object-cover" /> Uzbek — Native
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
-              <span className="text-base">🇷🇺</span> Russian — Basic
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://flagcdn.com/w40/gb.png" alt="UK flag" className="w-4 h-3 rounded-[2px] object-cover" /> English — Fluent (C1)
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://flagcdn.com/w40/ru.png" alt="Russian flag" className="w-4 h-3 rounded-[2px] object-cover" /> Russian — Conversational
             </span>
           </motion.div>
 
@@ -165,13 +171,13 @@ export default function HeroSection() {
             transition={{ opacity: { duration: 0.5, delay: 0.7 }, x: { duration: 0.5, delay: 0.7 }, y: { duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1 } }}
             className="absolute left-0 top-[28%] -translate-x-[60%] bg-[#0d1b2e] border border-[#38bdf8]/20 rounded-2xl px-5 py-4 shadow-xl shadow-sky-950/40 backdrop-blur-sm min-w-[130px]">
             <p className="text-3xl font-black text-[#38bdf8] leading-none">3+</p>
-            <p className="text-xs text-slate-400 mt-1.5 font-medium">Year Experience <br /> in Coumputer Science</p>
+            <p className="text-xs text-slate-400 mt-1.5 font-medium">Year Experience <br /> in Computer Science</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0, y: [0, 7, 0] }}
             transition={{ opacity: { duration: 0.5, delay: 0.9 }, x: { duration: 0.5, delay: 0.9 }, y: { duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1.2 } }}
             className="absolute right-0 top-[55%] translate-x-[60%] bg-[#0d1b2e] border border-[#38bdf8]/20 rounded-2xl px-5 py-4 shadow-xl shadow-sky-950/40 backdrop-blur-sm min-w-[130px]">
-            <p className="text-3xl font-black text-[#38bdf8] leading-none">10+</p>
+            <p className="text-3xl font-black text-[#38bdf8] leading-none">13+</p>
             <p className="text-xs text-slate-400 mt-1.5 font-medium">Projects Built</p>
           </motion.div>
 

@@ -10,14 +10,14 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Sherzodbek Usmonjonov — Frontend Web Developer',
+  title: 'Sherzodbek Usmonjonov — Full-Stack Engineer & AI Integration Specialist',
   description:
-    'Frontend Web Developer crafting high-performance digital experiences with React, Next.js & motion design.',
-  keywords: ['Frontend Developer', 'React', 'Next.js', 'TypeScript', 'Uzbekistan', 'Sherzodbek Usmonjonov'],
+    'Full-Stack Engineer building production platforms with React, Next.js & Node.js — architect of Era AI (40+ integrated AI tools) and a certified Frontend Engineer Expert (micro1).',
+  keywords: ['Full-Stack Developer', 'Frontend Developer', 'AI Integration', 'React', 'Next.js', 'TypeScript', 'Uzbekistan', 'Sherzodbek Usmonjonov'],
   authors: [{ name: 'Sherzodbek Usmonjonov', url: 'https://sherzoddev.com' }],
   openGraph: {
-    title: 'Sherzodbek Usmonjonov — Frontend Web Developer',
-    description: 'Building high-performance web experiences with React & Next.js.',
+    title: 'Sherzodbek Usmonjonov — Full-Stack Engineer & AI Integration Specialist',
+    description: 'Building production platforms end to end with React, Next.js & Node.js — plus AI-augmented delivery.',
     url: 'https://sherzoddev.com',
     siteName: 'Sherzoddev',
     locale: 'en_US',

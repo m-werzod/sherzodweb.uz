@@ -4,9 +4,10 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 
 const skills = [
-  { category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'JS', 'Tailwind CSS', 'CSS', 'Framer Motion with AI'] },
-  { category: '3D & Motion Designs with AI', items: ['Three.js (AI-assisted)', 'React Three Fiber', 'Motion Design', 'CSS Animations'] },
-  { category: 'Tools & Others', items: ['Git', 'Figma', 'Node.js', 'Vercel'] },
+  { category: 'Frontend', items: ['React 19', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Three.js'] },
+  { category: 'Backend & Databases', items: ['Node.js', 'Express', 'PostgreSQL', 'Prisma ORM', 'REST APIs'] },
+  { category: 'AI & Automation', items: ['OpenAI / Claude / Gemini APIs', 'Prompt Engineering', 'Claude Code', 'n8n Automation'] },
+  { category: 'Tools & Platforms', items: ['Git', 'Figma', 'Vercel', 'Docker (Basics)'] },
 ]
 
 const services = [
@@ -28,9 +29,9 @@ const services = [
 ]
 
 const languages = [
-  { lang: 'English', level: 'Fluent — speaks freely', flag: 'EN', fill: 95 },
-  { lang: 'Russian', level: 'Understands basic, speaks barely', flag: '🇷🇺', fill: 35 },
-  { lang: 'Uzbek', level: 'Native', flag: '🇺🇿', fill: 100 },
+  { lang: 'Uzbek', level: 'Native', flag: 'https://flagcdn.com/w80/uz.png', fill: 100 },
+  { lang: 'English', level: 'Fluent — C1, IELTS Band 7+', flag: 'https://flagcdn.com/w80/gb.png', fill: 90 },
+  { lang: 'Russian', level: 'Conversational', flag: 'https://flagcdn.com/w80/ru.png', fill: 45 },
 ]
 
 export default function AboutPage() {
@@ -40,7 +41,7 @@ export default function AboutPage() {
   useEffect(() => { if (imgRef.current?.complete) setImgLoaded(true) }, [])
 
   return (
-    <div className="min-h-screen pt-28 pb-24 px-6">
+    <div className="min-h-screen pt-36 pb-24 px-6">
       <div className="max-w-5xl mx-auto">
         {/* Hero */}
         <motion.div
@@ -53,7 +54,7 @@ export default function AboutPage() {
             About Me
           </p>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-6">
-            Passionate about <span className="text-[#38bdf8]">the web</span>
+            Full-Stack Engineer, <span className="text-[#38bdf8]">AI-Augmented</span>
           </h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -65,32 +66,30 @@ export default function AboutPage() {
                 </span>
                 , a{" "}
                 <span className="text-[#38bdf8] font-semibold">
-                  Frontend Web Developer
+                  Full-Stack Developer
                 </span>{" "}
-                from Uzbekistan with a passion for building exceptional digital
-                experiences. I specialize in transforming complex ideas into
-                elegant, high-performance web applications.
+                from Uzbekistan, internationally certified as a Frontend Engineer Expert
+                by micro1 (United States). I build production web applications end to
+                end — React 19 &amp; Next.js frontends on Node.js and PostgreSQL/Prisma
+                backends.
               </p>
               <p>
-                My journey started with pure curiosity — tinkering with HTML and
-                CSS, then discovering the power of JavaScript. Over the past
-                year I&apos;ve built full-scale React &amp; Next.js apps. Plus,
-                I am learning <span className="text-white font-medium">Prompt engineering</span> and the{" "}
-                <span className="text-white font-medium">AI automation</span>{" "} and want ot integrate it into my workflow
-                and I also bring interfaces to life through{" "}
-                <span className="text-white font-medium">motion design</span>{" "}
-                and{" "}
-                <span className="text-white font-medium">
-                  3D web experiences
-                </span>
-                , leveraging modern AI tools to push creative boundaries.
+                I independently architected and ship{" "}
+                <span className="text-white font-medium">Era AI</span>, a full-stack
+                platform integrating 40+ AI tools behind one unified interface, and
+                delivered the{" "}
+                <span className="text-white font-medium">Labour Migration Agency</span>{" "}
+                platform end to end. I run an{" "}
+                <span className="text-white font-medium">AI-augmented workflow</span>{" "}
+                with Claude Code and prompt engineering to ship senior-level quality
+                up to 10x faster.
               </p>
               <p>
                 I believe great software lives at the intersection of{" "}
                 <span className="text-[#38bdf8]">technical excellence</span> and{" "}
-                <span className="text-[#38bdf8]">creative vision</span>.
-                I&apos;m always exploring new tools, frameworks, and techniques
-                to stay ahead of the curve.
+                <span className="text-[#38bdf8]">creative vision</span>. Fluent in
+                English (C1, IELTS 7+), I&apos;m always exploring new tools,
+                frameworks, and techniques to stay ahead of the curve.
               </p>
             </div>
 
@@ -148,10 +147,10 @@ export default function AboutPage() {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20"
         >
           {[
-            { label: "Year Experience", value: "1+" },
-            { label: "Projects Built", value: "10+" },
-            { label: "Technologies", value: "15+" },
-            { label: "Lighthouse Score", value: "95+" },
+            { label: "Live Platforms Shipped", value: "5+" },
+            { label: "AI APIs Integrated", value: "40+" },
+            { label: "Lighthouse Score", value: "98/100" },
+            { label: "Faster w/ AI-Augmented Delivery", value: "10x" },
           ].map((stat) => (
             <div
               key={stat.label}
@@ -175,7 +174,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-black text-white mb-8">
             Technical Skills
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((group) => (
               <div
                 key={group.category}
@@ -218,7 +217,8 @@ export default function AboutPage() {
                 className="p-5 rounded-2xl border border-white/10 bg-[#0a1628] hover:border-[#38bdf8]/30 transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-2xl">{l.flag}</span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={l.flag} alt={`${l.lang} flag`} className="w-8 h-6 rounded object-cover shrink-0 border border-white/10" />
                   <div>
                     <p className="text-sm font-bold text-white">{l.lang}</p>
                     <p className="text-xs text-slate-500">{l.level}</p>
@@ -238,6 +238,37 @@ export default function AboutPage() {
                   />
                 </div>
               </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Certifications */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <h2 className="text-2xl font-black text-white mb-8">Certifications</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              { title: 'Frontend Engineer Expert Certification', org: 'micro1 (United States) — 2026', badge: '✓ Independently Proctored' },
+              { title: "Frontend Engineering Program", org: "Najot Ta'lim — 2025–2026, Graduated", badge: null },
+              { title: 'AI & Prompt Engineering for Developers', org: "Najot Ta'lim — 2026", badge: null },
+              { title: 'IELTS — Band 7+', org: 'C1 Advanced English', badge: null },
+            ].map((cert) => (
+              <div key={cert.title} className="flex items-start gap-3 p-4 rounded-2xl border border-white/10 bg-[#0a1628] hover:border-[#38bdf8]/30 transition-all">
+                <div className="w-9 h-9 rounded-xl bg-[#38bdf8]/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-4 h-4 text-[#38bdf8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 15a4 4 0 100-8 4 4 0 000 8z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-white leading-snug">{cert.title}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{cert.org}</p>
+                  {cert.badge && <p className="text-[10px] text-emerald-400 font-semibold mt-1">{cert.badge}</p>}
+                </div>
+              </div>
             ))}
           </div>
         </motion.div>

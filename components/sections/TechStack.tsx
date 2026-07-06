@@ -20,14 +20,19 @@ const row1Techs = [
   { name: 'Sass',          icon: `${DEVICON}/sass/sass-original.svg`                    },
 ]
 
-// ── Row 2 — Backend / Tools / AI (right → left) ──────────────────────────────
+// ── Row 2 — Backend / Tools / AI / QA (right → left) ──────────────────────────
 const row2Techs = [
   { name: 'Node.js',         icon: `${DEVICON}/nodejs/nodejs-original.svg`              },
+  { name: '.NET',            icon: `${DEVICON}/dot-net/dot-net-original.svg`            },
+  { name: 'Python',          icon: `${DEVICON}/python/python-original.svg`              },
   { name: 'Redux',           icon: `${DEVICON}/redux/redux-original.svg`                },
   { name: 'Git',             icon: `${DEVICON}/git/git-original.svg`                    },
   { name: 'PostgreSQL',      icon: `${DEVICON}/postgresql/postgresql-original.svg`      },
-  { name: 'AI Integration',  icon: `${SIMPLE}/openai/74AA9C`                            },
+  { name: 'AI Integration',  icon: 'https://img.icons8.com/color/96/chatgpt.png'        },
   { name: 'Automations',     icon: `${SIMPLE}/n8n/EA4B71`                              },
+  { name: 'Playwright',      icon: `${DEVICON}/playwright/playwright-original.svg`      },
+  { name: 'Postman',         icon: `${DEVICON}/postman/postman-original.svg`            },
+  { name: 'Jest',            icon: `${DEVICON}/jest/jest-plain.svg`                     },
   { name: 'Vercel',          icon: `${SIMPLE}/vercel/white`                             },
   { name: 'Ant Design',      icon: `${DEVICON}/antdesign/antdesign-original.svg`        },
   { name: 'Axios',           icon: `${DEVICON}/axios/axios-plain-wordmark.svg`          },
@@ -64,7 +69,7 @@ const MASK = '[mask-image:linear-gradient(to_right,transparent,black_6%,black_94
 
 export default function TechStack() {
   return (
-    <section className="py-24 overflow-hidden relative">
+    <section id="tech-stack" className="py-24 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-sky-950/5 to-transparent pointer-events-none" />
 
       {/* Heading */}
