@@ -6,7 +6,7 @@ export const ui: UIDict = {
     about: "Men haqimda",
     projects: "Loyihalar",
     contact: "Aloqa",
-    hireMe: "Ishga Oling",
+    hireMe: "Bog'laning",
     portfolio: "Portfolio",
     portfolioMainSite: "Portfolio (Asosiy Sayt)",
     specializationsLabel: "Mutaxassisliklar",
