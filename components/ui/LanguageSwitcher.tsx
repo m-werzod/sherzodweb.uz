@@ -8,6 +8,7 @@ export default function LanguageSwitcher({ variant = 'desktop' }: { variant?: 'd
   const { locale, setLocale } = useLanguage()
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const active = localeList.find((l) => l.code === locale)!
 
   useEffect(() => {
@@ -19,14 +20,40 @@ export default function LanguageSwitcher({ variant = 'desktop' }: { variant?: 'd
     return () => document.removeEventListener('mousedown', onClick)
   }, [open])
 
+  // Cancel any pending close on unmount
+  useEffect(() => () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+  }, [])
+
   const isMobile = variant === 'mobile'
   const isCompact = variant === 'compact'
 
+  const cancelClose = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current)
+      closeTimeoutRef.current = null
+    }
+  }
+  const handleMouseEnter = () => {
+    if (isMobile) return // hover doesn't make sense for the full-width drawer variant
+    cancelClose()
+    setOpen(true)
+  }
+  const handleMouseLeave = () => {
+    if (isMobile) return
+    closeTimeoutRef.current = setTimeout(() => setOpen(false), 150)
+  }
+
   return (
-    <div ref={rootRef} className={`relative ${isMobile ? 'w-full' : ''}`}>
+    <div
+      ref={rootRef}
+      className={`relative ${isMobile ? 'w-full' : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {isCompact ? (
         <button
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => { cancelClose(); setOpen((o) => !o) }}
           aria-label="Change language"
           className="w-9 h-9 rounded-xl border border-white/10 bg-white/5 hover:border-[#38bdf8]/30 hover:bg-[#38bdf8]/5 transition-all duration-200 flex items-center justify-center"
         >
@@ -35,7 +62,7 @@ export default function LanguageSwitcher({ variant = 'desktop' }: { variant?: 'd
         </button>
       ) : (
         <button
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => { cancelClose(); setOpen((o) => !o) }}
           aria-label="Change language"
           className={`flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 hover:border-[#38bdf8]/30 hover:bg-[#38bdf8]/5 transition-all duration-200 ${
             isMobile ? 'w-full px-4 py-3 justify-between' : 'px-3 py-2 text-sm'
@@ -75,6 +102,7 @@ export default function LanguageSwitcher({ variant = 'desktop' }: { variant?: 'd
               <button
                 key={l.code}
                 onClick={() => {
+                  cancelClose()
                   setLocale(l.code)
                   setOpen(false)
                 }}
