@@ -1,0 +1,3 @@
+[submodule "packages/edl-contract"]
+	path = packages/edl-contract
+	url = git@github.com:matsalayev/edl-contract.git

@@ -83,6 +83,17 @@ export const featuredProjects: Project[] = [
     image: '/images/projects/finance.jpg',
     status: 'live',
   },
+  {
+    title: "Turon Avtomaktab — Avtomaktab Platformasi",
+    description:
+      "Namangandagi 7 filialli avtomaktab uchun tayyor veb-sayt — toifalar katalogi, dinamik kurs narxlari, filiallar xaritasi, oldindan to'lov bilan o'quvchilarni ro'yxatga olish, natijalar va foto galereya, o'zbek, rus va ingliz tillarida to'liq lokalizatsiya qilingan.",
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'i18n'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://www.avtomaktabturon.uz/',
+    gradient: 'from-slate-600 to-orange-500',
+    image: '/images/projects/turon-avtomaktab.jpg',
+    status: 'live',
+  },
 ]
 
 /** The rest of the catalogue — shown under "More Work" on the full /projects page. */

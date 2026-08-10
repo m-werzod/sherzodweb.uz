@@ -1,0 +1,14 @@
+node_modules
+.next
+.turbo
+dist
+build
+coverage
+generated
+*.lock
+*.lockb
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+apps/agents/
+packages/db/generated/

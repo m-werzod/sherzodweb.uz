@@ -1,0 +1,6 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# apps/agents is a Python package and is not included in pnpm workspaces.
+# It is managed by uv (pyproject.toml inside apps/agents).

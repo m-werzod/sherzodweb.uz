@@ -1,0 +1,318 @@
+# ============================================================================
+# SMM Coach — production stack (Coolify-compatible).
+#
+# Coolify reads this file from the repo root, builds the web + agents images
+# from their Dockerfiles, attaches managed Postgres + Redis + MinIO, wires
+# the service URLs into env vars, and exposes web on the project domain.
+#
+# Domain: SERVICE_FQDN_WEB (Coolify auto-fills when you set the domain on
+# the `web` service in the Coolify UI — e.g. smm.brotech.uz).
+#
+# Boot:    Coolify "Deploy" — pulls latest main, builds, rolls.
+# Logs:    Coolify "Logs" tab per service.
+# ============================================================================
+
+services:
+  # ---- PostgreSQL 17 + pgvector --------------------------------------------
+  postgres:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-smm}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-smm}
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    # init.sql is inlined via Docker configs so we don't depend on the
+    # bind-mount path resolving correctly inside Coolify's build artifact
+    # (where ./infra/postgres/init.sql was being auto-created as an empty
+    # dir, causing "could not read from input file: Is a directory").
+    configs:
+      - source: postgres_init_sql
+        target: /docker-entrypoint-initdb.d/00-init.sql
+        mode: 0444
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-smm} -d ${POSTGRES_DB:-smm}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
+
+  # ---- Redis 7 -------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+
+  # ---- MinIO (self-hosted S3-compatible object storage) --------------------
+  # Used for user-uploaded media (raw videos, edited renders, thumbnails).
+  # Same S3 protocol as Cloudflare R2 / AWS S3 — code is provider-agnostic
+  # and reads via the S3_* env vars below.
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY_ID}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_ACCESS_KEY}
+      # Public-facing URL the browser uses for direct GETs (signed URLs).
+      # Optional: only effective once you bind a domain (e.g. cdn.brotech.uz)
+      # to the `minio` service in Coolify. Defaults to "" (the console then
+      # advertises the host it was opened from).
+      MINIO_BROWSER_REDIRECT_URL: ${SERVICE_URL_MINIO:-}
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+    expose:
+      - "9000"   # S3 API
+      - "9001"   # web console
+    deploy:
+      resources:
+        limits:
+          memory: 768M
+
+  # ---- One-shot bucket bootstrap ------------------------------------------
+  # Creates the bucket on first deploy. Re-runs are idempotent (ignore exit).
+  minio-bootstrap:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      S3_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID}
+      S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
+      S3_BUCKET: ${S3_BUCKET:-smm-media}
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 $$S3_ACCESS_KEY_ID $$S3_SECRET_ACCESS_KEY &&
+      (mc mb local/$$S3_BUCKET --ignore-existing || true) &&
+      mc anonymous set download local/$$S3_BUCKET &&
+      echo 'bucket ready: '$$S3_BUCKET
+      "
+    restart: "no"
+
+  # ---- Web (Next.js 15) ----------------------------------------------------
+  web:
+    build:
+      context: .
+      dockerfile: infra/docker/web.Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    environment:
+      # === Core ===
+      NODE_ENV: production
+      PORT: 3000
+      # SERVICE_URL_WEB = "https://<domain>"; Coolify populates from the
+      # domain you bind in the UI on the `web` service. NEXTAUTH_URL must
+      # include the scheme. (Coolify doesn't emit a _3000 suffixed variant
+      # because the domain binding is at service level, not per-port.)
+      NEXTAUTH_URL: ${SERVICE_URL_WEB}
+      AUTH_TRUST_HOST: "true"
+      AUTH_SECRET: ${AUTH_SECRET}
+      # === Database ===
+      DATABASE_URL: postgresql://${POSTGRES_USER:-smm}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-smm}?schema=public
+      DIRECT_URL: postgresql://${POSTGRES_USER:-smm}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-smm}?schema=public
+      # === Redis ===
+      REDIS_URL: redis://redis:6379
+      # === Agents service (internal Docker DNS) ===
+      AGENTS_BASE_URL: http://agents:8000
+      AGENTS_HMAC_SECRET: ${AGENTS_HMAC_SECRET}
+      # === Instagram OAuth (Meta Graph API) ===
+      INSTAGRAM_APP_ID: ${INSTAGRAM_APP_ID}
+      INSTAGRAM_APP_SECRET: ${INSTAGRAM_APP_SECRET}
+      INSTAGRAM_REDIRECT_URI: ${SERVICE_URL_WEB}/api/auth/callback/instagram
+      INSTAGRAM_WEBHOOK_VERIFY_TOKEN: ${INSTAGRAM_WEBHOOK_VERIFY_TOKEN}
+      # === Google OAuth (Auth.js — names match auth.ts code) ===
+      AUTH_GOOGLE_ID: ${AUTH_GOOGLE_ID}
+      AUTH_GOOGLE_SECRET: ${AUTH_GOOGLE_SECRET}
+      # === LLM providers ===
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      VOYAGE_API_KEY: ${VOYAGE_API_KEY:-}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY}
+      # === Media generation (soft-disabled when blank) ===
+      HEYGEN_API_KEY: ${HEYGEN_API_KEY:-}
+      HEYGEN_DEFAULT_AVATAR_ID: ${HEYGEN_DEFAULT_AVATAR_ID:-}
+      RUNWAY_API_KEY: ${RUNWAY_API_KEY:-}
+      # === Observability (soft-disabled when blank) ===
+      # === Object storage (MinIO — S3-compatible API) ===
+      S3_ENDPOINT: http://minio:9000      # internal Docker DNS, server-side uploads
+      # Browser-facing endpoint. Empty until you bind a domain (e.g. cdn.brotech.uz)
+      # to the `minio` service in Coolify; the upload code falls back to S3_ENDPOINT.
+      S3_PUBLIC_ENDPOINT: ${SERVICE_URL_MINIO:-}
+      S3_REGION: us-east-1                # MinIO ignores but SDK requires
+      S3_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID}
+      S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
+      S3_BUCKET: ${S3_BUCKET:-smm-media}
+      S3_FORCE_PATH_STYLE: "true"         # MinIO requires path-style URLs
+      # === Payme (UZ payments) — secret key only, merchant ID assigned later ===
+      PAYME_SECRET_KEY: ${PAYME_SECRET_KEY}
+      PAYME_TEST_MODE: ${PAYME_TEST_MODE:-true}
+      # === Telegram live reporting (soft-disabled when blank) ===
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_LOG_CHANNEL_ID: ${TELEGRAM_LOG_CHANNEL_ID:-}
+    expose:
+      - "3000"
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 1536M
+        reservations:
+          memory: 512M
+
+  # ---- Agents (FastAPI + LangGraph + Playwright) ---------------------------
+  agents:
+    build:
+      context: .
+      dockerfile: infra/docker/agents.Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment: &agents_environment
+      ENV: production
+      LOG_LEVEL: INFO
+      # === Database ===
+      DATABASE_URL: postgresql://${POSTGRES_USER:-smm}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-smm}
+      # === Redis (for SSE pub/sub + LangGraph state) ===
+      REDIS_URL: redis://redis:6379
+      # === HMAC shared secret with web service ===
+      AGENTS_HMAC_SECRET: ${AGENTS_HMAC_SECRET}
+      # === LLM providers (multi-provider best-of-breed routing) ===
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      # Paid Gemini: set GEMINI_MIN_GAP_S=0.2 to lift the free-tier 7s call gap.
+      GEMINI_MIN_GAP_S: ${GEMINI_MIN_GAP_S:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      # OpenRouter — paid Llama 3.3 70B fallback (UZ-payable via crypto/card).
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      VOYAGE_API_KEY: ${VOYAGE_API_KEY:-}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY}
+      # === Media generation ===
+      HEYGEN_API_KEY: ${HEYGEN_API_KEY:-}
+      HEYGEN_DEFAULT_AVATAR_ID: ${HEYGEN_DEFAULT_AVATAR_ID:-}
+      RUNWAY_API_KEY: ${RUNWAY_API_KEY:-}
+      # === Instagram scraping (instagrapi session pool) ===
+      # Scraper + proxy are now a FALLBACK only — the official Graph API path below is
+      # primary, so both are optional (dropping the proxy must not fail the deploy).
+      IG_SCRAPER_ACCOUNTS: ${IG_SCRAPER_ACCOUNTS:-}
+      IG_SCRAPER_PROXY_URL: ${IG_SCRAPER_PROXY_URL:-}
+      # Persist trusted IG sessions across redeploys (see volume below).
+      IG_SESSIONS_DIR: /data/ig-sessions
+      # === Instagram Graph API (official, scrape-free) — competitor business_discovery +
+      # trend ig_hashtag_search. Set IG_GRAPH_SERVICE_TOKEN to a NON-EXPIRING Page token
+      # + IG_GRAPH_SERVICE_USER_ID (the linked IG business account id). No proxy needed. ===
+      IG_GRAPH_SERVICE_TOKEN: ${IG_GRAPH_SERVICE_TOKEN:-}
+      IG_GRAPH_SERVICE_USER_ID: ${IG_GRAPH_SERVICE_USER_ID:-}
+      # === Telegram live reporting (soft-disabled when blank) ===
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_LOG_CHANNEL_ID: ${TELEGRAM_LOG_CHANNEL_ID:-}
+      # === Observability (soft-disabled when blank): Sentry crash reports + Langfuse LLM traces.
+      # Was wired in code (telemetry/__init__.py) but absent from this env block — now plumbed
+      # so setting the keys in Coolify activates it for BOTH the brain + media planes. ===
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      LANGFUSE_HOST: ${LANGFUSE_HOST:-}
+      # === Background workers (per-process opt-in) ===
+      RUN_WORKERS: "1"
+      # This is the BRAIN/API plane: serves HMAC + runs schedulers + run_reaper,
+      # but NOT the montage render (that's agents-worker below) — so a render OOM
+      # can never take down the API. ("all" keeps the old single-process behaviour.)
+      WORKER_SET: brain
+    volumes:
+      - ig-sessions:/data/ig-sessions
+    expose:
+      - "8000"
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2G        # no render here now; absorbs LLM + Playwright + the studio transcode
+        reservations:
+          memory: 512M
+
+  # ---- Media worker (montage render plane) ---------------------------------
+  # Same image, runs ONLY the montage render worker (WORKER_SET=media). Split out
+  # so a CPU-bound libx264 render that OOM-kills its container can NOT take the
+  # API/SSE/schedulers down with it (they live in `agents`). Scales by replica —
+  # the worker claims via FOR UPDATE SKIP LOCKED, so replicas never double-claim.
+  agents-worker:
+    build:
+      context: .
+      dockerfile: infra/docker/agents.Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    environment:
+      <<: *agents_environment
+      WORKER_SET: media         # ONLY montage_worker
+      MONTAGE_CONCURRENCY: "2"   # overlap one job's encode with another's download/STT/upload
+    volumes:
+      - ig-sessions:/data/ig-sessions
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: 2560M     # one libx264 render of an input-guard-bounded clip
+        reservations:
+          memory: 1G
+
+volumes:
+  postgres-data:
+  redis-data:
+  minio-data:
+  ig-sessions:
+
+configs:
+  # Inlined here so Coolify's build context doesn't need to find the file
+  # via a bind mount (which mis-resolves to an empty directory in some
+  # Coolify deployments).
+  postgres_init_sql:
+    content: |
+      CREATE EXTENSION IF NOT EXISTS vector;
+      CREATE EXTENSION IF NOT EXISTS pgcrypto;
+      CREATE EXTENSION IF NOT EXISTS pg_trgm;
+      CREATE TABLE IF NOT EXISTS _schema_bootstrap (
+        applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        notes TEXT
+      );
+      INSERT INTO _schema_bootstrap (notes)
+      VALUES ('init.sql executed by docker image')
+      ON CONFLICT DO NOTHING;

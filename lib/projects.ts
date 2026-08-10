@@ -85,6 +85,17 @@ export const featuredProjects: Project[] = [
     image: '/images/projects/finance.jpg',
     status: 'live',
   },
+  {
+    title: 'Turon Avtomaktab — Driving School Platform',
+    description:
+      'Production website for a 7-branch driving school in Namangan — license category catalogue, dynamic course pricing, branch locator, deposit-based student registration, results & photo gallery, fully localized in Uzbek, Russian and English.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'i18n'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://www.avtomaktabturon.uz/',
+    gradient: 'from-slate-600 to-orange-500',
+    image: '/images/projects/turon-avtomaktab.jpg',
+    status: 'live',
+  },
 ]
 
 /** The rest of the catalogue — shown under "More Work" on the full /projects page. */

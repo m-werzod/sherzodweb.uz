@@ -1,0 +1,41 @@
+{
+  "name": "smm",
+  "version": "0.0.1",
+  "private": true,
+  "description": "AI Instagram Growth Coach Platform — monorepo",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rimraf node_modules .turbo",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:generate": "pnpm --filter @smm/db generate",
+    "db:migrate": "pnpm --filter @smm/db migrate",
+    "db:studio": "pnpm --filter @smm/db studio",
+    "infra:up": "docker compose -f infra/docker-compose.dev.yml up -d",
+    "infra:down": "docker compose -f infra/docker-compose.dev.yml down",
+    "infra:logs": "docker compose -f infra/docker-compose.dev.yml logs -f",
+    "agents:dev": "pnpm --filter @smm/agents dev",
+    "agents:test": "pnpm --filter @smm/agents test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "prettier": "^3.4.0",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "rimraf": "^6.0.1",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

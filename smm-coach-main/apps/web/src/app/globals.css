@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+@import './trajectory.css' layer(components);
+
+/* ============================================================================
+ * SMM Coach — Tailwind v4 token registry.
+ *
+ * The full design system (cards, nav, buttons, landing, auth, signup chat)
+ * lives in `trajectory.css` and is a VERBATIM port of front/styles.css
+ * plus the inline <style> blocks from front/Landing.html, Login.html, and
+ * Signup.html. Edit visual rules there. This file only exposes tokens to
+ * Tailwind utilities so shadcn primitives (`bg-(--color-*)`, `text-(...)`)
+ * keep resolving and stays out of the design system's way.
+ * ========================================================================== */
+
+@theme {
+  --color-bg: oklch(0.13 0.006 80);
+  --color-bg-elev: oklch(0.16 0.006 80);
+  --color-surface: oklch(0.19 0.006 80);
+  --color-surface-2: oklch(0.22 0.006 80);
+  --color-line: oklch(0.28 0.006 80);
+  --color-line-soft: oklch(0.24 0.006 80 / 0.6);
+
+  --color-ink: oklch(0.96 0.01 85);
+  --color-ink-2: oklch(0.78 0.01 85);
+  --color-ink-3: oklch(0.58 0.008 85);
+  --color-ink-4: oklch(0.42 0.006 85);
+
+  --color-accent: oklch(0.58 0.26 295);
+  --color-accent-2: oklch(0.68 0.24 325);
+  --color-accent-3: oklch(0.78 0.18 55);
+  --color-accent-ink: oklch(0.98 0.005 295);
+
+  --color-warm: oklch(0.84 0.17 88);
+  --color-cool: oklch(0.74 0.12 245);
+  --color-rose: oklch(0.74 0.18 350);
+  --color-good: oklch(0.78 0.17 150);
+  --color-bad: oklch(0.66 0.22 25);
+
+  /* Semantic aliases consumed by older shadcn primitives. */
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-ink);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-ink);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-ink);
+  --color-primary: var(--color-accent);
+  --color-primary-foreground: var(--color-accent-ink);
+  --color-secondary: var(--color-surface-2);
+  --color-secondary-foreground: var(--color-ink);
+  --color-muted: var(--color-surface-2);
+  --color-muted-foreground: var(--color-ink-3);
+  --color-destructive: var(--color-bad);
+  --color-destructive-foreground: oklch(0.98 0 0);
+  --color-border: var(--color-line);
+  --color-input: var(--color-line);
+  --color-ring: var(--color-accent);
+  --radius: 0.875rem;
+
+  --font-sans: var(--font-geist-sans), 'Geist', 'Manrope', system-ui, sans-serif;
+  /* Bricolage Grotesque (next/font) — falls back to Geist if Google
+     fails to deliver the woff2. JetBrains Mono is also bundled via
+     next/font so the eyebrow + number typography stays stable offline. */
+  --font-display: var(--font-bricolage), 'Bricolage Grotesque', var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', var(--font-geist-mono), ui-monospace, Menlo, monospace;
+}
+

@@ -1,0 +1,78 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.pnp.*
+.yarn/
+
+# Build outputs
+.next/
+.turbo/
+dist/
+build/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.uv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# graphify knowledge-graph output (local artifact, regenerable)
+graphify-out/
+
+# Prisma
+packages/db/generated/
+
+# Env files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor / OS
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.shared.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Misc
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Local infra data
+.docker-data/
+postgres-data/
+redis-data/
+langfuse-data/
+
+# Scraper session cache (instagrapi) — must never be committed
+.smm-sessions/
+
+# Plans / scratch
+plans-local/
+scratch/
