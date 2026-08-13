@@ -26,3 +26,6 @@ Thumbs.db
 # Editor
 .vscode/
 .idea/
+
+# Unrelated project accidentally nested in this folder — never track it here
+smm-coach-main/
