@@ -79,7 +79,7 @@ export const ui: UIDict = {
     titlePrefix: "Barcha ",
     titleHighlight: "Loyihalar",
     subtitleDefault:
-      "13 ta real loyiha — AI agregatsiya platformasi va ishlab chiqarish darajasidagi bandlik tizimidan tortib, elektron tijorat, CRM va fintech ilovalarigacha.",
+      "17 ta real loyiha — AI avtomatlashtirish platformalari va ishlab chiqarish darajasidagi bandlik tizimidan tortib, 3D ko'chmas mulk, elektron tijorat, CRM va fintech ilovalarigacha.",
     subtitleCategoryTemplate:
       "{role} sifatida yaratilgan ishlab chiqarish darajasidagi platformalar — Era AI agregatsiya platformasi va Labour Migration Agency tizimidan tortib, elektron tijorat, CRM va fintech ilovalarigacha.",
     featured: "Tanlangan",
@@ -157,7 +157,7 @@ export const ui: UIDict = {
     statusTyping: "yozmoqda…",
     clear: "Tozalash",
     bubble1: "Salom! Sherzod haqida so'rang",
-    bubble2: "Uning 13 ta loyihasini ko'ring!",
+    bubble2: "Uning 17 ta loyihasini ko'ring!",
     bubble3: "Ishga taklif qilish uchun mavjud!",
     bubble4: "Uning mutaxassisliklari haqida so'rang",
     qTechStack: "Sherzod qaysi texnologiyalardan foydalanadi?",
@@ -168,7 +168,7 @@ export const ui: UIDict = {
       "Sherzod to'rtta mutaxassislik yo'nalishida ishlaydi — har birining ushbu saytda alohida sahifasi bor:\n\n1. Full Stack — boshidan-oxirigacha platformalar: Node.js, PostgreSQL/Prisma ustida React/Next.js frontendlari, shuningdek backendda Python va .NET.\n2. Frontend — TypeScript bo'yicha ekspert UI muhandisligi, micro1 (AQSH) tomonidan xalqaro sertifikatlangan Frontend Engineer Expert.\n3. AI Specialist — LLM integratsiyasi va prompt muhandisligi, ishlab chiqarishda 40+ AI vosita/API'ni (OpenAI, Claude, Gemini) boshqarish.\n4. QA Tester — API va reliz testlash (Playwright, Vitest, Jest, Postman), QA'ni 10–20x tezroq bajaradigan AI bilan kuchaytirilgan workflow (Claude Code) bilan.\n\nHar birining moslashtirilgan tajribasi, loyihalari va holatini ko'rish uchun /full-stack, /frontend, /ai-specialist yoki /qa-tester sahifalariga tashrif buyuring.",
     qProjects: "Sherzod qanday loyihalar yaratgan?",
     aProjects:
-      "Sherzod 13 ta real loyihani ishga tushirgan. Bayroqdor platformalar:\n\n1. Era AI Platform — bitta interfeys ortida 40+ AI vositasini (OpenAI, Claude, Gemini) birlashtiruvchi full-stack AI agregatsiya mahsuloti — React 19, Next.js, Node.js, PostgreSQL/Prisma\n2. Labour Migration Agency Platform — nomzodlarni qabul qilish, bo'sh ish o'rinlari ro'yxati, admin paneli va RBAC'ga ega ishlab chiqarish darajasidagi bandlik platformasi — React, Next.js, Node.js, PostgreSQL\n\nQo'shimcha (Tanlangan): E-Commerce Platform, Restaurant Website, Edu CRM/ERP System, Business Finance Manager.\n\nBoshqa Ishlar: Toshkent Baliqchi, Nexora Labs, iPhone Store UZ, Fitness Time Gym, Parfume Market, Barakah Restaurant va shu Sherzoddev Portfolio.\n\nBarchasini — jonli demolar bilan birga — Loyihalar sahifasida ko'ring!",
+      "Sherzod 17 ta real loyihani ishga tushirgan. Bayroqdor platformalar:\n\n1. Era AI Platform — bitta interfeys ortida 40+ AI vositasini (OpenAI, Claude, Gemini) birlashtiruvchi full-stack AI agregatsiya mahsuloti — React 19, Next.js, Node.js, PostgreSQL/Prisma\n2. Labour Migration Agency Platform — nomzodlarni qabul qilish, bo'sh ish o'rinlari ro'yxati, admin paneli va RBAC'ga ega ishlab chiqarish darajasidagi bandlik platformasi — React, Next.js, Node.js, PostgreSQL\n\nQo'shimcha (Tanlangan): AI Avtomatlashtirish Platformasi (Gmail · Telegram · Instagram plaginlari, CRM va AI agentlar bilan), Instagram AI Leads marketing SaaS, Toshkent 3D Kvartira Platformasi, E-Commerce Platform, Restaurant Website, Edu CRM/ERP System, Business Finance Manager.\n\nBoshqa Ishlar: Pera Hotel Toshkent, Toshkent Baliqchi, Nexora Labs, iPhone Store UZ, Fitness Time Gym, Parfume Market, Barakah Restaurant va shu Sherzoddev Portfolio.\n\nBarchasini — jonli demolar bilan birga — Loyihalar sahifasida ko'ring!",
     qContactInfo: "Sherzod bilan qanday bog'lanishim mumkin?",
     aContactInfo:
       "Sherzod bilan quyidagilar orqali bog'lanishingiz mumkin:\nEmail: sherzodusmonjonov734@gmail.com\nTelefon: +998 94 205 5512\nTelegram: @WerzodUsmanov\nGitHub: github.com/m-werzod\nLinkedIn: /in/sherzod-usmonjonov-8b22713b0\nInstagram: @Sherzod_usmanovv\n\nU hozirda frilanser va to'liq stavkali imkoniyatlar uchun mavjud va odatda 24 soat ichida javob beradi!",

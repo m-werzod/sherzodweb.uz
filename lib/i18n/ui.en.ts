@@ -79,7 +79,7 @@ export const ui: UIDict = {
     titlePrefix: 'All ',
     titleHighlight: 'Projects',
     subtitleDefault:
-      '13 real-world projects — from an AI aggregation platform and production employment system to e-commerce, CRM, and fintech apps.',
+      '17 real-world projects — from AI automation platforms and a production employment system to 3D real estate, e-commerce, CRM, and fintech apps.',
     subtitleCategoryTemplate:
       'Production platforms built as a {role} — from the Era AI aggregation platform and Labour Migration Agency system to e-commerce, CRM, and fintech apps.',
     featured: 'Featured',
@@ -157,7 +157,7 @@ export const ui: UIDict = {
     statusTyping: 'typing…',
     clear: 'Clear',
     bubble1: 'Hi! Ask me about Sherzod',
-    bubble2: 'See his 13 projects!',
+    bubble2: 'See his 17 projects!',
     bubble3: 'Available for hire!',
     bubble4: 'Ask about his specializations',
     qTechStack: 'What technologies does Sherzod use?',
@@ -168,7 +168,7 @@ export const ui: UIDict = {
       'Sherzod works across four specializations — each has its own dedicated page on this site:\n\n1. Full Stack — end-to-end platforms: React/Next.js frontends on Node.js, PostgreSQL/Prisma, plus Python and .NET on the backend.\n2. Frontend — TypeScript-expert UI engineering, internationally certified Frontend Engineer Expert by micro1 (US).\n3. AI Specialist — LLM integration & prompt engineering, orchestrating 40+ AI tools/APIs (OpenAI, Claude, Gemini) in production.\n4. QA Tester — API & release testing (Playwright, Vitest, Jest, Postman), with an AI-augmented workflow (Claude Code) that runs QA 10–20x faster.\n\nVisit /full-stack, /frontend, /ai-specialist or /qa-tester to see the tailored experience, projects, and case for each.',
     qProjects: 'What projects has Sherzod built?',
     aProjects:
-      'Sherzod has shipped 13 real-world projects. Flagship platforms:\n\n1. Era AI Platform — full-stack AI aggregation product integrating 40+ AI tools (OpenAI, Claude, Gemini) behind one interface — React 19, Next.js, Node.js, PostgreSQL/Prisma\n2. Labour Migration Agency Platform — production employment platform with candidate intake, vacancy listings, admin panel & RBAC — React, Next.js, Node.js, PostgreSQL\n\nPlus (Featured): E-Commerce Platform, Restaurant Website, Edu CRM/ERP System, Business Finance Manager.\n\nMore Work: Toshkent Baliqchi, Nexora Labs, iPhone Store UZ, Fitness Time Gym, Parfume Market, Barakah Restaurant, and this Sherzoddev Portfolio itself.\n\nSee them all — with live demos — on the Projects page!',
+      'Sherzod has shipped 17 real-world projects. Flagship platforms:\n\n1. Era AI Platform — full-stack AI aggregation product integrating 40+ AI tools (OpenAI, Claude, Gemini) behind one interface — React 19, Next.js, Node.js, PostgreSQL/Prisma\n2. Labour Migration Agency Platform — production employment platform with candidate intake, vacancy listings, admin panel & RBAC — React, Next.js, Node.js, PostgreSQL\n\nPlus (Featured): AI Automation Platform (Gmail · Telegram · Instagram plugins with CRM & AI agents), Instagram AI Leads marketing SaaS, Tashkent 3D Apartment Platform, E-Commerce Platform, Restaurant Website, Edu CRM/ERP System, Business Finance Manager.\n\nMore Work: Pera Hotel Tashkent, Toshkent Baliqchi, Nexora Labs, iPhone Store UZ, Fitness Time Gym, Parfume Market, Barakah Restaurant, and this Sherzoddev Portfolio itself.\n\nSee them all — with live demos — on the Projects page!',
     qContactInfo: 'How can I contact Sherzod?',
     aContactInfo:
       'You can reach Sherzod via:\nEmail: sherzodusmonjonov734@gmail.com\nPhone: +998 94 205 5512\nTelegram: @WerzodUsmanov\nGitHub: github.com/m-werzod\nLinkedIn: /in/sherzod-usmonjonov-8b22713b0\nInstagram: @Sherzod_usmanovv\n\nHe is currently available for freelance and full-time opportunities, and typically responds within 24 hours!',

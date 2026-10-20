@@ -79,7 +79,7 @@ export const ui: UIDict = {
     titlePrefix: 'Все ',
     titleHighlight: 'проекты',
     subtitleDefault:
-      '13 реальных проектов — от платформы агрегации ИИ и продакшн-системы для трудоустройства до e-commerce, CRM и финтех-приложений.',
+      '17 реальных проектов — от платформ AI-автоматизации и продакшн-системы для трудоустройства до 3D-недвижимости, e-commerce, CRM и финтех-приложений.',
     subtitleCategoryTemplate:
       'Продакшн-платформы, созданные в роли {role} — от платформы агрегации Era AI и системы Labour Migration Agency до e-commerce, CRM и финтех-приложений.',
     featured: 'Избранное',
@@ -157,7 +157,7 @@ export const ui: UIDict = {
     statusTyping: 'печатает…',
     clear: 'Очистить',
     bubble1: 'Привет! Спросите меня о Шерзоде',
-    bubble2: 'Посмотрите его 13 проектов!',
+    bubble2: 'Посмотрите его 17 проектов!',
     bubble3: 'Открыт для предложений!',
     bubble4: 'Спросите о его специализациях',
     qTechStack: 'Какие технологии использует Шерзод?',
@@ -168,7 +168,7 @@ export const ui: UIDict = {
       'Шерзод работает в четырёх специализациях — у каждой есть отдельная страница на этом сайте:\n\n1. Full Stack — end-to-end платформы: фронтенд на React/Next.js поверх Node.js, PostgreSQL/Prisma, а также Python и .NET на бэкенде.\n2. Frontend — экспертная UI-разработка на TypeScript, международно сертифицированный Frontend Engineer Expert от micro1 (США).\n3. AI Specialist — интеграция LLM и prompt engineering, оркестрация 40+ ИИ-инструментов/API (OpenAI, Claude, Gemini) в продакшене.\n4. QA Tester — тестирование API и релизов (Playwright, Vitest, Jest, Postman) с QA-процессом на базе ИИ (Claude Code), который ускоряет тестирование в 10–20x.\n\nПерейдите на /full-stack, /frontend, /ai-specialist или /qa-tester, чтобы увидеть адаптированный опыт, проекты и аргументы для каждой роли.',
     qProjects: 'Какие проекты реализовал Шерзод?',
     aProjects:
-      'Шерзод реализовал 13 реальных проектов. Флагманские платформы:\n\n1. Платформа Era AI — full-stack продукт агрегации ИИ, объединяющий 40+ ИИ-инструментов (OpenAI, Claude, Gemini) в едином интерфейсе — React 19, Next.js, Node.js, PostgreSQL/Prisma\n2. Платформа Labour Migration Agency — продакшн-платформа для трудоустройства с приёмом заявок кандидатов, списком вакансий, админ-панелью и RBAC — React, Next.js, Node.js, PostgreSQL\n\nПлюс (избранное): E-Commerce Platform, Restaurant Website, Edu CRM/ERP System, Business Finance Manager.\n\nДругие работы: Toshkent Baliqchi, Nexora Labs, iPhone Store UZ, Fitness Time Gym, Parfume Market, Barakah Restaurant и это самое портфолио Sherzoddev.\n\nПосмотрите их все — с живыми демо — на странице проектов!',
+      'Шерзод реализовал 17 реальных проектов. Флагманские платформы:\n\n1. Платформа Era AI — full-stack продукт агрегации ИИ, объединяющий 40+ ИИ-инструментов (OpenAI, Claude, Gemini) в едином интерфейсе — React 19, Next.js, Node.js, PostgreSQL/Prisma\n2. Платформа Labour Migration Agency — продакшн-платформа для трудоустройства с приёмом заявок кандидатов, списком вакансий, админ-панелью и RBAC — React, Next.js, Node.js, PostgreSQL\n\nПлюс (избранное): Платформа AI-автоматизации (плагины Gmail · Telegram · Instagram с CRM и AI-агентами), маркетинговый SaaS Instagram AI Leads, 3D-платформа квартир Ташкента, E-Commerce Platform, Restaurant Website, Edu CRM/ERP System, Business Finance Manager.\n\nДругие работы: Pera Hotel Ташкент, Toshkent Baliqchi, Nexora Labs, iPhone Store UZ, Fitness Time Gym, Parfume Market, Barakah Restaurant и это самое портфолио Sherzoddev.\n\nПосмотрите их все — с живыми демо — на странице проектов!',
     qContactInfo: 'Как связаться с Шерзодом?',
     aContactInfo:
       'Вы можете связаться с Шерзодом через:\nEmail: sherzodusmonjonov734@gmail.com\nТелефон: +998 94 205 5512\nTelegram: @WerzodUsmanov\nGitHub: github.com/m-werzod\nLinkedIn: /in/sherzod-usmonjonov-8b22713b0\nInstagram: @Sherzod_usmanovv\n\nОн сейчас открыт для фриланса и постоянной занятости и обычно отвечает в течение 24 часов!',

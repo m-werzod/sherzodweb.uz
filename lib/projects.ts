@@ -50,6 +50,42 @@ export const homeHighlights: Project[] = [...flagshipProjects, homeHighlightPick
 /** Shown in the "Featured" section of the full /projects page — every featured project. */
 export const featuredProjects: Project[] = [
   ...flagshipProjects,
+  {
+    title: 'AI Automation Platform',
+    description:
+      'Company automation platform uniting plugins for Gmail, Telegram, Instagram and more — full auth flow, a built-in CRM, and AI agents that run multi-channel workflows end to end.',
+    tags: ['Next.js', 'TypeScript', 'AI Agents', 'CRM', 'Telegram API', 'Instagram API', 'Gmail API'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://telegram-instagram-automation.vercel.app/',
+    gradient: 'from-violet-600 via-purple-500 to-fuchsia-500',
+    image: '/images/projects/automation-platform.jpg',
+    status: 'live',
+    year: '2026',
+  },
+  {
+    title: 'Instagram AI Leads — Marketing SaaS',
+    description:
+      'Instagram automation SaaS for private organizations — Meta-integrated ad payments, comment & DM automation, 10+ built-in AI agents, AI video editing, AI post scheduling, boosts and AI lead buttons.',
+    tags: ['Next.js', 'TypeScript', 'Meta API', 'Instagram API', 'AI Agents', 'SaaS', 'Payments'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://instagramaileads.vercel.app/',
+    gradient: 'from-rose-500 via-pink-500 to-orange-400',
+    image: '/images/projects/instagram-ai-leads.jpg',
+    status: 'live',
+    year: '2026',
+  },
+  {
+    title: 'Tashkent 3D Apartment Platform',
+    description:
+      'Interactive 3D real-estate platform for selling apartments in Tashkent buildings — explore blocks and floors in 3D, browse unit details, and go from visualization straight to a purchase inquiry.',
+    tags: ['Next.js', 'TypeScript', 'Three.js', '3D', 'Real Estate'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://tashkent-apartment-3d-platform.vercel.app/',
+    gradient: 'from-teal-500 via-cyan-500 to-sky-500',
+    image: '/images/projects/tashkent-3d.jpg',
+    status: 'live',
+    year: '2026',
+  },
   homeHighlightPick,
   {
     title: 'Restaurant Website',
@@ -100,6 +136,18 @@ export const featuredProjects: Project[] = [
 
 /** The rest of the catalogue — shown under "More Work" on the full /projects page. */
 export const moreProjects: Project[] = [
+  {
+    title: 'Pera Hotel Tashkent',
+    description:
+      'Hotel website for Pera Hotel in Tashkent — room showcase, amenities, booking inquiry, and an elegant mobile-first presentation.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://pera-hotel-tashkent.vercel.app/',
+    gradient: 'from-amber-500 to-orange-600',
+    image: '/images/projects/pera-hotel.jpg',
+    status: 'live',
+    year: '2026',
+  },
   {
     title: 'Toshkent Baliqchi',
     description:

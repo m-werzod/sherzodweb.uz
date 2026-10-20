@@ -48,6 +48,42 @@ export const homeHighlights: Project[] = [...flagshipProjects, homeHighlightPick
 /** Shown in the "Featured" section of the full /projects page — every featured project. */
 export const featuredProjects: Project[] = [
   ...flagshipProjects,
+  {
+    title: "AI Avtomatlashtirish Platformasi",
+    description:
+      "Kompaniyaning avtomatlashtirish platformasi — Gmail, Telegram, Instagram va boshqa xizmatlar uchun plaginlar, to'liq avtorizatsiya, ichki CRM hamda ko'p kanalli jarayonlarni boshidan oxirigacha yuritadigan AI agentlar.",
+    tags: ["Next.js", "TypeScript", "AI Agents", "CRM", "Telegram API", "Instagram API", "Gmail API"],
+    github: "https://github.com/m-werzod",
+    demo: "https://telegram-instagram-automation.vercel.app/",
+    gradient: "from-violet-600 via-purple-500 to-fuchsia-500",
+    image: "/images/projects/automation-platform.jpg",
+    status: "live",
+    year: "2026",
+  },
+  {
+    title: "Instagram AI Leads — Marketing SaaS",
+    description:
+      "Xususiy tashkilotlar uchun Instagram avtomatlashtirish SaaS platformasi — Meta bilan integratsiyalangan reklama to'lovlari, izoh va DM avtomatlashtiruvi, 10+ ichki AI agent, AI video tahrirlash, AI orqali post rejalashtirish, boost va AI lead tugmalari.",
+    tags: ["Next.js", "TypeScript", "Meta API", "Instagram API", "AI Agents", "SaaS", "Payments"],
+    github: "https://github.com/m-werzod",
+    demo: "https://instagramaileads.vercel.app/",
+    gradient: "from-rose-500 via-pink-500 to-orange-400",
+    image: "/images/projects/instagram-ai-leads.jpg",
+    status: "live",
+    year: "2026",
+  },
+  {
+    title: "Toshkent 3D Kvartira Platformasi",
+    description:
+      "Toshkent binolaridagi kvartiralarni sotish uchun interaktiv 3D platforma — bloklar va qavatlarni 3D ko'rinishda o'rganish, kvartira tafsilotlari va vizualizatsiyadan xarid so'roviga o'tish.",
+    tags: ["Next.js", "TypeScript", "Three.js", "3D", "Ko'chmas mulk"],
+    github: "https://github.com/m-werzod",
+    demo: "https://tashkent-apartment-3d-platform.vercel.app/",
+    gradient: "from-teal-500 via-cyan-500 to-sky-500",
+    image: "/images/projects/tashkent-3d.jpg",
+    status: "live",
+    year: "2026",
+  },
   homeHighlightPick,
   {
     title: "Restoran Veb-sayti",
@@ -98,6 +134,18 @@ export const featuredProjects: Project[] = [
 
 /** The rest of the catalogue — shown under "More Work" on the full /projects page. */
 export const moreProjects: Project[] = [
+  {
+    title: "Pera Hotel Toshkent",
+    description:
+      "Toshkentdagi Pera Hotel veb-sayti — xonalar vitrinasi, qulayliklar, bron qilish so'rovi va mobil qurilmalarga mos nafis dizayn.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    github: "https://github.com/m-werzod",
+    demo: "https://pera-hotel-tashkent.vercel.app/",
+    gradient: "from-amber-500 to-orange-600",
+    image: "/images/projects/pera-hotel.jpg",
+    status: "live",
+    year: "2026",
+  },
   {
     title: 'Toshkent Baliqchi',
     description:
