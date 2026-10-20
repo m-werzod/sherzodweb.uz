@@ -13,11 +13,15 @@ export const ui: UIDict = {
     availableForWork: 'Открыт для предложений',
   },
   footer: {
-    tagline: 'Full-Stack инженер и специалист по интеграции ИИ',
+    tagline: 'Full-Stack инженер и AI-инженер',
     rights: 'Все права защищены.',
   },
   hero: {
-    roleTagline: 'Full-Stack инженер · Специалист по интеграции ИИ',
+    roleTagline: 'Full-Stack инженер · AI-инженер',
+    ceoLine: 'CEO агентства Tech Solutions — руковожу услугами AI-автоматизации агентства в Узбекистане',
+    expertLLM: 'Эксперт по LLM — опыт более 3 лет',
+    expertAutomation: 'Эксперт по AI-автоматизации',
+    expertAIEngineer: 'AI-инженер — эксперт',
     valueProp:
       'Создаю **продакшн-платформы с нуля до релиза** на React, Next.js и Node.js — спроектировал Era AI (40+ интегрированных ИИ-инструментов) и запустил платформу Labour Migration Agency. Сертифицированный Frontend Engineer Expert от micro1 (США).',
     ctaContact: 'Связаться со мной',
@@ -27,7 +31,7 @@ export const ui: UIDict = {
     statProjectsLabel: 'Реализованных проектов',
     statTechLabel: 'Технологий',
     langUzbekLabel: 'Узбекский — родной',
-    langEnglishLabel: 'Английский — свободно (C1)',
+    langEnglishLabel: 'Английский — свободно (C1) · 5 лет рабочего опыта',
     langRussianLabel: 'Русский — разговорный',
   },
   trust: {
@@ -204,7 +208,7 @@ export const ui: UIDict = {
     langEnglishName: 'Английский',
     langRussianName: 'Русский',
     langNativeLevel: 'Родной',
-    langFluentLevel: 'Свободно — C1, IELTS 7+ баллов',
+    langFluentLevel: 'Свободно — C1, IELTS 7+ баллов · 5 лет рабочего опыта (удалённо и офлайн)',
     langConversationalLevel: 'Разговорный',
     certificationsHeading: 'Сертификаты',
     certFrontendTitle: 'Сертификация Frontend Engineer Expert',

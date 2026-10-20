@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
 import Highlight from '@/components/ui/Highlight'
+import MainImg from '@/app/assets/images/MainImg.jpg'
 
 const skillItems = [
   ['React 19', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Three.js'],
@@ -104,7 +105,7 @@ export default function AboutPage() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     ref={imgRef}
-                    src="/images/about.webp"
+                    src={MainImg.src}
                     alt="Sherzodbek Usmonjonov"
                     onLoad={() => setImgLoaded(true)}
                     onError={() => setImgError(true)}

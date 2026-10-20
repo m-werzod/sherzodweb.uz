@@ -13,11 +13,15 @@ export const ui: UIDict = {
     availableForWork: "Ishga Ochiq",
   },
   footer: {
-    tagline: "Full-Stack Muhandis va AI Integratsiya Mutaxassisi",
+    tagline: "Full-Stack Muhandis va AI Muhandisi",
     rights: "Barcha huquqlar himoyalangan.",
   },
   hero: {
-    roleTagline: "Full-Stack Muhandis · AI Integratsiya Mutaxassisi",
+    roleTagline: "Full-Stack Muhandis · AI Muhandisi",
+    ceoLine: "Tech Solutions Agentligining bosh direktori (CEO) — O'zbekistonda agentlikning AI avtomatlashtirish xizmatlarini boshqaraman",
+    expertLLM: "LLM Eksperti — 3+ yillik tajriba",
+    expertAutomation: "AI Avtomatlashtirish Eksperti",
+    expertAIEngineer: "AI Muhandisi — Ekspert",
     valueProp:
       "React, Next.js va Node.js bilan **ishlab chiqarish darajasidagi platformalarni boshidan-oxirigacha** quraman — Era AI'ni (40+ integratsiya qilingan AI vositasi) loyihalashtirdim va Labour Migration Agency platformasini ishga tushirdim. micro1 (AQSH) tomonidan sertifikatlangan Frontend Engineer Expert.",
     ctaContact: "Bog'laning",
@@ -27,7 +31,7 @@ export const ui: UIDict = {
     statProjectsLabel: "Yaratilgan Loyihalar",
     statTechLabel: "Texnologiyalar",
     langUzbekLabel: "O'zbek — Ona tili",
-    langEnglishLabel: "Ingliz — Erkin (C1)",
+    langEnglishLabel: "Ingliz — Erkin (C1) · 5 yillik ish tajribasi",
     langRussianLabel: "Rus — Muloqot darajasida",
   },
   trust: {
@@ -204,7 +208,7 @@ export const ui: UIDict = {
     langEnglishName: "Ingliz",
     langRussianName: "Rus",
     langNativeLevel: "Ona tili",
-    langFluentLevel: "Erkin — C1, IELTS 7+ ball",
+    langFluentLevel: "Erkin — C1, IELTS 7+ ball · 5 yillik ish tajribasi (masofaviy va oflayn)",
     langConversationalLevel: "Muloqot darajasida",
     certificationsHeading: "Sertifikatlar",
     certFrontendTitle: "Frontend Engineer Expert Sertifikati",

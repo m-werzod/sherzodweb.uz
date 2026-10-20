@@ -99,6 +99,21 @@ export default function HeroSection() {
             <p className="mt-3 text-lg md:text-xl font-semibold text-slate-400 tracking-wide">{ui.hero.roleTagline}</p>
           </motion.div>
 
+          {/* CEO line */}
+          <motion.p variants={item} className="text-sm md:text-base font-bold text-[#38bdf8] leading-snug max-w-md text-center lg:text-left">
+            {ui.hero.ceoLine}
+          </motion.p>
+
+          {/* Expertise badges */}
+          <motion.div variants={item} className="flex flex-wrap gap-2 justify-center lg:justify-start">
+            {[ui.hero.expertLLM, ui.hero.expertAutomation, ui.hero.expertAIEngineer].map((label) => (
+              <span key={label} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#38bdf8]/30 bg-[#38bdf8]/10 text-xs font-semibold text-[#38bdf8]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" />
+                {label}
+              </span>
+            ))}
+          </motion.div>
+
           {/* Value prop */}
           <motion.p variants={item} className="text-slate-400 text-sm md:text-base leading-relaxed max-w-md text-center lg:text-left">
             <Highlight text={ui.hero.valueProp} />

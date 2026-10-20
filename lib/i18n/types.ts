@@ -16,6 +16,10 @@ export interface UIDict {
   }
   hero: {
     roleTagline: string
+    ceoLine: string
+    expertLLM: string
+    expertAutomation: string
+    expertAIEngineer: string
     valueProp: string
     ctaContact: string
     ctaProjects: string

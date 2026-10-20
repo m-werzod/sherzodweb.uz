@@ -13,11 +13,15 @@ export const ui: UIDict = {
     availableForWork: 'Available for Work',
   },
   footer: {
-    tagline: 'Full-Stack Engineer & AI Integration Specialist',
+    tagline: 'Full-Stack Engineer & AI Engineer',
     rights: 'All rights reserved.',
   },
   hero: {
-    roleTagline: 'Full-Stack Engineer · AI Integration Specialist',
+    roleTagline: 'Full-Stack Engineer · AI Engineer',
+    ceoLine: "CEO of Tech Solutions Agency — leading the Agency's AI Automation services in Uzbekistan",
+    expertLLM: 'LLM Expert — 3+ Years Experience',
+    expertAutomation: 'AI Automation Expert',
+    expertAIEngineer: 'AI Engineer Expert',
     valueProp:
       'Building **production platforms end to end** with React, Next.js & Node.js — architected Era AI (40+ integrated AI tools) and shipped the Labour Migration Agency platform. Certified Frontend Engineer Expert by micro1 (US).',
     ctaContact: 'Contact Me',
@@ -27,7 +31,7 @@ export const ui: UIDict = {
     statProjectsLabel: 'Projects Built',
     statTechLabel: 'Technologies',
     langUzbekLabel: 'Uzbek — Native',
-    langEnglishLabel: 'English — Fluent (C1)',
+    langEnglishLabel: 'English — Fluent (C1) · 5 Years Work Experience',
     langRussianLabel: 'Russian — Conversational',
   },
   trust: {
@@ -204,7 +208,7 @@ export const ui: UIDict = {
     langEnglishName: 'English',
     langRussianName: 'Russian',
     langNativeLevel: 'Native',
-    langFluentLevel: 'Fluent — C1, IELTS Band 7+',
+    langFluentLevel: 'Fluent — C1, IELTS Band 7+ · 5 years of working experience (remote & offline)',
     langConversationalLevel: 'Conversational',
     certificationsHeading: 'Certifications',
     certFrontendTitle: 'Frontend Engineer Expert Certification',
