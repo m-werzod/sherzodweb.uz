@@ -18,7 +18,7 @@ export const ui: UIDict = {
   },
   hero: {
     roleTagline: 'Full-Stack Engineer · AI Engineer',
-    ceoLine: "CEO of Tech Solutions Agency — leading the Agency's AI Automation services in Uzbekistan",
+    ceoLine: "CEO & Lead Senior Engineer of Tech Solutions Agency — leading the Agency's AI Automation services in Uzbekistan",
     expertLLM: 'LLM Expert — 3+ Years Experience',
     expertAutomation: 'AI Automation Expert',
     expertAIEngineer: 'AI Engineer Expert',
@@ -79,7 +79,7 @@ export const ui: UIDict = {
     titlePrefix: 'All ',
     titleHighlight: 'Projects',
     subtitleDefault:
-      '17 real-world projects — from AI automation platforms and a production employment system to 3D real estate, e-commerce, CRM, and fintech apps.',
+      '100+ delivered projects — from AI automation platforms and luxury hospitality to 3D real estate, e-commerce, CRM, and fintech. Highlights below.',
     subtitleCategoryTemplate:
       'Production platforms built as a {role} — from the Era AI aggregation platform and Labour Migration Agency system to e-commerce, CRM, and fintech apps.',
     featured: 'Featured',
@@ -157,7 +157,7 @@ export const ui: UIDict = {
     statusTyping: 'typing…',
     clear: 'Clear',
     bubble1: 'Hi! Ask me about Sherzod',
-    bubble2: 'See his 17 projects!',
+    bubble2: 'See his 100+ projects!',
     bubble3: 'Available for hire!',
     bubble4: 'Ask about his specializations',
     qTechStack: 'What technologies does Sherzod use?',
@@ -168,13 +168,13 @@ export const ui: UIDict = {
       'Sherzod works across four specializations — each has its own dedicated page on this site:\n\n1. Full Stack — end-to-end platforms: React/Next.js frontends on Node.js, PostgreSQL/Prisma, plus Python and .NET on the backend.\n2. Frontend — TypeScript-expert UI engineering, internationally certified Frontend Engineer Expert by micro1 (US).\n3. AI Specialist — LLM integration & prompt engineering, orchestrating 40+ AI tools/APIs (OpenAI, Claude, Gemini) in production.\n4. QA Tester — API & release testing (Playwright, Vitest, Jest, Postman), with an AI-augmented workflow (Claude Code) that runs QA 10–20x faster.\n\nVisit /full-stack, /frontend, /ai-specialist or /qa-tester to see the tailored experience, projects, and case for each.',
     qProjects: 'What projects has Sherzod built?',
     aProjects:
-      'Sherzod has shipped 17 real-world projects. Flagship platforms:\n\n1. Era AI Platform — full-stack AI aggregation product integrating 40+ AI tools (OpenAI, Claude, Gemini) behind one interface — React 19, Next.js, Node.js, PostgreSQL/Prisma\n2. Labour Migration Agency Platform — production employment platform with candidate intake, vacancy listings, admin panel & RBAC — React, Next.js, Node.js, PostgreSQL\n\nPlus (Featured): AI Automation Platform (Gmail · Telegram · Instagram plugins with CRM & AI agents), Instagram AI Leads marketing SaaS, Tashkent 3D Apartment Platform, E-Commerce Platform, Restaurant Website, Edu CRM/ERP System, Business Finance Manager.\n\nMore Work: Pera Hotel Tashkent, Toshkent Baliqchi, Nexora Labs, iPhone Store UZ, Fitness Time Gym, Parfume Market, Barakah Restaurant, and this Sherzoddev Portfolio itself.\n\nSee them all — with live demos — on the Projects page!',
+      'Sherzod has shipped 100+ real-world projects. Flagship platforms:\n\n1. Era AI Platform — full-stack AI aggregation product integrating 40+ AI tools (OpenAI, Claude, Gemini) behind one interface — React 19, Next.js, Node.js, PostgreSQL/Prisma\n2. Labour Migration Agency Platform — production employment platform with candidate intake, vacancy listings, admin panel & RBAC — React, Next.js, Node.js, PostgreSQL\n\nPlus (Featured): Aurevane Grand Hotel (luxury hospitality platform), AI Automation Platform (Gmail · Telegram · Instagram plugins with CRM & AI agents), Instagram AI Leads marketing SaaS, Tashkent 3D Apartment Platform, E-Commerce Platform, Restaurant Website, Edu CRM/ERP System, Business Finance Manager.\n\nMore Work: Samarkhand Hotel, Chust Pichoqlari, Pera Hotel Tashkent, Toshkent Baliqchi, Nexora Labs, iPhone Store UZ, Fitness Time Gym, Parfume Market, Barakah Restaurant, and this Sherzoddev Portfolio itself.\n\nSee them all — with live demos — on the Projects page!',
     qContactInfo: 'How can I contact Sherzod?',
     aContactInfo:
       'You can reach Sherzod via:\nEmail: sherzodusmonjonov734@gmail.com\nPhone: +998 94 205 5512\nTelegram: @WerzodUsmanov\nGitHub: github.com/m-werzod\nLinkedIn: /in/sherzod-usmonjonov-8b22713b0\nInstagram: @Sherzod_usmanovv\n\nHe is currently available for freelance and full-time opportunities, and typically responds within 24 hours!',
     qAboutMe: 'Tell me about Sherzod.',
     aAboutMe:
-      "Sherzodbek Usmonjonov is a Full-Stack Engineer & AI Integration Specialist from Uzbekistan with 3+ years of experience, internationally certified as a Frontend Engineer Expert by micro1 (United States).\n\nHe's solo-architected Era AI (40+ integrated AI tools) and shipped the Labour Migration Agency platform, alongside enterprise ERP, e-commerce and fintech SaaS products — with results like 98/100 Lighthouse scores and 50% fewer redundant re-renders.\n\nEducation: Bachelor of Business Management, Tashkent State University of Economics (in progress); graduate of Najot Ta'lim's Frontend Engineering and AI Prompt Engineering programs.\n\nLanguages: Uzbek (Native) · English (Fluent, C1/IELTS 7+) · Russian (Conversational)\n\nAvailable for freelance and full-time work!",
+      "Sherzodbek Usmonjonov is a Full-Stack Engineer & AI Engineer from Uzbekistan — CEO & Lead Senior Engineer of Tech Solutions Agency, leading its AI Automation services, with 100+ delivered projects and international certification as a Frontend Engineer Expert by micro1 (United States).\n\nHe's solo-architected Era AI (40+ integrated AI tools) and shipped the Labour Migration Agency platform, alongside enterprise ERP, e-commerce and fintech SaaS products — with results like 98/100 Lighthouse scores and 50% fewer redundant re-renders.\n\nEducation: Bachelor of Business Management, Tashkent State University of Economics (in progress); graduate of Najot Ta'lim's Frontend Engineering and AI Prompt Engineering programs.\n\nLanguages: Uzbek (Native) · English (Fluent, C1/IELTS 7+) · Russian (Conversational)\n\nAvailable for freelance and full-time work!",
     replyHire:
       "Sherzod is currently available for freelance projects and full-time opportunities!\n\nBest way to reach him:\nTelegram: @WerzodUsmanov\nEmail: sherzodusmonjonov734@gmail.com\n\nHe typically responds within 24 hours.",
     replyGreeting:

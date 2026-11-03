@@ -200,7 +200,7 @@ export default function HeroSection() {
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0, y: [0, 7, 0] }}
             transition={{ opacity: { duration: 0.5, delay: 0.9 }, x: { duration: 0.5, delay: 0.9 }, y: { duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1.2 } }}
             className="absolute right-0 top-[55%] translate-x-[60%] bg-[#0d1b2e] border border-[#38bdf8]/20 rounded-2xl px-5 py-4 shadow-xl shadow-sky-950/40 backdrop-blur-sm min-w-[130px]">
-            <p className="text-3xl font-black text-[#38bdf8] leading-none">17+</p>
+            <p className="text-3xl font-black text-[#38bdf8] leading-none">100+</p>
             <p className="text-xs text-slate-400 mt-1.5 font-medium">{ui.hero.statProjectsLabel}</p>
           </motion.div>
 

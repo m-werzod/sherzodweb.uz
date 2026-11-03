@@ -39,7 +39,7 @@ export const homeHighlightPick: Project = {
   github: 'https://github.com/m-werzod',
   demo: 'https://e-commerce-with-registration.vercel.app/',
   gradient: 'from-sky-500 to-blue-600',
-  image: '/images/projects/ecommerce.webp',
+  image: '/images/projects/ecommerce-cover.jpg',
   status: 'live',
   year: '2024',
 }
@@ -49,6 +49,18 @@ export const homeHighlights: Project[] = [...flagshipProjects, homeHighlightPick
 
 /** Shown in the "Featured" section of the full /projects page — every featured project. */
 export const featuredProjects: Project[] = [
+  {
+    title: 'Aurevane Grand Hotel',
+    description:
+      'Luxury hospitality platform for Aurevane Grand Hotel — a curated rooms & suites collection, dining and amenities showcase, immersive gallery, and a streamlined booking-inquiry flow, delivered as a motion-polished, fully responsive experience.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Booking Flow'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://aurevane-grand-hotel.vercel.app/',
+    gradient: 'from-amber-400 via-yellow-500 to-stone-600',
+    image: '/images/projects/aurevane.jpg',
+    status: 'live',
+    year: '2026',
+  },
   ...flagshipProjects,
   {
     title: 'AI Automation Platform',
@@ -95,7 +107,7 @@ export const featuredProjects: Project[] = [
     github: 'https://github.com/m-werzod',
     demo: 'https://restaurant-ten-self.vercel.app/',
     gradient: 'from-orange-500 to-red-600',
-    image: '/images/projects/restaurant.webp',
+    image: '/images/projects/restaurant-cover.jpg',
     status: 'live',
     year: '2024',
   },
@@ -107,7 +119,7 @@ export const featuredProjects: Project[] = [
     github: 'https://github.com/m-werzod',
     demo: 'https://edu-crm-erp.vercel.app/',
     gradient: 'from-emerald-500 to-teal-600',
-    image: '/images/projects/educrm.webp',
+    image: '/images/projects/educrm-cover.jpg',
     status: 'live',
   },
   {
@@ -149,6 +161,30 @@ export const moreProjects: Project[] = [
     year: '2026',
   },
   {
+    title: 'Samarkhand Hotel',
+    description:
+      'Hotel platform for Samarkand — rooms & rates presentation, amenities, photo gallery and a booking-inquiry flow, designed with a heritage-inspired visual language on a fast, mobile-first layout.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Booking'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://samarkhand-hotel.vercel.app/',
+    gradient: 'from-sky-500 to-indigo-600',
+    image: '/images/projects/samarkand-hotel.jpg',
+    status: 'live',
+    year: '2026',
+  },
+  {
+    title: 'Chust Pichoqlari — Heritage E-Commerce',
+    description:
+      'E-commerce showcase for traditional Chust knives — a handcrafted product catalogue with detail views and an ordering flow, presenting a centuries-old Uzbek craft through a fast, modern, mobile-first storefront.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'E-Commerce'],
+    github: 'https://github.com/m-werzod',
+    demo: 'https://chust-pichoqlari.vercel.app/',
+    gradient: 'from-red-600 to-slate-700',
+    image: '/images/projects/chust-pichoqlari.jpg',
+    status: 'live',
+    year: '2026',
+  },
+  {
     title: 'Toshkent Baliqchi',
     description:
       'Fish restaurant landing page with animated menu sections, location map, contact form, and a fresh nautical-themed UI optimised for mobile.',
@@ -156,7 +192,7 @@ export const moreProjects: Project[] = [
     github: 'https://github.com/m-werzod',
     demo: 'https://toshkent-baliqchi.vercel.app/',
     gradient: 'from-cyan-500 to-blue-500',
-    image: '/images/projects/baliqchi.jpg',
+    image: '/images/projects/baliqchi-cover.jpg',
     status: 'live',
   },
   {
@@ -167,7 +203,7 @@ export const moreProjects: Project[] = [
     github: 'https://github.com/m-werzod/Nexora-labs-company',
     demo: 'https://github.com/m-werzod/Nexora-labs-company',
     gradient: 'from-violet-500 to-purple-600',
-    image: '/images/projects/nexora.jpg',
+    image: '/images/projects/nexora-cover.jpg',
   },
   {
     title: 'iPhone Store UZ',
@@ -177,7 +213,7 @@ export const moreProjects: Project[] = [
     github: 'https://github.com/m-werzod/IPHONE-STORE.UZ',
     demo: 'https://github.com/m-werzod/IPHONE-STORE.UZ',
     gradient: 'from-slate-400 to-slate-600',
-    image: '/images/projects/iphone-store.jpg',
+    image: '/images/projects/iphone-store-cover.jpg',
   },
   {
     title: 'Fitness Time Gym',
@@ -220,7 +256,7 @@ export const moreProjects: Project[] = [
     github: 'https://github.com/m-werzod',
     demo: 'https://sherzoddev.com',
     gradient: 'from-[#38bdf8] to-indigo-500',
-    image: '/images/projects/portfolio.jpg',
+    image: '/images/projects/portfolio-cover.jpg',
     status: 'live',
   },
 ]
